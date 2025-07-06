@@ -1,11 +1,13 @@
 import './styles/reset.css';
 import './App.css';
-import MoblieWrapper from '@/layouts/MobileWrapper';
+import MoblieWrapper from '@/components/MobileWrapper';
+import { RouterProvider } from 'react-router-dom';
+import router from './router';
 
 function App() {
   return (
     <MoblieWrapper>
-      <div></div>
+      <RouterProvider router={router} />
     </MoblieWrapper>
   );
 }
