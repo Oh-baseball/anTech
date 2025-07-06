@@ -1,6 +1,6 @@
-import { lazy, Suspense } from 'react';
-import { createBrowserRouter, Outlet } from 'react-router-dom';
-import MobileWrapper from './components/MobileWrapper';
+import { lazy } from 'react';
+import { createBrowserRouter } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
 
 const Home = lazy(() => import('./pages/Home'));
 const ProductsPage = lazy(() => import('./pages/ProductsPage'));
@@ -8,17 +8,7 @@ const CartPage = lazy(() => import('./pages/CartPage'));
 const VerifyPage = lazy(() => import('./pages/VerifyPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const CheckoutSuccessPages = lazy(() => import('./pages/CheckoutSuccessPages'));
-const NoFound = lazy(() => import('./pages/NoFound'));
-
-function MainLayout() {
-  return (
-    <MobileWrapper>
-      <Suspense fallback={<div>로딩 중~~~</div>}>
-        <Outlet />
-      </Suspense>
-    </MobileWrapper>
-  );
-}
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 const router = createBrowserRouter([
   {
@@ -51,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: '*',
-        element: <NoFound />,
+        element: <NotFound />,
       },
     ],
   },

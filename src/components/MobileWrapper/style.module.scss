@@ -1,6 +1,4 @@
-.mobile-wrapper {
-  border: solid 1px red;
-  // font-family: "pretendard";
+.mobileWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -20,6 +18,4 @@
   &::-webkit-scrollbar {
     display: none;
   }
-
-  padding: 30px 20px;
 }

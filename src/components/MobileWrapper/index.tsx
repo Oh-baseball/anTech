@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import './style.scss';
+import styles from './style.module.scss';
 
 const MobileWrapper = ({ children }: { children: ReactNode }) => {
-  return <div className="mobile-wrapper">{children}</div>;
+  return <div className={styles.mobileWrapper}>{children}</div>;
 };
 
 export default MobileWrapper;

@@ -1,15 +1,9 @@
-import './styles/reset.css';
-import './App.css';
-import MoblieWrapper from '@/components/MobileWrapper';
+import './styles/global.scss';
 import { RouterProvider } from 'react-router-dom';
 import router from './router';
 
 function App() {
-  return (
-    <MoblieWrapper>
-      <RouterProvider router={router} />
-    </MoblieWrapper>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
