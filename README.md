@@ -49,7 +49,8 @@ Node ≥ 20 및 pnpm 가 필요합니다. pnpm 설치 가이드를 참고하세�
 
 폴더 구조
 
-Toss-Payment-Web/
+```
+Ahn-Payment-Web/
 ├── src/
 │ ├── assets/ # 이미지 · 폰트 등 정적 리소스
 │ ├── components/ # 재사용 가능한 UI 컴포넌트
@@ -82,7 +83,7 @@ Toss-Payment-Web/
 ├── tsconfig.json
 ├── vite.config.ts
 └── README.md
-
+```
 폴더 이름은 소문자 카멜 케이스를 기본으로, 컴포넌트 폴더는 파스칼 케이스를 사용합니다.
 
 ⸻
