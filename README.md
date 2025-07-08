@@ -6,13 +6,31 @@ Vite + React 19 + TypeScript 기반으로 구축되었으며, 모듈화된 폴�
 
 ⸻
 
-목차 1. 기술 스택 2. 시작하기 3. 폴더 구조 4. Git Convention 5. Coding Convention 6. React Convention 7. Type Convention 8. 커밋 & 코드 리뷰 9. 라이선스
+목차 
+1. 기술 스택
+
+2. 시작하기
+
+3. 폴더 구조
+
+4. Git Convention
+
+5. Coding Convention
+
+6. React Convention
+
+7. Type Convention
+
+8. 커밋 & 코드 리뷰
+
+
 
 ⸻
 
 기술 스택
 
 영역 사용 기술
+```
 Language TypeScript 5.x
 Framework React 19, React Router v6
 Build Tool Vite 5.x
@@ -21,7 +39,7 @@ Styling SCSS (CSS Modules)
 Testing Vitest, React Testing Library
 Linter / Formatter ESLint + Prettier
 CI/CD GitHub Actions (Deploy to Vercel)
-
+```
 ⸻
 
 시작하기
@@ -29,7 +47,7 @@ CI/CD GitHub Actions (Deploy to Vercel)
 # 1. 저장소 클론
 
 git clone https://github.com/your-org/The-Movie.git
-cd toss-payment-web
+cd The-Moive
 
 # 2. 패키지 설치
 
@@ -91,6 +109,7 @@ Ahn-Payment-Web/
 ### Git Convention
 
 태그 용도
+```
 feat 새로운 기능 추가
 fix 버그 수정
 docs 문서 수정
@@ -101,7 +120,7 @@ chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 �
 
 브랜치 전략 : main ← develop ← feature/✱, bugfix/✱
 커밋 메시지 서식 : <type>: <subject> (예: feat: 결제 내역 조회 API 연동)
-
+```
 ⸻
 
 ### Coding Convention
