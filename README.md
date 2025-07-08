@@ -173,12 +173,13 @@ export default Home;
 ### Type Convention
 
 규칙 설명
+```
 undefined 사용 null 대신 undefined 선호
 any 금지 필요한 경우 unknown 사용
 타입 선언 type 키워드 (type User = {...})
 인터페이스 선언 메서드·필수 속성 포함 시 interface
 전역 타입 src/types/ 폴더에 정의 & 재export
-
+```
 ⸻
 
 ### 커밋 & 코드 리뷰
