@@ -1,5 +1,5 @@
-const CartPage = () => {
-  return <div>CartPage</div>;
+const Cart = () => {
+  return <div>Cart</div>;
 };
 
-export default CartPage;
+export default Cart;

@@ -1,5 +1,5 @@
-const CheckoutPage = () => {
-  return <div>CheckoutPage</div>;
+const PaymentMethod = () => {
+  return <div>PaymentMethod</div>;
 };
 
-export default CheckoutPage;
+export default PaymentMethod;

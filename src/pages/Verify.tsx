@@ -1,5 +1,5 @@
-const VerifyPage = () => {
-  return <div>VerifyPage</div>;
+const Verify = () => {
+  return <div>Verify</div>;
 };
 
-export default VerifyPage;
+export default Verify;
