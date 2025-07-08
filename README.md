@@ -107,7 +107,7 @@ chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 �
 Coding Convention
 
 네이밍 규칙
-
+```
 구분 규칙 예시
 상수 대문자 + 스네이크 케이스 const MAX_RETRY = 3;
 변수·함수 카멜 케이스 const paymentList = [];
@@ -143,6 +143,7 @@ const handlePay = () => {
 바로 반환하는 경우 중괄호와 return 생략
 
 const getTotal = (a: number, b: number) => a + b;
+```
 
 폴더 네이밍
 • 기본 카멜 케이스
