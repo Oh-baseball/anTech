@@ -47,7 +47,7 @@ Node ≥ 20 및 pnpm 가 필요합니다. pnpm 설치 가이드를 참고하세�
 
 ⸻
 
-폴더 구조
+### 폴더 구조
 
 ```
 Ahn-Payment-Web/
@@ -88,7 +88,7 @@ Ahn-Payment-Web/
 
 ⸻
 
-Git Convention
+### Git Convention
 
 태그 용도
 feat 새로운 기능 추가
@@ -104,7 +104,7 @@ chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 �
 
 ⸻
 
-Coding Convention
+### Coding Convention
 
 네이밍 규칙
 ```
@@ -155,7 +155,8 @@ const getTotal = (a: number, b: number) => a + b;
 
 ⸻
 
-React Convention
+### React Convention
+```
 • Props 개수 3개 초과 시 ...spread 활용
 • 함수형 컴포넌트 예시
 
@@ -166,10 +167,10 @@ return <div className={styles.home_container}>Home</div>;
 };
 
 export default Home;
-
+```
 ⸻
 
-Type Convention
+### Type Convention
 
 규칙 설명
 undefined 사용 null 대신 undefined 선호
@@ -180,7 +181,7 @@ any 금지 필요한 경우 unknown 사용
 
 ⸻
 
-커밋 & 코드 리뷰
+### 커밋 & 코드 리뷰
 • 커밋 타임 : 매일 16:50 KST 이후 dev ← feat/\* 머지 권장
 • 코드 리뷰 : GitHub Pull Request → AI 리뷰 툴(ex. GitHub Copilot CI) 검사 후 팀원 승인
 
