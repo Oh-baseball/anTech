@@ -1,6 +1,6 @@
 Ahn Payment Web App
 
-간편하고 안전한 토스(Toss) 결제 경험을 제공하는 프론트엔드 프로젝트
+간편하고 안전한 결제 경험을 제공하는 프론트엔드 프로젝트
 
 Vite + React 19 + TypeScript 기반으로 구축되었으며, 모듈화된 폴더 구조·일관된 Git/코딩 컨벤션·AI 리뷰 프로세스를 통해 협업 효율과 코드 품질을 극대화합니다.
 
@@ -28,7 +28,7 @@ CI/CD GitHub Actions (Deploy to Vercel)
 
 # 1. 저장소 클론
 
-git clone https://github.com/your-org/toss-payment-web.git
+git clone https://github.com/your-org/The-Movie.git
 cd toss-payment-web
 
 # 2. 패키지 설치
@@ -140,7 +140,7 @@ const handlePay = () => {
 // ...
 };
 
-    •	바로 반환하는 경우 중괄호와 return 생략
+바로 반환하는 경우 중괄호와 return 생략
 
 const getTotal = (a: number, b: number) => a + b;
 
@@ -180,7 +180,7 @@ any 금지 필요한 경우 unknown 사용
 ⸻
 
 커밋 & 코드 리뷰
-• 커밋 타임 : 매일 16:50 KST 이후 develop ← feature/\* 머지 권장
+• 커밋 타임 : 매일 16:50 KST 이후 dev ← feat/\* 머지 권장
 • 코드 리뷰 : GitHub Pull Request → AI 리뷰 툴(ex. GitHub Copilot CI) 검사 후 팀원 승인
 
 ⸻
