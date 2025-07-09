@@ -1,17 +1,12 @@
-const Home = () => {
+import AccountBox from "@/components/AccountBox";
 
+
+const Home = () => {
+  const userBalance: number= 123450
   return (
-  <div>
+  <div className="home_container">
     <div><p>toss</p><button>이미지</button></div>
-    <div>
-      <div>토스뱅크</div>
-      <div>1,234,560원</div>
-      <div>
-        <button>송금</button>
-        <button>충전</button>
-        <button>ATM</button>
-      </div>
-    </div>
+    <AccountBox balance={userBalance}/>
     <div>
       <div>빠른 서비스</div>
       <div>
