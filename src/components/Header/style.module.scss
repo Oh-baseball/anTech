@@ -1,9 +1,34 @@
 .header {
-  background-color: yellow;
+  position: absolute;
   width: 100%;
   height: 64px;
 
-  display: flex;
-  align-items: center;
-  padding: 20px 15px;
+  @include align-items-center;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+
+.left {
+  width: 60%;
+  height: 32px;
+  padding: 4px 10px;
+
+  @include align-items-center;
+  gap: 9px;
+  font-size: 18px;
+  font-weight: $font-weight-semibold;
+}
+
+.left button {
+  @include align-items-center;
+  cursor: pointer;
+}
+
+.left img {
+  width: 21px;
+  height: 27px;
+}
+
+.right {
+  @include align-items-center;
 }

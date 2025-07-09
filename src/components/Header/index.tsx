@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import styles from './style.module.scss';
+import backIcon from '@/assets/back-icon.svg';
 
 interface HeaderProps {
   prevBtn?: boolean;
@@ -16,7 +17,7 @@ const Header = ({ prevBtn, title, right }: HeaderProps) => {
       <div className={styles.left}>
         {prevBtn && (
           <button className={styles.backBtn} onClick={handleClickPrevBtn} aria-label="뒤로가기">
-            &#8592;
+            <img src={backIcon} alt="뒤로가기" />
           </button>
         )}
         {title && <span className={styles.title}>{title}</span>}
