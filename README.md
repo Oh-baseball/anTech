@@ -27,7 +27,7 @@ Vite + React 19 + TypeScript 기반으로 구축되었으며, 모듈화된 폴�
 
 ⸻
 
-기술 스택
+## 1. 기술 스택
 
 영역 사용 기술
 ```
@@ -42,22 +42,22 @@ CI/CD GitHub Actions (Deploy to Vercel)
 ```
 ⸻
 
-시작하기
+## 2. 시작하기
 
-# 1. 저장소 클론
+### 1. 저장소 클론
 
 git clone https://github.com/your-org/The-Movie.git
 cd The-Moive
 
-# 2. 패키지 설치
+### 2. 패키지 설치
 
 pnpm install
 
-# 3. 개발 서버 실행
+### 3. 개발 서버 실행
 
-pnpm dev # http://localhost:5173
+`pnpm run dev` # http://localhost:5173
 
-# 4. 프로덕션 빌드
+### 4. 프로덕션 빌드
 
 pnpm build
 
@@ -65,7 +65,7 @@ Node ≥ 20 및 pnpm 가 필요합니다. pnpm 설치 가이드를 참고하세�
 
 ⸻
 
-### 폴더 구조
+## 3. 폴더 구조
 
 ```
 Ahn-Payment-Web/
@@ -106,7 +106,7 @@ Ahn-Payment-Web/
 
 ⸻
 
-### Git Convention
+## 4. Git Convention
 
 태그 용도
 ```
@@ -123,7 +123,7 @@ chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 �
 ```
 ⸻
 
-### Coding Convention
+## 5. Coding Convention
 
 네이밍 규칙
 ```
@@ -174,7 +174,7 @@ const getTotal = (a: number, b: number) => a + b;
 
 ⸻
 
-### React Convention
+## 6. React Convention
 ```
 • Props 개수 3개 초과 시 ...spread 활용
 • 함수형 컴포넌트 예시
@@ -189,7 +189,7 @@ export default Home;
 ```
 ⸻
 
-### Type Convention
+## 7. Type Convention
 
 규칙 설명
 ```
