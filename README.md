@@ -118,7 +118,7 @@ refactor 프로덕션 코드 리팩터링
 test 테스트 코드 추가·수정, 프로덕션 코드 변경 없음
 chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 변경 없음
 
-브랜치 전략 : main ← develop ← feature/✱, bugfix/✱
+브랜치 전략 : main ← dev ← feat/✱, bugfix/✱
 커밋 메시지 서식 : <type>: <subject> (예: feat: 결제 내역 조회 API 연동)
 ```
 ⸻
