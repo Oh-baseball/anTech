@@ -1,27 +1,37 @@
+import { useState } from 'react';
 import styles from './style.module.scss';
 
+const pattern = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const chunkArray = (array: number[], size: number) => {
+  const chunks = [];
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size));
+  }
+  return chunks;
+};
+
 const Authentication = () => {
+  const [isPin, setIsPin] = useState(false);
+  const [isDraw, setIsDraw] = useState(false);
+
+  const patternRows = chunkArray(pattern, 3);
+
   return (
     <header className={styles.authentication_container}>
       <h3>패턴 입력</h3>
       <h4>패턴을 그려주세요</h4>
       <main>
         <div className={styles.patternContainer}>
-          <div className={styles.patternContainer_1}>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-          </div>
-          <div className={styles.patternContainer_2}>
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-          </div>
-          <div className={styles.patternContainer_3}>
-            <div>7</div>
-            <div>8</div>
-            <div>9</div>
-          </div>
+          {patternRows.map((row, rowIndex) => (
+            <div key={rowIndex} className={styles.patternRow}>
+              {row.map((item, itemIndex) => (
+                <div key={itemIndex} className={styles.patternContainer_item}>
+                  {item}
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </main>
       <footer className={styles.footer}>
