@@ -1,18 +1,22 @@
 import styles from './style.module.scss';
 
 interface AccountBoxProps {
+  title: string;
   balance: number;
+  menu: string[];
 }
 
-const AccountBox = ({balance}: AccountBoxProps) => {
+const AccountBox = ({title, balance, menu}: AccountBoxProps) => {
+  const formmetedBalance = balance.toLocaleString();
+
   return (
     <div className={styles.accountBox}>
-      <div>토스뱅크</div>
-      <div>{balance}원</div>
+      <p>{title}</p>
+      <p>{formmetedBalance}원</p>
       <div>
-        <button>송금</button>
-        <button>충전</button>
-        <button>ATM</button>
+        {menu.map((item, idx) => (
+          <button key={idx}>{item}</button>
+        ))}
       </div>
     </div>
   )
