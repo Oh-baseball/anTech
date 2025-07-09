@@ -1,6 +1,8 @@
 .authentication_container {
   width: 375px;
+  max-width: 375px;
   display: flex;
+  margin: 0 auto;
   box-sizing: border-box;
   flex-direction: column;
   background-color: #000;
