@@ -1,6 +1,7 @@
 .authentication_container {
   width: 375px;
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
   background-color: #000;
   text-align: center;
@@ -28,7 +29,7 @@ main {
   flex-direction: column;
   gap: 10px;
   background-color: #000;
-  padding: 10px;
+  padding: 0px 37.5px;
   color: #528eff;
 }
 
@@ -53,7 +54,7 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 2px solid #fff;
+  //   border: 2px solid #fff;
   margin-bottom: 34px;
 
   button {
@@ -65,6 +66,7 @@ main {
     color: #fff;
     font-size: 16px;
     font-weight: 600;
+    opacity: 0.7;
   }
   .footer_divider {
     width: 1px;
