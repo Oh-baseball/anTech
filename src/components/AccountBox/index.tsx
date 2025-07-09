@@ -1,12 +1,17 @@
 import styles from './style.module.scss';
 
-interface AccountBoxProps {
-  title: string;
-  balance: number;
-  menu: string[];
+export interface AccountBoxProps {
+    title: string;
+    balance: number;
+    menu: string[];
 }
 
-const AccountBox = ({title, balance, menu}: AccountBoxProps) => {
+type UserAccount = {
+  accountInfo: AccountBoxProps;
+}
+
+const AccountBox = ({accountInfo}: UserAccount) => {
+  const { title, balance, menu } = accountInfo;
   const formmetedBalance = balance.toLocaleString();
 
   return (
