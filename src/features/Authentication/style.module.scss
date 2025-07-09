@@ -76,3 +76,78 @@ main {
     background-color: #fff;
   }
 }
+
+$pattern-items: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+
+@each $number in $pattern-items {
+  .patternContainer_item:nth-child(#{$number}) {
+    &:hover {
+      background-color: rgba(82, 142, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    &.selected {
+      background-color: #528eff;
+      color: #fff;
+    }
+  }
+}
+
+$button-types: (
+  primary: (
+    background: #528eff,
+    color: #fff,
+    opacity: 1,
+  ),
+  secondary: (
+    background: transparent,
+    color: #fff,
+    opacity: 0.7,
+  ),
+  disabled: (
+    background: #333,
+    color: #666,
+    opacity: 0.5,
+  ),
+);
+
+@each $type, $props in $button-types {
+  .footer button.#{$type} {
+    background-color: map-get($props, background);
+    color: map-get($props, color);
+    opacity: map-get($props, opacity);
+  }
+}
+
+$screen-sizes: (
+  small: (
+    gap: 30px,
+    item-height: 60px,
+  ),
+  medium: (
+    gap: 40px,
+    item-height: 70px,
+  ),
+  large: (
+    gap: 50px,
+    item-height: 80px,
+  ),
+);
+
+@each $size, $props in $screen-sizes {
+  .patternContainer.#{$size} {
+    .patternRow {
+      gap: map-get($props, gap);
+    }
+
+    .patternContainer_item {
+      height: map-get($props, item-height);
+    }
+  }
+}
+
+@for $i from 1 through 9 {
+  .patternContainer_item:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
