@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 .authentication_container {
   width: 375px;
   max-width: 375px;
@@ -113,9 +115,9 @@ $button-types: (
 
 @each $type, $props in $button-types {
   .footer button.#{$type} {
-    background-color: map-get($props, background);
-    color: map-get($props, color);
-    opacity: map-get($props, opacity);
+    background-color: map.get($props, background);
+    color: map.get($props, color);
+    opacity: map.get($props, opacity);
   }
 }
 
@@ -137,11 +139,11 @@ $screen-sizes: (
 @each $size, $props in $screen-sizes {
   .patternContainer.#{$size} {
     .patternRow {
-      gap: map-get($props, gap);
+      gap: map.get($props, gap);
     }
 
     .patternContainer_item {
-      height: map-get($props, item-height);
+      height: map.get($props, item-height);
     }
   }
 }
