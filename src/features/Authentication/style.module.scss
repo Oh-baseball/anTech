@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../../styles/mixins' as *;
 
 .authentication_container {
   width: 375px;
@@ -7,34 +8,37 @@
   margin: 0 auto;
   box-sizing: border-box;
   flex-direction: column;
-  background-color: #000;
+  background-color: $color-dark-bg;
   text-align: center;
-  color: #fff;
+  color: $color-bg;
 }
 
 .authentication_container {
   h3,
   h4 {
     height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flex-center;
     font-size: 18px;
-    font-weight: 600;
+    padding: 16px 20px;
+    font-weight: $font-weight-semibold;
   }
+}
+
+.authentication_container h4 {
+  padding: 20px;
 }
 
 main {
   margin-top: 105px;
 }
 
-.patternContainer {
+.pattern_container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background-color: #000;
+  background-color: $color-dark-bg;
   padding: 0px 37.5px;
-  color: #528eff;
+  color: $color-primary;
 }
 
 .patternRow {
@@ -42,13 +46,11 @@ main {
   gap: 40px;
 }
 
-.patternContainer_item {
+.pattern_container_item {
   width: 100%;
   height: 70px;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include flex-center;
+  background-color: $color-dark-bg;
   font-size: 24px;
   font-weight: 500;
 }
@@ -58,52 +60,52 @@ main {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  //   border: 2px solid #fff;
+  //   border: 2px solid $color-bg;
   margin-bottom: 34px;
 
   button {
     width: 150px;
     height: 48px;
     border-radius: 10px;
-    border: 1px solid #000;
-    background-color: #000;
-    color: #fff;
+    border: 1px solid $color-dark-bg;
+    background-color: $color-dark-bg;
+    color: $color-bg;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: $font-weight-semibold;
     opacity: 0.7;
   }
   .footer_divider {
     width: 1px;
     height: 20px;
-    background-color: #fff;
+    background-color: $color-bg;
   }
 }
 
 $pattern-items: 1, 2, 3, 4, 5, 6, 7, 8, 9;
 
 @each $number in $pattern-items {
-  .patternContainer_item:nth-child(#{$number}) {
+  .pattern_container_item:nth-child(#{$number}) {
     &:hover {
       background-color: rgba(82, 142, 255, 0.1);
       transform: scale(1.05);
     }
 
     &.selected {
-      background-color: #528eff;
-      color: #fff;
+      background-color: $color-primary;
+      color: $color-bg;
     }
   }
 }
 
 $button-types: (
   primary: (
-    background: #528eff,
-    color: #fff,
+    background: $color-primary,
+    color: $color-bg,
     opacity: 1,
   ),
   secondary: (
     background: transparent,
-    color: #fff,
+    color: $color-bg,
     opacity: 0.7,
   ),
   disabled: (
@@ -137,19 +139,19 @@ $screen-sizes: (
 );
 
 @each $size, $props in $screen-sizes {
-  .patternContainer.#{$size} {
+  .pattern_container.#{$size} {
     .patternRow {
       gap: map.get($props, gap);
     }
 
-    .patternContainer_item {
+    .pattern_container_item {
       height: map.get($props, item-height);
     }
   }
 }
 
 @for $i from 1 through 9 {
-  .patternContainer_item:nth-child(#{$i}) {
+  .pattern_container_item:nth-child(#{$i}) {
     animation-delay: #{$i * 0.1}s;
   }
 }

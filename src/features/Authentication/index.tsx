@@ -22,11 +22,11 @@ const Authentication = () => {
       <h3>패턴 입력</h3>
       <h4>패턴을 그려주세요</h4>
       <main>
-        <div className={styles.patternContainer}>
+        <div className={styles.pattern_container}>
           {patternRows.map((row, rowIndex) => (
             <div key={rowIndex} className={styles.patternRow}>
               {row.map((item, itemIndex) => (
-                <div key={itemIndex} className={styles.patternContainer_item}>
+                <div key={itemIndex} className={styles.pattern_container_item}>
                   {item}
                 </div>
               ))}
