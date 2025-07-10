@@ -1,0 +1,17 @@
+addReviewers: true
+
+addAssignees: author
+
+reviewers:
+  - wonill
+  - MSbtff
+  - Rndns
+  - aaa67
+  - akssw9120
+
+skipKeywords:
+  - wip
+
+numberOfReviewers: 1
+
+filterUserReviewer: true
