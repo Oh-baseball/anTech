@@ -9,7 +9,7 @@ export default defineConfig({
     react(),
     visualizer({
       filename: './dist/stats.html', // 빌드 결과 폴더에 생성
-      template: 'treemap', // 시각화 방식
+      template: 'network', // 시각화 방식
       gzipSize: true, // gzip 크기 표시
       brotliSize: true, // brotli 크기 표시
       open: true, // 빌드 완료 후 자동으로 브라우저에서 열기
