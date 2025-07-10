@@ -1,4 +1,5 @@
 .recordBox {
+  position: relative;
   width: 100%;
   height: 70px;
   padding: 16px 10px;
@@ -7,8 +8,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgb(21, 11, 1);
-  mix-blend-mode: difference;
+  overflow: hidden; // 혹시 모를 오버레이 삐져나감 방지
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(21, 11, 1);
+    mix-blend-mode: difference;
+    z-index: 0;
+  }
 
   .left_items {
     display: flex;
@@ -32,6 +44,7 @@
       }
 
       p:nth-of-type(2) {
+        align-self: self-start;
         font-size: 11px;
         color: rgb(125, 125, 125);
       }

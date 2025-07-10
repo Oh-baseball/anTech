@@ -5,13 +5,13 @@ import { AccountBoxProps } from "@/components/AccountBox";
 
 
 const Home = () => {
-  const accountInfo: AccountBoxProps = {
+  const userAccount: AccountBoxProps = {
     title: '토스페이',
     balance: 1234560,
     menu: ['송금', '충전', 'ATM'],
   };
 
-  const metrixMenu: SmallSquareBoxItem[] = [
+  const metrixCodeMenu: SmallSquareBoxItem[] = [
     {  
       img: 'https://picsum.photos/200/300',
       title: 'QR결제',
@@ -58,7 +58,7 @@ const Home = () => {
 
   return (
   <>
-    <HomeLayout userAccount={accountInfo} metrixMenu={metrixMenu} recordList={recordList}/>
+    <HomeLayout userAccount={userAccount} metrixCodeMenu={metrixCodeMenu} recordList={recordList}/>
   </>
   )
 };

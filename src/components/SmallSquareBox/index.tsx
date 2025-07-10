@@ -15,7 +15,9 @@ const SmallSquareBox = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
   <div className={styles.smallSquareBox}>
     {SmallSquareBoxItems.map((boxItem, idx) => (
           <button key={idx}>
-            <img src={boxItem.img}/>
+            <div>
+              <img src={boxItem.img}/>
+            </div>
             <p>{boxItem.title}</p>
             <p>{boxItem.content}</p>
           </button>
