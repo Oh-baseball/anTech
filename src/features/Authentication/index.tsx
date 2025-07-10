@@ -1,9 +1,24 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
 
-const pattern = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+type Pattern = {
+  id: number;
+  value: number;
+};
 
-const chunkArray = (array: number[], size: number) => {
+const pattern = [
+  { id: 1, value: 1 },
+  { id: 2, value: 2 },
+  { id: 3, value: 3 },
+  { id: 4, value: 4 },
+  { id: 5, value: 5 },
+  { id: 6, value: 6 },
+  { id: 7, value: 7 },
+  { id: 8, value: 8 },
+  { id: 9, value: 9 },
+];
+
+const chunkArray = (array: Pattern[], size: number) => {
   const chunks = [];
   for (let i = 0; i < array.length; i += size) {
     chunks.push(array.slice(i, i + size));
@@ -27,7 +42,7 @@ const Authentication = () => {
             <div key={rowIndex} className={styles.patternRow}>
               {row.map((item, itemIndex) => (
                 <div key={itemIndex} className={styles.pattern_container_item}>
-                  {item}
+                  {item.value}
                 </div>
               ))}
             </div>

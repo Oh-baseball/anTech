@@ -1,10 +1,20 @@
 // vite.config.ts
-import { defineConfig } from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    visualizer({
+      filename: './dist/stats.html', // 빌드 결과 폴더에 생성
+      template: 'treemap', // 시각화 방식
+      gzipSize: true, // gzip 크기 표시
+      brotliSize: true, // brotli 크기 표시
+      open: true, // 빌드 완료 후 자동으로 브라우저에서 열기
+    }) as PluginOption,
+  ],
   resolve: {
     alias: [
       { find: '@', replacement: path.resolve(__dirname, 'src') },
