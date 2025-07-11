@@ -1,0 +1,69 @@
+.payment_method_container{
+    background-color: #E5F1FE;
+    width: 335px;
+    height: 80px;
+    padding: 20px;
+    border-radius: 16px;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+}
+.payment_method_container>div{
+    background-color: #E5F1FE;
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.payment_method_container>div>img{
+    width: 40px;
+    height: 40px;
+}
+.payment_method_container>div>.payment_method_info{
+    width: 128px;
+    height: 56px;
+    padding: 10px;
+    display: flex;
+    flex-flow: column;
+    gap: 4px;
+}
+.payment_method_container>div>.payment_method_info>p:nth-of-type(1){
+    width: 100%;
+    height: 19px;
+    color: #262626;
+    font-size: 16px;
+    font-weight:600;
+}
+
+.payment_method_container>div>.payment_method_info>p:nth-of-type(2){
+    width: 100%;
+    height: 14px;
+    color: #808080;
+    font-size: 12px;
+    font-weight:400;
+}
+
+.payment_method_container>.selected{
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    display: flex;
+    gap: 10.5px; 
+    align-items: center;
+}
+
+.payment_method_container>.selected>img{
+    width: 20px;
+    height: 20px;
+}
+
+.payment_method_container>.selected>p{
+    width: 100%;
+    height: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #528EFF;
+    white-space: nowrap;
+}
