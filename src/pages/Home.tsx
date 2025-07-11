@@ -11,7 +11,7 @@ const Home = () => {
     menu: ['송금', '충전', 'ATM'],
   };
 
-  const metrixMenu: SmallSquareBoxItem[] = [
+  const metrixCodeMenu: SmallSquareBoxItem[] = [
     {  
       img: 'https://picsum.photos/200/300',
       title: 'QR결제',
@@ -58,7 +58,7 @@ const Home = () => {
 
   return (
   <>
-    <HomeLayout userAccount={accountInfo} metrixMenu={metrixMenu} recordList={recordList}/>
+    <HomeLayout userAccount={accountInfo} metrixCodeMenu={metrixCodeMenu} recordList={recordList}/>
   </>
   )
 };
