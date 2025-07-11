@@ -44,13 +44,11 @@
   }
 
   .service_menu {
-    // position: absolute;
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     gap: 18px;
-    mix-blend-mode: difference;
 
     p {
       font-size: 20px;
@@ -61,7 +59,6 @@
   }
 
   .transection_menu {
-    // position: absolute;
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
