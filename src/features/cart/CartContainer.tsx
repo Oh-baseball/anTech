@@ -3,6 +3,7 @@ import MobileWrapper from "@/components/MobileWrapper";
 import StoreInfoBox from "@/features/products/StoreInfoBox";
 import CartButtonBox from "./CartButtonBox";
 import CartTotalBox from "./CartTotalBox";
+import Header from "@/components/Header";
 
 const dummyCartBoxItems = [
   {
@@ -137,6 +138,11 @@ const CartContainer = () => {
   return (
     <>
     <MobileWrapper>
+      <Header 
+        prevBtn={true}
+        title="장바구니"
+        right={<button style={{ fontSize: '14px', color: '#666' }}>전체삭제</button>}
+      />
       <StoreInfoBox/>
       <CartBox CartBoxItmes={dummyCartBoxItems}/>
       <CartButtonBox/>

@@ -4,6 +4,7 @@ import StoreMenuBox, { StoreMenuBoxRef } from "@/features/products/StoreMenuBox"
 import StoreButtonBox from "@/features/products/StoreButtonBox";
 import StoreTabBox from "@/features/products/StoreTabBox";
 import MobileWrapper from "@/components/MobileWrapper";
+import Header from "@/components/Header";
 
 const ProductsContainer = () => {
   const [activeTab, setActiveTab] = useState("커피");
@@ -24,6 +25,11 @@ const ProductsContainer = () => {
   return (
     <>
     <MobileWrapper>
+    <Header 
+        prevBtn={true}
+        title="스타벅스 강남점"
+        right={<button style={{ fontSize: '20px' }}>🛒</button>}
+      />
       <StoreInfoBox/>
       <StoreTabBox activeTab={activeTab} onTabClick={handleTabClick}/>
       <StoreMenuBox 

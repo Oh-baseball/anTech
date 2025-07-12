@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import styles from './style.module.scss';
+import { motion } from "framer-motion";
 
 export interface CartButtonItem {
   amount: number;
@@ -15,8 +17,18 @@ const dummyData: CartButtonItem = {
 const CartButton = ({ CartButtonItem }: CartButtonProps) => {
   const data = CartButtonItem ?? dummyData;
 
+  const [pressedIdx, setPressedIdx] = useState<string | null>(null);
+
   return (
-    <button className={styles.cartButton}>💳 {data.amount.toLocaleString()}원 결제하기</button>
+    <motion.button 
+      className={`${styles.cartButton} ${pressedIdx === 'button' ? styles.pressed : ''}`}
+      onTapStart={() => setPressedIdx('button')}
+      onTap={() => setPressedIdx(null)}
+      onTapCancel={() => setPressedIdx(null)}
+    >
+      {pressedIdx === 'button' && <div className={styles.overlay} />}
+      💳 {data.amount.toLocaleString()}원 결제하기
+    </motion.button>
   );
 };
 
