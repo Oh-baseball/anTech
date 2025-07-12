@@ -3,6 +3,7 @@ import styles from './paymentConfirm.module.scss';
 import PaymentAmount from './PaymentAmount';
 import PaymentInfoList from './PaymentInfoList';
 import CancelButton from '@/components/CancelButton';
+import ActionButton from '@/components/ActionButton';
 
 const PaymentConfirmContainer = () => (
   <>
@@ -12,6 +13,8 @@ const PaymentConfirmContainer = () => (
         <PaymentAmount amount={9000} />
         <PaymentInfoList />
       </section>
+
+      <ActionButton label="14,000원 결제하기" onClick={() => null} />
     </div>
   </>
 );

@@ -1,0 +1,59 @@
+.action_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: $radius-md;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+
+  &.primary {
+    background: $color-primary;
+    color: white;
+    &:hover {
+      background: darken($color-primary, 8%);
+    }
+    &:disabled {
+      background: lighten($color-primary, 30%);
+      cursor: not-allowed;
+    }
+  }
+
+  &.secondary {
+    background: $color-secondary;
+    color: #111;
+    &:hover {
+      background: darken($color-secondary, 5%);
+    }
+    &:disabled {
+      background: lighten($color-secondary, 10%);
+      cursor: not-allowed;
+    }
+  }
+
+  &.danger {
+    background: red;
+    color: white;
+    &:hover {
+      background: darken(red, 8%);
+    }
+    &:disabled {
+      background: lighten(red, 30%);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.icon {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
