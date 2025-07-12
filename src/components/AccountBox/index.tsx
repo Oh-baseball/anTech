@@ -16,12 +16,14 @@ const AccountBox = ({accountInfo}: UserAccount) => {
 
   return (
     <div className={styles.accountBox}>
-      <p>{title}</p>
-      <p>{formmetedBalance}원</p>
-      <div>
-        {menu.map((item, idx) => (
-          <button key={idx}>{item}</button>
-        ))}
+      <div className={styles.stopMixBlend}>
+        <p>{title}</p>
+        <p>{formmetedBalance}원</p>
+        <div>
+          {menu.map((item, idx) => (
+            <button key={idx}>{item}</button>
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import SmallSquareBox, { SmallSquareBoxItem } from "@/components/SmallSquareBox"
 import AccountBox, { AccountBoxProps } from "@/components/AccountBox";
 import RecordBox, { RecordBoxItem } from "@/components/RecordBox";
 import { useState } from 'react';
+import SmallSquareBoxDark from '@/features/SmallSquareBoxDark';
 
 interface HomeLayoutProps {
   userAccount: AccountBoxProps;
@@ -19,7 +20,14 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
 
   return (
     <div className={styles.home_container}>
-      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : styles.white_mode}`}></div>
+      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : styles.white_mode}`}>
+        <div className={styles.home_menu}><p>toss</p></div>
+        <div className={styles.account_box_dark}></div>
+        <div className={styles.small_square_box_dark}>
+          <SmallSquareBoxDark SmallSquareBoxItems={metrixCodeMenu} />
+        </div>
+
+      </div>
       <div className={styles.home_menu}>
         <p>toss</p>
         <button onClick={conversionMode}><img src='https://picsum.photos/200/300'/></button>
