@@ -1,0 +1,21 @@
+.storeButton{
+    width: 160px;
+    height: 48px;
+    border-radius: $radius-md;
+    padding: 16px 24px 16px 24px;
+
+    &.pay{
+        background-color: $color-primary;
+        color: #FFFFFF;
+        font-size: 16px;
+        font-weight: $font-weight-semibold;
+    }
+
+    &.cart{
+        background-color: #EBEBEB;
+        color: #333333;
+        font-size: 16px;
+        font-weight: $font-weight-semibold;
+    }
+}
+
