@@ -38,18 +38,25 @@
         border-radius: 8px;
       }
     }
-
-    p:nth-of-type(1){
+    
+    .bottom_items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
       margin-top: 51px;
-      font-size: 14px;
-      font-weight: $font-weight-semibold;
-      color: #ffffff;
-    }
 
-    p:nth-of-type(2){
-      font-size: 10px;
-      font-weight: $font-weight-regular;
-      color: #808080;
+      p:nth-of-type(1){
+        font-size: 14px;
+        font-weight: $font-weight-semibold;
+        color: #ffffff;
+      }
+      
+      p:nth-of-type(2){
+        font-size: 10px;
+        font-weight: $font-weight-regular;
+        color: #808080;
+      }
     }
   }
 }

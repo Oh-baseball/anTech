@@ -23,7 +23,7 @@ const RecordBox = ({RecordBoxItmes}: RecordBoxProps) => {
                 <p>{boxItem.time}</p>
               </div>
             </div>
-            <p>-{boxItem.pay.toLocaleString()}원</p>
+            <p className={styles.amount_use}>-{boxItem.pay.toLocaleString()}원</p>
           </div>
         ))}
       </>

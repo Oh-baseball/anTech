@@ -14,7 +14,7 @@ const SmallSquareBoxDark = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
               <img src={boxItem.img}/>
             </div>
             <p>{boxItem.title}</p>
-            <p>{boxItem.content}</p>
+            <p></p>
           </button>
     ))}
   </div>

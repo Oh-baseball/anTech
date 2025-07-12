@@ -4,6 +4,8 @@ import AccountBox, { AccountBoxProps } from "@/components/AccountBox";
 import RecordBox, { RecordBoxItem } from "@/components/RecordBox";
 import { useState } from 'react';
 import SmallSquareBoxDark from '@/features/SmallSquareBoxDark';
+import RecordBoxDark from '@/features/RecordBoxDark';
+import AccountBoxDark from '@/features/AccountBoxDark';
 
 interface HomeLayoutProps {
   userAccount: AccountBoxProps;
@@ -22,11 +24,19 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
     <div className={styles.home_container}>
       <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : styles.white_mode}`}>
         <div className={styles.home_menu}><p>toss</p></div>
-        <div className={styles.account_box_dark}></div>
+        <div className={styles.account_box_dark}>
+          <AccountBoxDark/>
+        </div>
         <div className={styles.small_square_box_dark}>
           <SmallSquareBoxDark SmallSquareBoxItems={metrixCodeMenu} />
         </div>
-
+        <div className={styles.transection_menu_dark}>
+          <div>
+            <p>최근거래</p>
+            <a href='#'></a>
+          </div>
+          <RecordBoxDark recordBoxDarkItems={recordList}/>
+        </div>
       </div>
       <div className={styles.home_menu}>
         <p>toss</p>

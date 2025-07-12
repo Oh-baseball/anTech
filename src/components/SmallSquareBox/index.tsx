@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 export interface SmallSquareBoxItem {
   img?: string;
   title: string;
-  content: string;
+  content?: string;
 }
 
 interface SmallSquareBoxProps {
@@ -18,8 +18,10 @@ const SmallSquareBox = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
             <div>
               <img src={boxItem.img}/>
             </div>
-            <p>{boxItem.title}</p>
-            <p>{boxItem.content}</p>
+            <div className={styles.bottom_items}>
+              <p>{boxItem.title}</p>
+              <p>{boxItem.content}</p>
+            </div>
           </button>
     ))}
   </div>
