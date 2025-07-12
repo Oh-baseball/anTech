@@ -8,7 +8,7 @@ const PaymentConfirmContainer = () => (
   <>
     <Header prevBtn title="결제하기" right={<CancelButton />} />
     <div className={styles.container}>
-      <section className={styles.confirmBox}>
+      <section className={styles.confirm_box}>
         <PaymentAmount amount={9000} />
         <PaymentInfoList />
       </section>

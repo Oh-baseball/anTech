@@ -1,4 +1,4 @@
-import styles from '../paymentConfirm.module.scss';
+import styles from './style.module.scss';
 
 interface PaymentInfoItemProps {
   label: string;
@@ -7,9 +7,9 @@ interface PaymentInfoItemProps {
 }
 
 const PaymentInfoItem = ({ label, value, isDiscount = false }: PaymentInfoItemProps) => (
-  <li>
-    <span className={styles.infoLabel}>{label}</span>
-    <span className={isDiscount ? styles.discount : styles.infoValue}>{value}</span>
+  <li className={styles.info_item}>
+    <span className={styles.info_label}>{label}</span>
+    <span className={isDiscount ? styles.discount : styles.info_value}>{value}</span>
   </li>
 );
 

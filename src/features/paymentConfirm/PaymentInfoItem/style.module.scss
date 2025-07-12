@@ -1,0 +1,21 @@
+.info_item {
+  @include align-items-center;
+  justify-content: space-between;
+  font-size: 15px;
+  padding: 3px 0;
+}
+
+.info_label {
+  color: #808080;
+  font-weight: $font-weight-regular;
+  flex: 1;
+}
+
+.info_value {
+  font-weight: $font-weight-semibold;
+}
+
+.discount {
+  color: #4d4dff;
+  font-weight: $font-weight-semibold;
+}
