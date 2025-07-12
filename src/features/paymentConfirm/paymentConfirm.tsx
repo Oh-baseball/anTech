@@ -14,7 +14,7 @@ const PaymentConfirmContainer = () => (
         <PaymentInfoList />
       </section>
 
-      <ActionButton label="14,000원 결제하기" onClick={() => null} />
+      <ActionButton label="9,000원 결제하기" onClick={() => null} />
     </div>
   </>
 );
