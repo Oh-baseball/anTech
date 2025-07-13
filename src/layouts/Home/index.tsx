@@ -47,7 +47,9 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
       </div>
       <div className={styles.service_menu}>
         <p>빠른 서비스</p>
-        <SmallSquareBox SmallSquareBoxItems={metrixCodeMenu} />
+        <div className={styles.service_menu_button}>
+          <SmallSquareBox SmallSquareBoxItems={metrixCodeMenu} />
+        </div>
       </div>
       <div className={styles.transection_menu}>
         <div>

@@ -12,19 +12,21 @@ interface SmallSquareBoxProps {
 
 const SmallSquareBox = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
   return (
-  <div className={styles.smallSquareBox}>
+  <>
     {SmallSquareBoxItems.map((boxItem, idx) => (
-          <button key={idx}>
+          <button key={idx} className={styles.smallSquareBox}>
             <div>
               <img src={boxItem.img}/>
             </div>
             <div className={styles.bottom_items}>
               <p>{boxItem.title}</p>
+            <div>
               <p>{boxItem.content}</p>
+            </div>
             </div>
           </button>
     ))}
-  </div>
+  </>
   )
 };
 
