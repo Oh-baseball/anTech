@@ -1,7 +1,7 @@
-import { SmallSquareBoxItem } from "@/components/SmallSquareBox";
-import { RecordBoxItem } from "@/components/RecordBox";
-import HomeLayout from "@/layouts/Home";
-import { AccountBoxProps } from "@/components/AccountBox";
+import { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
+import { RecordBoxItem } from "@/features/Home/RecordBox";
+import HomeLayout from "@/features/Home";
+import { AccountBoxProps } from "@/features/Home/AccountBox";
 
 
 const Home = () => {

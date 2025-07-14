@@ -1,7 +1,7 @@
 import styles from './style.module.scss';
 
 
-const AccountBoxDark = () => {
+const DarkAccountBox = () => {
 
   return (
     <div className={styles.accountBox}>
@@ -15,4 +15,4 @@ const AccountBoxDark = () => {
   )
 };
 
-export default AccountBoxDark
+export default DarkAccountBox

@@ -1,11 +1,14 @@
 import styles from './style.module.scss';
-import SmallSquareBox, { SmallSquareBoxItem } from "@/components/SmallSquareBox";
-import AccountBox, { AccountBoxProps } from "@/components/AccountBox";
-import RecordBox, { RecordBoxItem } from "@/components/RecordBox";
 import { useState } from 'react';
-import SmallSquareBoxDark from '@/features/SmallSquareBoxDark';
-import RecordBoxDark from '@/features/RecordBoxDark';
-import AccountBoxDark from '@/features/AccountBoxDark';
+
+import SmallSquareBox, { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
+import AccountBox, { AccountBoxProps } from "@/features/Home/AccountBox";
+import RecordBox, { RecordBoxItem } from "@/features/Home/RecordBox";
+
+import DarkSmallSquareBox from '@/features/Home/DarkSmallSquareBox';
+import DarkAccountBox from '@/features/Home/DarkAccountBox';
+import DarkRecordBox from '@/features/Home/DarkRecordBox';
+import FlipButton from './FlipButton';
 
 interface HomeLayoutProps {
   userAccount: AccountBoxProps;
@@ -19,28 +22,31 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
   const conversionMode = () => {
     setDarkMode(darkMode ? false : true);
   }
-
+  
   return (
     <div className={styles.home_container}>
-      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : styles.white_mode}`}>
+      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ""}`}>
         <div className={styles.home_menu}><p>toss</p></div>
         <div className={styles.account_box_dark}>
-          <AccountBoxDark/>
+          <DarkAccountBox/>
         </div>
         <div className={styles.small_square_box_dark}>
-          <SmallSquareBoxDark SmallSquareBoxItems={metrixCodeMenu} />
+          <DarkSmallSquareBox SmallSquareBoxItems={metrixCodeMenu} />
         </div>
         <div className={styles.transection_menu_dark}>
           <div>
             <p>최근거래</p>
             <a href='#'></a>
           </div>
-          <RecordBoxDark recordBoxDarkItems={recordList}/>
+          <DarkRecordBox recordBoxDarkItems={recordList}/>
         </div>
       </div>
       <div className={styles.home_menu}>
         <p>toss</p>
-        <button onClick={conversionMode}><img src='https://picsum.photos/200/300'/></button>
+        <button onClick={conversionMode}>
+          <FlipButton/>
+          {/* <img src='https://picsum.photos/200/300'/> */}
+        </button>
       </div>
       <div className={styles.accountBox}>
         <AccountBox accountInfo={userAccount}/>

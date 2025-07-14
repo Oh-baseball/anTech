@@ -1,11 +1,11 @@
-import { SmallSquareBoxItem } from '@/components/SmallSquareBox';
+import { SmallSquareBoxItem } from '@/features/Home/SmallSquareBox';
 import styles from './style.module.scss';
 
-interface SmallSquareBoxProps {
+interface DarkSmallSquareBoxProps {
   SmallSquareBoxItems: SmallSquareBoxItem[];
 }
 
-const SmallSquareBoxDark = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
+const DarkSmallSquareBox = ({SmallSquareBoxItems}: DarkSmallSquareBoxProps) => {
   return (
   <>
     {SmallSquareBoxItems.map((boxItem, idx) => (
@@ -21,4 +21,4 @@ const SmallSquareBoxDark = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
   )
 };
 
-export default SmallSquareBoxDark
+export default DarkSmallSquareBox

@@ -1,11 +1,11 @@
-import { RecordBoxItem } from '@/components/RecordBox';
+import { RecordBoxItem } from '@/features/Home/RecordBox';
 import styles from './style.module.scss';
 
-interface RecordBoxDarkProps {
+interface DarkRecordBoxProps {
   recordBoxDarkItems: RecordBoxItem[];
 }
 
-const RecordBoxDark = ({recordBoxDarkItems}: RecordBoxDarkProps) => {
+const DarkRecordBox = ({recordBoxDarkItems}: DarkRecordBoxProps) => {
   return (
     <>
       {recordBoxDarkItems.map((boxItem, idx) => (
@@ -24,4 +24,4 @@ const RecordBoxDark = ({recordBoxDarkItems}: RecordBoxDarkProps) => {
   )
 };
 
-export default RecordBoxDark
+export default DarkRecordBox
