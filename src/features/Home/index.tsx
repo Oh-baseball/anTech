@@ -26,7 +26,7 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
   return (
     <div className={styles.home_container}>
       <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ""}`}>
-        <div className={styles.home_menu}><p>toss</p></div>
+        <div className={styles.home_menu}><p>ANPay</p></div>
         <div className={styles.account_box_dark}>
           <DarkAccountBox/>
         </div>
@@ -42,10 +42,9 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
         </div>
       </div>
       <div className={styles.home_menu}>
-        <p>toss</p>
+        <p>ANPay</p>
         <button onClick={conversionMode}>
           <FlipButton/>
-          {/* <img src='https://picsum.photos/200/300'/> */}
         </button>
       </div>
       <div className={styles.accountBox}>

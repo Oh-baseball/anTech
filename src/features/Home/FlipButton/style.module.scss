@@ -10,11 +10,11 @@
   height: 32px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 1.5s cubic-bezier(0.2, 0.9, 0.9, 0.2);
+  transition: transform 1.5s cubic-bezier(0.9, 0.2, 0.2, 0.9);
 }
 
 .isFlipped {
-  transform: rotateY(180deg);
+  transform: rotateY(540deg);
 }
 
 .cardFace {
