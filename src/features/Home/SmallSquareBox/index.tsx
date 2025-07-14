@@ -1,9 +1,9 @@
 import styles from './style.module.scss';
 
 export interface SmallSquareBoxItem {
-  img: string;
+  img?: string;
   title: string;
-  content: string;
+  content?: string;
 }
 
 interface SmallSquareBoxProps {
@@ -12,15 +12,21 @@ interface SmallSquareBoxProps {
 
 const SmallSquareBox = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
   return (
-  <div className={styles.smallSquareBox}>
+  <>
     {SmallSquareBoxItems.map((boxItem, idx) => (
-          <button key={idx}>
-            <img src={boxItem.img}/>
-            <p>{boxItem.title}</p>
-            <p>{boxItem.content}</p>
+          <button key={idx} className={styles.smallSquareBox}>
+            <div>
+              <img src={boxItem.img}/>
+            </div>
+            <div className={styles.bottom_items}>
+              <p>{boxItem.title}</p>
+            <div>
+              <p>{boxItem.content}</p>
+            </div>
+            </div>
           </button>
     ))}
-  </div>
+  </>
   )
 };
 
