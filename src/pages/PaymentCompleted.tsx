@@ -1,5 +1,7 @@
+import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
+
 const PaymentCompleted = () => {
-  return <div>PaymentCompleted</div>;
+  return <PaymentCompletedContainer />;
 };
 
 export default PaymentCompleted;
