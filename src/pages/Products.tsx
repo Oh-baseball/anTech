@@ -1,4 +1,4 @@
-import ProductsContainer from "@/features/products/productsContainer";
+import ProductsContainer from "@/features/products/ProductsContainer";
 
 const Products = () => {
   return (

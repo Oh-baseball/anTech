@@ -18,7 +18,7 @@ interface StoreMenuBoxProps {
 }
 
 export interface StoreMenuBoxRef {
-  categoryRefs: Record<string, HTMLDivElement | null>;
+  categoryRefs: Record<string, HTMLDivElement | null>; //{카테고리명: div DOM} 형태
 }
 
 const dummyCategories = ["커피", "디저트", "샌드위치"];
@@ -162,12 +162,14 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
     const [pressedIdx, setPressedIdx] = useState<string | null>(null);
 
     const [activeTab, setActiveTab] = useState(categories[0]);
-    const categoryRefs = useRef<Record<string, HTMLDivElement|null>>({});
-    const scrollRef = useRef<HTMLDivElement>(null);
 
+    //부모(productsContainer)로 넘김
+    const categoryRefs = useRef<Record<string, HTMLDivElement|null>>({});
     useImperativeHandle(ref, () => ({
       categoryRefs: categoryRefs.current
     }));
+
+    const scrollRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
       categories.forEach(cat => {
@@ -177,11 +179,11 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
       });
     }, [categories]);
 
-    const handleTabClick = (cat: string) => {
-      setActiveTab(cat);
-      scrollToCategory?.(cat);
-      onTabChange?.(cat);
-    };
+    // const handleTabClick = (cat: string) => {
+    //   setActiveTab(cat);
+    //   scrollToCategory?.(cat);
+    //   onTabChange?.(cat);
+    // };
     
     // 스크롤 시 현재 보이는 카테고리 감지
     useEffect(() => {
@@ -210,7 +212,7 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
 
       categories.forEach(cat => {
         const ref = categoryRefs.current[cat];
-        if (ref) observer.observe(ref);
+        if (ref) observer.observe(ref); //IntersectionObserver에 내가 관찰하고 싶은 DOM요소를 등록
       });
 
       return () => observer.disconnect();

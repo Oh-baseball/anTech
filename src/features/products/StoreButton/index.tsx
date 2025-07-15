@@ -46,7 +46,7 @@ const StoreButton = ({ StoreButtonItem }: StoreButtonProps) => {
       {data.name === "장바구니 담기" && (
         <div className={styles.cartAnimation}>
           <div className={styles.cartIcon}>🛒</div>
-          <div className={styles.checkIcon}>✓</div>
+          <div className={styles.checkIcon}>✅</div>
         </div>
       )}
     </motion.button>
