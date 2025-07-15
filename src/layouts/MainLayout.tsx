@@ -1,4 +1,4 @@
-import Loding from '@/components/Loading';
+import Loding from '@/components/Login';
 import MobileWrapper from '@/components/MobileWrapper';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';

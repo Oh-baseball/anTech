@@ -2,6 +2,8 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Login from './pages/Login';
+import PageA from './pages/PageA';
+import PageB from './pages/PageB';
 
 const Home = lazy(() => import('./pages/Home'));
 const Products = lazy(() => import('./pages/Products'));
@@ -18,6 +20,8 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <Home /> },
+      { path: 'pageA', element: <PageA /> },
+      { path: 'pageB', element: <PageB /> },
       { path: 'login', element: <Login/>},
       { path: 'products', element: <Products /> },
       { path: 'cart', element: <Cart /> },

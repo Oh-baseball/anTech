@@ -1,4 +1,4 @@
-import Loading from "@/components/Loading";
+import Loading from "@/components/Login";
 
 const Login = () => {
   return <div><Loading/></div>;
