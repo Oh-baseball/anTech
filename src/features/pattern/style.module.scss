@@ -1,0 +1,579 @@
+@use 'sass:map';
+@use '../../styles/mixins' as *;
+
+.pattern_container {
+  width: 375px;
+  max-width: 375px;
+  display: flex;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex-direction: column;
+  background-color: $color-dark-bg;
+  text-align: center;
+  color: $color-bg;
+}
+
+.header {
+  h3,
+  h4 {
+    height: 64px;
+    @include flex-center;
+    font-size: 18px;
+    padding: 16px 20px;
+    font-weight: $font-weight-semibold;
+    margin: 0;
+  }
+
+  h4 {
+    padding: 20px;
+    font-size: 16px;
+    opacity: 0.8;
+  }
+}
+
+.status_display {
+  padding: 0 20px;
+  margin-bottom: 20px;
+
+  .attempt_counter {
+    margin-bottom: 10px;
+
+    span {
+      font-size: 14px;
+      color: $color-secondary;
+      opacity: 0.8;
+    }
+  }
+
+  .error_message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: $font-weight-medium;
+    background-color: rgba(255, 68, 68, 0.1);
+    color: #ff4444;
+    border: 1px solid rgba(255, 68, 68, 0.2);
+
+    &.success {
+      background-color: rgba(82, 142, 255, 0.1);
+      color: $color-primary;
+      border-color: rgba(82, 142, 255, 0.2);
+    }
+  }
+}
+
+main {
+  margin-top: 20px;
+}
+
+.pattern_area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.pattern_svg_container {
+  width: 250px;
+  height: 250px;
+  border-radius: 16px;
+  // background-color: $color-dark-box;
+  // border: 2px solid rgba(82, 142, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    // border-color: rgba(82, 142, 255, 0.4);
+  }
+
+  // 터치 영역 시각적 피드백
+  // &:active {
+  //   transform: scale(0.98);
+  //   border-color: $color-primary;
+  // }
+}
+
+.pattern_svg {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  border-radius: 14px;
+
+  // 터치 디바이스에서 기본 동작 방지
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+
+  // 드래그 방지
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+// 패턴 페이드 애니메이션
+.pattern_fade {
+  animation: patternFadeOut 2s ease-out forwards !important;
+  pointer-events: none; /* 애니메이션 중 터치 이벤트 방지 */
+}
+
+.pattern_active {
+  animation: patternPulse 0.8s ease-in-out infinite alternate;
+
+  &.pattern_fade {
+    animation: patternFadeOut 2s ease-out forwards !important;
+  }
+}
+
+@keyframes patternFadeOut {
+  0% {
+    opacity: 1;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.6));
+  }
+  25% {
+    opacity: 0.8;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 0 3px rgba(82, 142, 255, 0.4));
+  }
+  50% {
+    opacity: 0.5;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 2px rgba(82, 142, 255, 0.3));
+  }
+  75% {
+    opacity: 0.2;
+    stroke-width: 1.5;
+    filter: drop-shadow(0 0 1px rgba(82, 142, 255, 0.2));
+  }
+  100% {
+    opacity: 0;
+    stroke-width: 1;
+    filter: drop-shadow(0 0 0px rgba(82, 142, 255, 0));
+    visibility: hidden; /* 완전히 숨김 */
+  }
+}
+
+@keyframes patternPulse {
+  0% {
+    opacity: 1;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.5));
+  }
+  50% {
+    opacity: 0.9;
+    stroke-width: 3.5;
+    filter: drop-shadow(0 0 8px rgba(82, 142, 255, 0.7));
+  }
+  100% {
+    opacity: 1;
+    stroke-width: 4;
+    filter: drop-shadow(0 0 12px rgba(82, 142, 255, 0.9));
+  }
+}
+
+// 점들의 페이드 효과
+.pattern_fade circle {
+  animation: patternFadeOut 2s ease-out forwards;
+}
+
+.pattern_fade path {
+  animation: patternFadeOut 2s ease-out forwards;
+}
+
+// 오류 시 패턴 흔들림 효과
+.pattern_error {
+  animation: patternError 0.5s ease-in-out;
+}
+
+@keyframes patternError {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+// 성공 시 패턴 효과
+.pattern_success {
+  animation: patternSuccess 1s ease-in-out;
+}
+
+@keyframes patternSuccess {
+  0% {
+    opacity: 1;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.5));
+  }
+  50% {
+    opacity: 1;
+    stroke-width: 5;
+    filter: drop-shadow(0 0 20px rgba(82, 142, 255, 1));
+  }
+  100% {
+    opacity: 1;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.5));
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 34px;
+
+  button {
+    width: 150px;
+    height: 48px;
+    border-radius: 10px;
+    border: 1px solid rgba(82, 142, 255, 0.2);
+    // background-color: $color-dark-bg;
+    color: $color-bg;
+    font-size: 16px;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      // background-color: rgba(82, 142, 255, 0.1);
+      border-color: $color-primary;
+      transform: translateY(-2px);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      // background-color: rgba(82, 142, 255, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    &.secondary {
+      opacity: 0.8;
+
+      &:hover:not(:disabled) {
+        opacity: 1;
+      }
+    }
+  }
+
+  .footer_divider {
+    width: 1px;
+    height: 20px;
+    background-color: rgba(229, 241, 254, 0.2);
+  }
+}
+
+// 점 선택 애니메이션
+@keyframes pointPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(82, 142, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(82, 142, 255, 0.1);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(82, 142, 255, 0);
+  }
+}
+
+// 패턴 라인 애니메이션
+@keyframes lineGlow {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 15px rgba(82, 142, 255, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.5));
+  }
+}
+
+// 오류 상태 애니메이션
+@keyframes errorShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+// 성공 상태 애니메이션
+@keyframes successGlow {
+  0% {
+    border-color: rgba(82, 142, 255, 0.2);
+    box-shadow: 0 0 0 0 rgba(82, 142, 255, 0.2);
+  }
+  50% {
+    border-color: $color-primary;
+    box-shadow: 0 0 20px 0 rgba(82, 142, 255, 0.4);
+  }
+  100% {
+    border-color: rgba(82, 142, 255, 0.2);
+    box-shadow: 0 0 0 0 rgba(82, 142, 255, 0.2);
+  }
+}
+
+// 반응형 디자인
+@media (max-width: 375px) {
+  .pattern_container {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .pattern_area {
+    padding: 15px;
+  }
+
+  .pattern_svg_container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .footer {
+    padding: 15px;
+
+    button {
+      width: 140px;
+      height: 44px;
+      font-size: 14px;
+    }
+  }
+}
+
+// 다크 모드 최적화
+@media (prefers-color-scheme: dark) {
+  .pattern_container {
+    // background-color: $color-dark-bg;
+  }
+
+  .pattern_svg_container {
+    // background-color: $color-dark-box;
+    border-color: rgba(82, 142, 255, 0.15);
+  }
+}
+
+// 터치 디바이스 최적화
+@media (hover: none) and (pointer: coarse) {
+  .pattern_svg {
+    cursor: default;
+  }
+
+  .pattern_svg_container {
+    &:hover {
+      border-color: rgba(82, 142, 255, 0.2);
+    }
+  }
+
+  .footer button {
+    &:hover {
+      background-color: $color-dark-bg;
+      border-color: rgba(82, 142, 255, 0.2);
+      transform: none;
+    }
+  }
+}
+
+// 접근성 개선
+@media (prefers-reduced-motion: reduce) {
+  .footer button {
+    transition: none;
+  }
+
+  .pattern_svg_container {
+    transition: none;
+  }
+}
+
+// 별 반짝임 효과 애니메이션
+.sparkle_group {
+  animation: sparkleAppear 1.5s ease-out;
+  transform-origin: center;
+}
+
+.sparkle_star {
+  animation: starTwinkle 1.5s ease-in-out;
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+.sparkle_dot {
+  animation: dotFloat 1.5s ease-out;
+  transform-origin: center;
+}
+
+.sparkle_ring {
+  animation: ringExpand 1.5s ease-out;
+  transform-origin: center;
+}
+
+@keyframes sparkleAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) rotate(360deg);
+  }
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+  }
+  15% {
+    opacity: 1;
+    transform: scale(1.3) rotate(90deg);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 1));
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+    filter: drop-shadow(0 0 12px rgba(82, 142, 255, 0.8));
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(270deg);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+  }
+  80% {
+    opacity: 0.9;
+    transform: scale(1.05) rotate(330deg);
+    filter: drop-shadow(0 0 8px rgba(82, 142, 255, 0.7));
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) rotate(360deg);
+    filter: drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+  }
+}
+
+@keyframes dotFloat {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(0);
+  }
+  20% {
+    opacity: 1;
+    transform: scale(1.5) translateY(-5px);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1) translateY(-8px);
+  }
+  70% {
+    opacity: 0.8;
+    transform: scale(0.8) translateY(-12px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-20px);
+  }
+}
+
+@keyframes ringExpand {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+    stroke-width: 3;
+  }
+  20% {
+    opacity: 0.8;
+    transform: scale(0.8);
+    stroke-width: 2;
+  }
+  40% {
+    opacity: 0.6;
+    transform: scale(1.2);
+    stroke-width: 1.5;
+  }
+  70% {
+    opacity: 0.3;
+    transform: scale(1.8);
+    stroke-width: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.5);
+    stroke-width: 0.5;
+  }
+}
+
+// 선택된 포인트에 추가 반짝임 효과
+.pattern_svg circle {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 3px rgba(82, 142, 255, 0.5));
+  }
+}
+
+// 선택된 포인트 특별 효과
+.pattern_svg circle[fill='#528eff'] {
+  animation: selectedPointGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes selectedPointGlow {
+  0% {
+    filter: drop-shadow(0 0 5px rgba(82, 142, 255, 0.6));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 12px rgba(82, 142, 255, 0.9))
+      drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    transform: scale(1.05);
+  }
+  100% {
+    filter: drop-shadow(0 0 8px rgba(82, 142, 255, 0.8));
+    transform: scale(1);
+  }
+}
+
+// 고대비 모드
+@media (prefers-contrast: high) {
+  .pattern_svg_container {
+    border-width: 3px;
+    border-color: $color-primary;
+  }
+
+  .error_message {
+    border-width: 2px;
+
+    &.success {
+      border-color: $color-primary;
+    }
+  }
+}

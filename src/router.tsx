@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout';
 import Authentication from './features/Authentication';
+import PatternLockDemo from './features/pattern';
 
 const Home = lazy(() => import('./pages/Home'));
 const Products = lazy(() => import('./pages/Products'));
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
       { path: 'payment-confirm', element: <PaymentConfirm /> },
       { path: 'payment-completed', element: <PaymentCompleted /> },
       { path: 'authentication', element: <Authentication /> },
+      { path: 'pattern', element: <PatternLockDemo /> },
       { path: '*', element: <NotFound /> },
     ],
   },
