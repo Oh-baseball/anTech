@@ -28,8 +28,31 @@
   padding: 20px;
 }
 
+.pin_display {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.pin_dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid $color-bg;
+  background-color: transparent;
+  transition: all 0.3s ease;
+
+  &.filled {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    transform: scale(1.1);
+  }
+}
+
 main {
-  margin-top: 105px;
+  margin-top: 20px;
 }
 
 .pattern_container {
@@ -51,8 +74,56 @@ main {
   height: 70px;
   @include flex-center;
   background-color: $color-dark-bg;
+  border: 1px solid rgba(82, 142, 255, 0.2);
+  border-radius: 8px;
   font-size: 24px;
   font-weight: 500;
+  color: $color-secondary;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  // &:hover:not(:disabled) {
+  //   background-color: rgba(82, 142, 255, 0.1);
+  //   transform: scale(1.05);
+  //   border-color: $color-primary;
+  // }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.animating {
+    background-color: $color-primary !important;
+    color: $color-bg;
+    transform: scale(1.1) !important;
+    box-shadow: 0 0 20px rgba(82, 142, 255, 0.6);
+    border-color: $color-primary !important;
+    animation: buttonPress 0.3s ease-in-out;
+  }
+}
+
+@keyframes buttonPress {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(82, 142, 255, 0.6);
+  }
+  25% {
+    transform: scale(1.15);
+    box-shadow: 0 0 25px rgba(82, 142, 255, 0.8);
+  }
+  50% {
+    transform: scale(1.11);
+    box-shadow: 0 0 20px rgba(82, 142, 255, 0.6);
+  }
+  75% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(82, 142, 255, 0.4);
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 rgba(82, 142, 255, 0.6);
+  }
 }
 
 .footer {
@@ -73,6 +144,17 @@ main {
     font-size: 16px;
     font-weight: $font-weight-semibold;
     opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
   .footer_divider {
     width: 1px;
@@ -81,21 +163,21 @@ main {
   }
 }
 
-$pattern-items: 1, 2, 3, 4, 5, 6, 7, 8, 9;
+// $pattern-items: 1, 2, 3, 4, 5, 6, 7, 8, 9;
 
-@each $number in $pattern-items {
-  .pattern_container_item:nth-child(#{$number}) {
-    &:hover {
-      background-color: rgba(82, 142, 255, 0.1);
-      transform: scale(1.05);
-    }
+// @each $number in $pattern-items {
+//   .pattern_container_item:nth-child(#{$number}) {
+//     &:hover {
+//       background-color: rgba(82, 142, 255, 0.1);
+//       transform: scale(1.05);
+//     }
 
-    &.selected {
-      background-color: $color-primary;
-      color: $color-bg;
-    }
-  }
-}
+//     &.selected {
+//       background-color: $color-primary;
+//       color: $color-bg;
+//     }
+//   }
+// }
 
 $button-types: (
   primary: (
@@ -122,7 +204,7 @@ $button-types: (
     opacity: map.get($props, opacity);
   }
 }
-
+//반응형
 $screen-sizes: (
   small: (
     gap: 30px,
@@ -150,8 +232,8 @@ $screen-sizes: (
   }
 }
 
-@for $i from 1 through 9 {
-  .pattern_container_item:nth-child(#{$i}) {
-    animation-delay: #{$i * 0.1}s;
-  }
-}
+// @for $i from 1 through 9 {
+//   .pattern_container_item:nth-child(#{$i}) {
+//     animation-delay: #{$i * 0.1}s;
+//   }
+// }
