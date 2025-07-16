@@ -24,9 +24,14 @@ const router = createBrowserRouter([
       { path: 'products', element: <Products /> },
       { path: 'cart', element: <Cart /> },
       { path: 'verify', element: <Verify /> },
-      { path: 'payment-method', element: <PaymentMethod /> },
-      { path: 'payment-confirm', element: <PaymentConfirm /> },
-      { path: 'payment-completed', element: <PaymentCompleted /> },
+      {
+        path: 'payment',
+        children: [
+          { path: 'method', element: <PaymentMethod /> },
+          { path: 'confirm', element: <PaymentConfirm /> },
+          { path: 'completed', element: <PaymentCompleted /> },
+        ],
+      },
       { path: 'authentication', element: <Authentication /> },
       { path: 'pattern', element: <PatternLockDemo /> },
       { path: '*', element: <NotFound /> },
