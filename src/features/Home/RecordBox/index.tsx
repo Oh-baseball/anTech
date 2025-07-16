@@ -17,13 +17,13 @@ const RecordBox = ({RecordBoxItmes}: RecordBoxProps) => {
         {RecordBoxItmes.map((boxItem, idx) => (
           <div key={idx} className={styles.recordBox}>
             <div className={styles.left_items}>
-              <img src={boxItem.img}/>
+              <div><img src={boxItem.img}/></div>
               <div className={styles.middle_items}>
                 <p>{boxItem.title}</p>
                 <p>{boxItem.time}</p>
               </div>
             </div>
-            <p>-{boxItem.pay.toLocaleString()}원</p>
+            <p className={styles.amount_use}>-{boxItem.pay.toLocaleString()}원</p>
           </div>
         ))}
       </>

@@ -1,14 +1,17 @@
-import SmallSquareBox, { SmallSquareBoxItem } from "@/components/SmallSquareBox";
-import AccountBox from "@/components/AccountBox";
-import RecordBox, { RecordBoxItem } from "@/components/RecordBox";
+import { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
+import { RecordBoxItem } from "@/features/Home/RecordBox";
+import HomeLayout from "@/features/Home";
+import { AccountBoxProps } from "@/features/Home/AccountBox";
 
 
 const Home = () => {
-  const accountTitle: string = '토스페이'
-  const userBalance: number = 1234560;
-  const accountMenu: string[] = ['송금', '충전', 'ATM']
+  const accountInfo: AccountBoxProps = {
+    title: '토스페이',
+    balance: 1234560,
+    menu: ['송금', '충전', 'ATM'],
+  };
 
-  const metrixMenu: SmallSquareBoxItem[] = [
+  const metrixCodeMenu: SmallSquareBoxItem[] = [
     {  
       img: 'https://picsum.photos/200/300',
       title: 'QR결제',
@@ -54,21 +57,9 @@ const Home = () => {
   ]
 
   return (
-  <div className="home_container" style={{ backgroundColor: 'white' }}>
-    <div><p>toss</p><button>이미지</button></div>
-    <AccountBox title={accountTitle} balance={userBalance} menu={accountMenu}/>
-    <div>
-      <div>빠른 서비스</div>
-      <SmallSquareBox SmallSquareBoxItems={metrixMenu} />
-    </div>
-    <div>
-      <div>
-        <div>최근거래</div>
-        <div>전체</div>
-      </div>
-    <RecordBox RecordBoxItmes={recordList}/>
-    </div>
-  </div>
+  <>
+    <HomeLayout userAccount={accountInfo} metrixCodeMenu={metrixCodeMenu} recordList={recordList}/>
+  </>
   )
 };
 
