@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './paymentCompletedContainer.module.scss';
 import Card from './Card';
+import SpeechBubble from './SpeechBubble';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -76,7 +77,7 @@ const PaymentCompletedContainer = () => {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <div className={styles.starBg} ref={starBgRef}></div>
+      <div className={styles.star_bg} ref={starBgRef}></div>
       <section className={`${styles.top} ${styles.section_container}`}>
         <h1 className={styles.title} ref={titleRef}>
           <div>결</div>
@@ -91,8 +92,11 @@ const PaymentCompletedContainer = () => {
         </h1>
       </section>
       <section className={`${styles.bottom} ${styles.section_container}`} ref={bottomRef}>
-        <div className={styles.contWrap}>
-          <Card ref={cardRef} />
+        <div className={styles.cont_wrap}>
+          <div className={styles.card_wrap}>
+            <SpeechBubble />
+            <Card ref={cardRef} />
+          </div>
           <h2>결제가 완료되었습니다.</h2>
         </div>
       </section>

@@ -6,9 +6,11 @@
 
 .card_container {
   position: relative;
+  z-index: 100;
   @include card_base;
   margin: 50px;
   transform-style: preserve-3d;
+  border: solid 1px yellow;
 }
 .card {
   @include card_base;
