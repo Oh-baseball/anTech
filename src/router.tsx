@@ -25,9 +25,9 @@ const router = createBrowserRouter([
       {
         path: 'payment',
         children: [
-          { path: 'payment-method', element: <PaymentMethod /> },
-          { path: 'payment-confirm', element: <PaymentConfirm /> },
-          { path: 'payment-completed', element: <PaymentCompleted /> },
+          { path: 'method', element: <PaymentMethod /> },
+          { path: 'confirm', element: <PaymentConfirm /> },
+          { path: 'completed', element: <PaymentCompleted /> },
         ],
       },
       { path: 'authentication', element: <Authentication /> },
