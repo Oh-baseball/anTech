@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./style.module.scss";
 import { FaLock } from "react-icons/fa";
 import { MdEditDocument } from "react-icons/md";
@@ -5,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 const Loading = () => {
   const navigate = useNavigate()
-
+  const [clickedLogin, setClickedLogin] = useState(false)
   const Login = () => {
-    // navigate('/');
-    navigate('/', { viewTransition: true });
+    setClickedLogin(true);
+    setTimeout(() => {
+      navigate('/', { viewTransition: true });
+    }, 1000);
   }
 
   return (
@@ -29,9 +32,9 @@ const Loading = () => {
           <input className={styles.user_password} type="text" placeholder="비밀번호" required/>
         </div>
         <div className={styles.button_part}>
-          <button className={styles.login_btn} onClick={Login}>
+          <button className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`} onClick={Login} disabled={clickedLogin}>
             <span className={styles.lock_icon}><FaLock /></span>
-            <div>
+            <div className={styles.login_box}>
               <span className={styles.login_text}>로그인</span>
             </div>
           </button>

@@ -1,7 +1,7 @@
-import Loading from "@/components/Login";
+import LoginLayout from "@/components/Login";
 
 const Login = () => {
-  return <div><Loading/></div>;
+  return <div><LoginLayout/></div>;
 };
 
 export default Login;

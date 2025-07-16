@@ -38,7 +38,7 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
             <p>최근거래</p>
             <a href='#'></a>
           </div>
-          <DarkRecordBox recordBoxDarkItems={recordList}/>
+            <DarkRecordBox recordBoxDarkItems={recordList}/>
         </div>
       </div>
       <div className={styles.home_menu}>
@@ -61,7 +61,7 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
           <p>최근거래</p>
           <a href='#'>전체</a>
         </div>
-        <RecordBox RecordBoxItmes={recordList}/>
+          <RecordBox RecordBoxItmes={recordList}/>
       </div>
     </div>
   )

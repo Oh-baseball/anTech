@@ -15,6 +15,7 @@
     font-size: 40px;
     font-weight: bold;
     display: inline-block;
+    view-transition-name: logo-box;
     
     &.moveUp {
       animation: moveUp 1.0s 3.7s forwards;
@@ -168,8 +169,8 @@
           transition: color 1s;
           font-size: 20px;
         }
-        
-        div {
+
+        .login_box {
           display: flex;
           border-radius: 10px;
           align-items: center;
@@ -184,6 +185,9 @@
           transform: rotateX(0deg);
           will-change: transform;
           perspective: 1000px;
+          view-transition-name: account-box;
+
+
           
           span {
             font-size: 14px;
@@ -196,9 +200,15 @@
           >span {
             color: #808080;
           }
-
-          div{
+          
+          div {
             transform: rotateX(90deg);
+          }
+        }
+
+        &.clickedCheck {
+          div {
+            transform: rotateX(0deg);
           }
         }
       }

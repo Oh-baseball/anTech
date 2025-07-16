@@ -22,19 +22,13 @@
       p {
         font-size: 27px;
         font-weight: $font-weight-bold;
-        color: #ffffff;
+        color: #528EFF;
+        view-transition-name: logo-box;
       }
     }
 
     .account_box_dark {
       margin-top: 120px;
-      // width: calc(100%);
-      // display: flex;
-      // left: 20px;
-      // height: 180px;
-      // padding: 24px;
-      // border-radius: $radius-lg;
-      // background-color: rgb(213, 155, 74);
     }
 
     .small_square_box_dark {
@@ -76,8 +70,7 @@
     p {
       font-size: 27px;
       font-weight: $font-weight-bold;
-      color: rgb(168, 110, 0);
-      mix-blend-mode: difference;
+      color: #528EFF;
     }
 
     button>img {
