@@ -1,4 +1,5 @@
-import Button from "@/features/paymentMethod/Button";
+import Header from "@/components/Header";
+import PaymentButton from "@/features/paymentMethod/PaymentButton";
 import PaymentMethodBox from "@/features/paymentMethod/PaymentMethodBox";
 import PaymentStore from "@/features/paymentMethod/PaymentStore";
 import PaymentTitle from "@/features/paymentMethod/PaymentTitle";
@@ -14,39 +15,39 @@ const PaymentMethod = () => {
   ];
 
   return (
-    <div className='payment_method' style={{overflow: 'auto'}}>
-      <PaymentStore />
+    <>
+      <Header 
+        prevBtn={true}
+        title="결제수단 선택"
+        right={<button style={{ fontSize: '20px' }}>X</button>}
+      />
+      <div className='payment_method'>
+      
+        <PaymentStore />
 
-      {sections.map((section)=>(
-        <div key={section.title}>
-          <PaymentTitle title={section.title} />
-          {section.categories.map((category) => (
-            <PaymentMethodBox
-              key={category} 
-              category={category}
-              selectedId={selectedId}
-              setSelectedId={setSelectedId} />)
-          )
-}
-        </div>
-      ))}
+        {sections.map((section) => (
+          <div key={section.title}>
+            <PaymentTitle title={section.title} />
+            {section.categories.length === 1 ? (
+              <PaymentMethodBox
+                category={section.categories[0]}
+                selectedId={selectedId}
+                setSelectedId={setSelectedId} 
+              />
+            ) : (
+              <PaymentMethodBox
+                category="card_or_account"
+                selectedId={selectedId}
+                setSelectedId={setSelectedId} 
+              />
+            )}
+          </div>
+        ))}
 
-      <Button />
-    </div>
+        <PaymentButton />
+      </div>
+    </>
   )
 };
 
 export default PaymentMethod;
-
-// {sections.map((section)=>(
-//         <div key={section.title}>
-//           <PaymentTitle title={section.title} />
-//           {section.categories.map((category) => (
-//             <PaymentMethodBox 
-//               key={category}  
-//               category={category}
-//               selectedId={selectedId}
-//               setSelectedId={setSelectedId} />
-//           ))}
-//         </div>
-//       ))}

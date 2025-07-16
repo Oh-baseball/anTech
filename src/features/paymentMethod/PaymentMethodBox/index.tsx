@@ -22,14 +22,16 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
         {id: 6, category: 'others_payment', name: '포인트·적립금', balance: '12,450P'},
     ];
 
-    const filtered = paymentMethods.filter((method) => method.category === category);
+    const filtered = category === 'card_or_account' ? paymentMethods.filter((method) => 
+    method.category === 'card_payment' || method.category === 'account_payment')
+    : paymentMethods.filter((method) => method.category === category);
 
     const handleClick = (id: number) => {
         setSelectedId(prev => (prev === id ? null : id));
     };
 
     return(
-        <div style={{height:'200px', overflow:'auto'}}>
+        <div style={{height:'105px', overflow:'auto', scrollbarWidth:'none', msOverflowStyle:'none'}}>
             {filtered.map((method) => (     
                 <div 
                     key={method.id}

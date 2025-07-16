@@ -1,6 +1,7 @@
 .button_container{
     width: 335px;
     height: 48px;
+    margin: 0px 20px;
     @include flex-center;
     
     button{
