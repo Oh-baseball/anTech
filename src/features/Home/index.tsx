@@ -1,5 +1,4 @@
 import styles from './style.module.scss';
-import { useState } from 'react';
 
 import SmallSquareBox, { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
 import AccountBox, { AccountBoxProps } from "@/features/Home/AccountBox";
@@ -9,6 +8,7 @@ import DarkSmallSquareBox from '@/features/Home/DarkSmallSquareBox';
 import DarkAccountBox from '@/features/Home/DarkAccountBox';
 import DarkRecordBox from '@/features/Home/DarkRecordBox';
 import FlipButton from './FlipButton';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface HomeLayoutProps {
   userAccount: AccountBoxProps;
@@ -17,11 +17,12 @@ interface HomeLayoutProps {
 }
 
 const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) => {
-  const [darkMode, setDarkMode] = useState(false);
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+  const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
 
   const conversionMode = () => {
-    setDarkMode(darkMode ? false : true);
-  }
+    toggleDarkMode();
+  };
   
   return (
     <div className={styles.home_container}>
@@ -38,14 +39,14 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
             <p>최근거래</p>
             <a href='#'></a>
           </div>
-            <DarkRecordBox recordBoxDarkItems={recordList}/>
+          <DarkRecordBox recordBoxDarkItems={recordList}/>
         </div>
       </div>
       <div className={styles.home_menu}>
         <p>ANPay</p>
-        <button onClick={conversionMode}>
+        <div onClick={conversionMode}>
           <FlipButton/>
-        </button>
+        </div>
       </div>
       <div className={styles.accountBox}>
         <AccountBox accountInfo={userAccount}/>
