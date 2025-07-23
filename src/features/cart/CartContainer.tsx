@@ -56,7 +56,10 @@ const CartContainer = () => {
       <Header 
         prevBtn={true}
         title="장바구니"
-        right={<button className={styles.delete} onClick={() => setItems([])}>전체삭제</button>}
+        right={<button className={styles.delete} onClick={() => {
+          setItems([]);
+          localStorage.removeItem("cartItems");
+        }}>전체삭제</button>}
       />
       <StoreInfoBox/>
       <CartBox
