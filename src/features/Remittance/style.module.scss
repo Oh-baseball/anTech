@@ -1,205 +1,224 @@
-// .coin-area {
-//   position: relative;
-//   width: 400px;   // 원하는 크기로 조정
-//   height: 400px;
-//   perspective: 600px;    // 3D 효과
-// }
-// .box {
-//   position: absolute;
-//   left: 52px;
-//   top: 40px;
-//   width: 5px;
-//   height: 36px;
-//   background: #ffd700;
+.transfer_container {
+  position: relative;
+  padding: 0 20px;
+}
 
-// }
-// // .coin {
-// //   position: absolute;
-// //   left: 40px;   // 출발(a) 위치, 조정 가능
-// //   top: 40px;
-// //   width: 36px;
-// //   height: 36px;
-// //   border-radius: 50%;
-// //   background: radial-gradient(circle at 30% 30%, #ffd700 70%, #b89f43 100%);
-// //   // box-shadow: 0 4px 16px rgba(0,0,0,0.22);
-// //   transform-style: preserve-3d;
+.header {
+  position: absolute;
+  top: 60px;
+}
 
-// //   // 두께감: 노란 테두리 강조
-// //   &::before {
-// //     content: "";
-// //     position: absolute; inset: 0;
-// //     border-radius: 50%;
-// //     background: radial-gradient(circle at 70% 70%, #faf5b4 60%, rgba(160,120,30,0.5) 100%);
-// //     filter: blur(1px);
-// //     z-index: -1;
-// //     // box-shadow: inset 0 12px 10px -5px rgba(0,0,0,0.2);
-// //     transform: translateZ(-5px);
-// //   }
-// // }
+.accountBox {
+  position: absolute;
+  width: calc(100% - 40px);
+  top:120px
+}
 
+.sectionTitle {
+  position: absolute;
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: bold;
+  left: 24px;
+  top: 320px;
+  color: #000000;
+  font-size: 20px;
+  white-space: nowrap;
+}
 
-// @keyframes curve1 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(40px, -20px);}
-//   50%  { transform: translate(80px, 30px);}
-//   75%  { transform: translate(120px, 10px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve2 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(45px, -23px);}
-//   50%  { transform: translate(84px, 32px);}
-//   75%  { transform: translate(123px, 6px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve3 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(50px, -26px);}
-//   50%  { transform: translate(88px, 34px);}
-//   75%  { transform: translate(126px, 2px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve4 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(55px, -29px);}
-//   50%  { transform: translate(92px, 36px);}
-//   75%  { transform: translate(129px, -2px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve5 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(60px, -32px);}
-//   50%  { transform: translate(96px, 38px);}
-//   75%  { transform: translate(132px, -6px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve6 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(65px, -35px);}
-//   50%  { transform: translate(100px, 40px);}
-//   75%  { transform: translate(135px, -10px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve7 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(70px, -38px);}
-//   50%  { transform: translate(104px, 42px);}
-//   75%  { transform: translate(138px, -14px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve8 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(75px, -41px);}
-//   50%  { transform: translate(108px, 44px);}
-//   75%  { transform: translate(141px, -18px);}
-//   100% { transform: translate(200px, 200px);}
-// }
-// @keyframes curve9 {
-//   0%   { transform: translate(0,0);}
-//   25%  { transform: translate(80px, -44px);}
-//   50%  { transform: translate(112px, 46px);}
-//   75%  { transform: translate(144px, -22px);}
-//   100% { transform: translate(200px, 200px);}
-// }
+.infoCard {
+  position: absolute;
+  background-color: #e5f1fe;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 301px;
+  align-items: center;
+  justify-content: flex-start;
+  left: 19px;
+  top: 364px;
+  width: 336px;
+  padding: 24px;
+  border-radius: 20px;
+}
 
-// @keyframes rotate1 { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
-// @keyframes rotate10 { from { transform: rotateY(90deg); } to { transform: rotateY(360deg); } }
-// @keyframes rotate2 { from { transform: rotateY(0deg); } to { transform: rotateY(-360deg); } }
-// @keyframes rotate3 { from { transform: rotateX(0deg); } to { transform: rotateX(360deg); } }
-// @keyframes rotate4 { from { transform: rotateZ(0deg); } to { transform: rotateZ(360deg); } }
-// @keyframes rotate5 { from { transform: rotate3d(1, 1, 0, 0deg); } to { transform: rotate3d(1, 1, 0, 360deg); } }
+.infoCardTitle {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 500;
+  color: #808080;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: bold;
+  color: #528eff;
+  font-size: 36px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.divider {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 1px;
+  width: 287px;
+  flex-shrink: 0;
+}
+
+.detailsList {
+  background-color: #e5f1fe;
+  height: 152px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.detailsContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 152px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 5px;
+  width: 100%;
+}
+
+.detailItem {
+  background-color: #e5f1fe;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 15px;
+}
+
+.detailLabel {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 400;
+  color: #808080;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  color: #000000;
+  flex-shrink: 0;
+  
+  input {
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+
+    &:focus {
+      outline: none;
+      border-color: #528eff;
+    }
+  }
+}
+
+.detailValueBlue {
+  color: #4d4dff;
+}
+
+.buttonGroup {
+  position: absolute;
+  background-color: #fafcff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  left: 20px;
+  top: 740px;
+  width: 335px;
+  padding: 10px;
+}
+
+.cancelButton {
+  background-color: #ebebeb;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  width: 120px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelButtonText {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: 600;
+  color: #333333;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.confirmButton {
+  background-color: #528eff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  width: 203px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.confirmButtonText {
+  font-family: 'Pretendard Variable', sans-serif;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 16px;
+  white-space: nowrap;
+}
 
 // .coin {
-//   position: relative;
-//   width: 60px;
-//   height: 60px;
-//   border-radius: 50%;
-//   background: #ffd700;
-//   transform-style: preserve-3d;
-//   perspective: 600px;
-//   animation: rotateEdge 5s linear infinite;;
-
-//   /* 기타 스타일 */
+//   margin-left: 50px;
+//   margin-top: 50px;
+//   animation: xAxis 4.5s infinite cubic-bezier(0.02, 0.01, 0.21, 1);
+//   /* coin 자체의 x축 이동 애니메이션 */
 // }
 
-// .edge {
-//   position: absolute;
-//   width: 60px;
-//   height: 60px;
-//   border-radius: 50%;
-//   background: #e5b439;
-//   left: 0;
-//   top: 0;
-//   transform-style: preserve-3d;
-//   z-index: 1;
-//   animation: rotateEdge 5s linear infinite;
+// .coin::after {
+//   content: '';
+//   display: block;
+//   width: 120px;
+//   height: 90px;
+//   background-image: url(http://www.meriqueen-woolmark.com/03_doolyit_image/birdright.jpg);
+//   animation: yAxis 4.5s infinite cubic-bezier(0.3, 0.27, 0.07, 1.64);
+//   /* y축 이동 애니메이션 */
 // }
 
-@keyframes rotateEdge {
-  from { transform: rotateX(0deg); }
-  to { transform: rotateX(360deg); }
-}
+// @keyframes yAxis {
+//     50% {
+//         // animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+//         transform: translateY(300px);
+//     }
+// }
 
-// // 각 동전에 다른 애니메이션 명과 지속 시간(속도) 지정
-// // .coin1 { animation: curve1 1.5s cubic-bezier(.5,.15,.2,1) forwards; }
-// // .coin1 { animation: rotate1 10.95s linear forwards infinite;}
-// // .box1 { animation: rotate10 10.95s linear forwards infinite;}
-// // .coin2 { animation: curve2 1.65s cubic-bezier(.58,.2,.17,1.1) forwards; }
-// // .coin3 { animation: curve3 1.8s cubic-bezier(.47,.18,.29,1) forwards; }
-// // .coin4 { animation: curve4 1.95s cubic-bezier(.6,.23,.2,1) forwards; }
-// // .coin5 { animation: curve5 2.1s cubic-bezier(.5,.17,.31,1.1) forwards; }
-// // .coin6 { animation: curve6 2.25s cubic-bezier(.44,.16,.21,1.02) forwards; }
-// // .coin7 { animation: curve7 2.4s cubic-bezier(.52,.17,.37,1.04) forwards; }
-// // .coin8 { animation: curve8 2.55s cubic-bezier(.61,.22,.22,1) forwards; }
-// // .coin9 { animation: curve9 2.7s cubic-bezier(.48,.13,.32,1.1) forwards; }
-
-// // .coin1 { animation: curve1 1.7s cubic-bezier(.44,.14,.34,1.03) both, rotate1 0.95s linear infinite; }
-// // .coin2 { animation: curve2 1.85s cubic-bezier(.51,.2,.48,1.08) both, rotate2 1.07s linear infinite; }
-// // .coin3 { animation: curve3 2.0s cubic-bezier(.49,.16,.47,1.12) both, rotate3 0.83s linear infinite; }
-// // .coin4 { animation: curve3 1.5s cubic-bezier(.55,.19,.33,1.05) both, rotate4 1.22s linear infinite; }
-// // .coin5 { animation: curve1 2.1s cubic-bezier(.50,.25,.37,1.09) both, rotate5 1.1s linear infinite; }
-// // .coin6 { animation: curve2 1.6s cubic-bezier(.58,.18,.37,1.11) both, rotate1 0.9s linear infinite; }
-// // .coin7 { animation: curve1 2.0s cubic-bezier(.54,.22,.45,1.0) both, rotate2 1.13s linear infinite; }
-// // .coin8 { animation: curve2 1.77s cubic-bezier(.51,.21,.44,1.12) both, rotate3 1.05s linear infinite; }
-// // .coin9 { animation: curve3 2.3s cubic-bezier(.59,.24,.38,1.13) both, rotate4 0.93s linear infinite; }
-
-
-  .coin{
-    width: 200px;
-    height:150px;
-    position:relative;
-  }
-.cylinder_edge {
-  position: absolute;
-  left: 0;
-  top: 50px;
-  width: 200px;
-  height: 80px;
-  background-color: rgb(0, 0, 255);
-  /* 애니메이션 적용 */
-  // animation: rotateEdge 5s linear infinite;
-}
-
-.cylinder_bottom {
-  position: absolute;
-  width: 200px;
-  height: 75px;
-  left: 0;
-  bottom: 43px;
-  background-color: rgb(17, 17, 206);
-  border-radius: 100px / 37.5px;
-  /* 애니메이션 적용 */
-  animation: rotateEdge 5s linear infinite;
-}
-
-.cylinder_top {
-  position: absolute;
-  width: 200px;
-  height: 75px;
-  left: 0;
-  top: 43px;
-  background-color: rgba(0, 0, 255);
-  border-radius: 100px / 37.5px;
-  /* 애니메이션 적용 */
-  animation: rotateEdge 5s linear infinite;
-}
+// @keyframes xAxis {
+//     50% {
+//         // animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
+//         transform: translateX(300px);
+//     }
+// }
