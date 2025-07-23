@@ -130,7 +130,7 @@ const PaymentCompletedContainer = () => {
       const dvw = containerRef.current.offsetWidth;
       coinRefs.current.forEach((coinEl, i) => {
         if (!coinEl) return;
-        const coin = coinEl.firstElementChild; // 혹은 원하는 selector
+        const coin = coinEl.firstElementChild;
         console.log(coin);
 
         const randomX = (Math.random() - 0.5) * dvw * 2;
@@ -210,31 +210,13 @@ const PaymentCompletedContainer = () => {
             <VisualTag variant="here" ref={hereTagRef} />
             <VisualTag variant="thx" ref={thxTagRef} />
             <Card ref={cardRef} />
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '10%',
-                left: '-15%',
-              }}
-            >
+            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--first']}`}>
               <Coin scale={0.3} zIndex={100} />
             </div>
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '30%',
-                right: '0%',
-              }}
-            >
+            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--second']}`}>
               <Coin scale={0.3} zIndex={100} />
             </div>
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '0%',
-                right: '10%',
-              }}
-            >
+            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--third']}`}>
               <Coin scale={0.3} zIndex={100} />
             </div>
           </div>

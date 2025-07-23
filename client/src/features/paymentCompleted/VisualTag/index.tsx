@@ -6,7 +6,7 @@ interface VisualTagProps {
 }
 
 const variantMap = {
-  toss_pay: 'Toss Pay',
+  toss_pay: 'An Pay',
   here: 'Here',
   thx: 'Thx!',
 };

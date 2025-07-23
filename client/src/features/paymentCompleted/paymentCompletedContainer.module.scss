@@ -66,3 +66,20 @@
   color: #fff;
   font-weight: $font-weight-bold;
 }
+
+.coin_wrapper {
+  position: absolute;
+}
+
+.coin_wrapper--first {
+  top: calc(50% - 50px);
+  left: calc(50% - 230px);
+}
+.coin_wrapper--second {
+  top: calc(50% + 20px);
+  left: calc(50% - 50px);
+}
+.coin_wrapper--third {
+  top: calc(50% - 120px);
+  left: calc(50% - 20px);
+}
