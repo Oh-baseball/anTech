@@ -1,8 +1,8 @@
 import styles from './style.module.scss';
 
-import SmallSquareBox, { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
-import AccountBox, { AccountBoxProps } from "@/features/Home/AccountBox";
-import RecordBox, { RecordBoxItem } from "@/features/Home/RecordBox";
+import SmallSquareBox, { SmallSquareBoxItem } from '@/features/Home/SmallSquareBox';
+import AccountBox, { AccountBoxProps } from '@/features/Home/AccountBox';
+import RecordBox, { RecordBoxItem } from '@/features/Home/RecordBox';
 
 import DarkSmallSquareBox from '@/features/Home/DarkSmallSquareBox';
 import DarkAccountBox from '@/features/Home/DarkAccountBox';
@@ -16,20 +16,22 @@ interface HomeLayoutProps {
   recordList: RecordBoxItem[];
 }
 
-const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) => {
+const HomeLayout = ({ userAccount, metrixCodeMenu, recordList }: HomeLayoutProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
 
   const conversionMode = () => {
     toggleDarkMode();
   };
-  
+
   return (
     <div className={styles.home_container}>
-      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ""}`}>
-        <div className={styles.home_menu}><p>ANPay</p></div>
+      <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ''}`}>
+        <div className={styles.home_menu}>
+          <p>ANPay</p>
+        </div>
         <div className={styles.account_box_dark}>
-          <DarkAccountBox/>
+          <DarkAccountBox />
         </div>
         <div className={styles.small_square_box_dark}>
           <DarkSmallSquareBox SmallSquareBoxItems={metrixCodeMenu} />
@@ -37,19 +39,19 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
         <div className={styles.transection_menu_dark}>
           <div>
             <p>최근거래</p>
-            <a href='#'></a>
+            <a href="#"></a>
           </div>
-          <DarkRecordBox recordBoxDarkItems={recordList}/>
+          <DarkRecordBox recordBoxDarkItems={recordList} />
         </div>
       </div>
       <div className={styles.home_menu}>
         <p>ANPay</p>
         <div onClick={conversionMode}>
-          <FlipButton/>
+          <FlipButton />
         </div>
       </div>
       <div className={styles.accountBox}>
-        <AccountBox accountInfo={userAccount}/>
+        <AccountBox accountInfo={userAccount} />
       </div>
       <div className={styles.service_menu}>
         <p>빠른 서비스</p>
@@ -60,12 +62,12 @@ const HomeLayout = ({userAccount, metrixCodeMenu, recordList}: HomeLayoutProps) 
       <div className={styles.transection_menu}>
         <div>
           <p>최근거래</p>
-          <a href='#'>전체</a>
+          <a href="#">전체</a>
         </div>
-          <RecordBox RecordBoxItmes={recordList}/>
+        <RecordBox RecordBoxItmes={recordList} />
       </div>
     </div>
-  )
+  );
 };
 
-export default HomeLayout
+export default HomeLayout;
