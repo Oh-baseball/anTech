@@ -7,14 +7,15 @@ export interface StoreButtonItem {
 }
 
 interface StoreButtonProps {
-  StoreButtonItem?: StoreButtonItem; // ?로 옵셔널 처리
+  StoreButtonItem?: StoreButtonItem;
+  onClick?: () => void;
 }
 
 const dummyData: StoreButtonItem = {
   name:"장바구니 담기"
 };
 
-const StoreButton = ({ StoreButtonItem }: StoreButtonProps) => {
+const StoreButton = ({ StoreButtonItem, onClick  }: StoreButtonProps) => {
   const data = StoreButtonItem ?? dummyData;
 
   const [pressedIdx, setPressedIdx] = useState<string | null>(null);
@@ -40,6 +41,7 @@ const StoreButton = ({ StoreButtonItem }: StoreButtonProps) => {
         handleCartClick();
       }}
       onTapCancel={() => setPressedIdx(null)}
+      onClick={onClick}
     >
       {pressedIdx === 'button' && <div className={styles.overlay} />}
       <span className={styles.buttonText}>{data.name}</span>

@@ -7,16 +7,16 @@ export interface CartButtonItem {
 }
 
 interface CartButtonProps {
-  CartButtonItem?: CartButtonItem; // ?로 옵셔널 처리
+  CartButtonItem?: CartButtonItem;
+  onClick?: () => void;
 }
 
 const dummyData: CartButtonItem = {
   amount: 14000
 };
 
-const CartButton = ({ CartButtonItem }: CartButtonProps) => {
+const CartButton = ({ CartButtonItem, onClick }: CartButtonProps) => {
   const data = CartButtonItem ?? dummyData;
-
   const [pressedIdx, setPressedIdx] = useState<string | null>(null);
 
   return (
@@ -25,6 +25,7 @@ const CartButton = ({ CartButtonItem }: CartButtonProps) => {
       onTapStart={() => setPressedIdx('button')}
       onTap={() => setPressedIdx(null)}
       onTapCancel={() => setPressedIdx(null)}
+      onClick={onClick}
     >
       {pressedIdx === 'button' && <div className={styles.overlay} />}
       💳 {data.amount.toLocaleString()}원 결제하기
