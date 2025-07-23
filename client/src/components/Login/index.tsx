@@ -11,7 +11,7 @@ const Loading = () => {
     setClickedLogin(true);
     setTimeout(() => {
       navigate('/', { viewTransition: true });
-    }, 1000);
+    }, 800);
   }
 
   return (

@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import AccountBox, { AccountBoxProps } from './AccountBox';
 import styles from './style.module.scss';
 import { useState } from 'react';
+import { FaRegCreditCard } from "react-icons/fa6";
 
 interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
@@ -17,34 +18,24 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
   const [amount, setAmount] = useState('input');
   const [accountNumber, setAccountNumber] = useState('input');
   const [memo, setMemo] = useState('input');
-
-  const detailItems: DetailItem[] = [
-    { label: '계좌번호', value: accountNumber },
-    { label: '메       모', value: memo },
-    { label: '입금자명', value: '김성진' },
-    { label: '수  수  료', value: '-500원', isBlue: true }
-  ];
+  const [checkTransfer, setCheckTransfer] = useState(false);
 
   const handleCancel = () => {
     console.log('취소 버튼 클릭');
   };
 
-  const handleDeposit = () => {
-    console.log('입금 버튼 클릭');
-  };
+  const handletransfer = () => {
+    setCheckTransfer(true);
 
-  const handleActionButton = (action: string) => {
-    console.log(`${action} 버튼 클릭`);
   };
 
   return (
     <div className={styles.transfer_container}>
-      <div className={styles.header}>
-        <Header 
-          prevBtn={true}
-          title="입금"
-        />
-      </div>
+      <Header 
+        prevBtn={true}
+        title="입금"
+      />
+      <div className={styles.coin}></div>
       <div className={styles.accountBox}>
         <AccountBox accountInfo={userAccount}/>
       </div>
@@ -54,12 +45,12 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
       </div>
 
       {/* Info Card */}
-      <div className={styles.infoCard}>
+      <div className={`${styles.infoCard} ${checkTransfer ? styles.reduce : ''}`}>
         <div className={styles.infoCardTitle}>
           <p>입금할 금액</p>
         </div>
         <div className={styles.amount}>
-          {/* <input>원</input> */}
+          <input type='number' placeholder=''/>
           <p>원</p>
         </div>
         <div className={styles.divider} />
@@ -97,20 +88,11 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
                 <p>-500</p>
               </div>
             </div>
-
-            {/* {detailItems.map((item, index) => (
-              <div key={index} className={styles.detailItem}>
-                <div className={styles.detailLabel}>
-                  <p>{item.label}</p>
-                </div>
-                <div className={`${styles.detailValue} ${item.isBlue ? styles.detailValueBlue : ''}`}>
-                  <p>{item.value}</p>
-                </div>
-              </div>
-            ))} */}
           </div>
         </div>
       </div>
+        
+      <span className={`${styles.card_icon} ${checkTransfer ? styles.visible : ''}`}><FaRegCreditCard/></span>
 
       {/* Button Group */}
       <div className={styles.buttonGroup}>
@@ -119,7 +101,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
             <p>취 소</p>
           </div>
         </button>
-        <button className={styles.confirmButton} onClick={handleDeposit}>
+        <button className={styles.confirmButton} onClick={handletransfer}>
           <div className={styles.confirmButtonText}>
             <p>입 금</p>
           </div>
