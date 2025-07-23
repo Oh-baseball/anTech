@@ -7,7 +7,7 @@ import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
 
 gsap.registerPlugin(ScrollToPlugin);
-const FALLING_COIN_COUNT = 30;
+const FALLING_COIN_COUNT = 50;
 
 const PaymentCompletedContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -130,31 +130,37 @@ const PaymentCompletedContainer = () => {
       const dvw = containerRef.current.offsetWidth;
       coinRefs.current.forEach((coinEl, i) => {
         if (!coinEl) return;
-        console.log(coinEl);
+        const coin = coinEl.firstElementChild; // 혹은 원하는 selector
+        console.log(coin);
 
         const randomX = (Math.random() - 0.5) * dvw * 2;
-        const randomScale = 0.5 + Math.random() * 0.9;
+        const randomScale = 0.5 + Math.random() * 0.5;
         const randomRotationX = (Math.random() - 0.5) * 90;
-        const randomRotationY = (Math.random() - 0.5) * 90;
+        const randomRotationY = (Math.random() - 0.5) * 360;
         const randomRotationZ = (Math.random() - 0.5) * 720;
+
+        if (coin) {
+          gsap.set(coin, { rotationX: 0, rotationY: 0, rotationZ: 0 });
+          gsap.to(coin, {
+            duration: 5,
+            rotationX: randomRotationX * 6,
+            rotationY: randomRotationY * 10,
+            rotationZ: randomRotationZ * 6,
+          });
+        }
 
         gsap.set(coinEl, {
           y: -1500,
-          opacity: 1,
           x: 0,
-          scale: randomScale,
-          rotationZ: 0,
           position: 'absolute',
+          scale: 0.3 * randomScale,
         });
 
         gsap.to(coinEl, {
-          duration: 5,
+          duration: 2,
           y: 0,
           x: randomX,
-          rotationZ: randomRotationZ * 6,
-          rotationX: randomRotationX * 10,
-          rotationY: randomRotationY * 6,
-          ease: 'power3.out',
+          ease: 'linear',
           delay: (i % 10) * 0.15,
           onComplete: () => {},
         });
@@ -180,28 +186,26 @@ const PaymentCompletedContainer = () => {
       </section>
       <section className={`${styles.bottom} ${styles.section_container}`} ref={bottomRef}>
         <div className={styles.cont_wrap}>
-          {showFallingCoins &&
-            Array.from({ length: FALLING_COIN_COUNT }).map((_, i) => (
-              <div
-                key={`fallingCoin_${i}`}
-                ref={(el) => {
-                  if (el) {
-                    coinRefs.current[i] = el;
-                  }
-                }}
-                className={styles.fallingCoin}
-                style={{
-                  bottom: -300,
-                  left: '50%',
-                  pointerEvents: 'none',
-                  transform: 'translateX(-50%)',
-                  position: 'absolute',
-                }}
-              >
-                <Coin scale={0.3} zIndex={1} />
-              </div>
-            ))}
           <div className={styles.card_wrap}>
+            {showFallingCoins &&
+              Array.from({ length: FALLING_COIN_COUNT }).map((_, i) => (
+                <div
+                  key={`fallingCoin_${i}`}
+                  ref={(el) => {
+                    if (el) {
+                      coinRefs.current[i] = el;
+                    }
+                  }}
+                  className={styles.fallingCoin}
+                  style={{
+                    bottom: -300,
+                    pointerEvents: 'none',
+                    position: 'absolute',
+                  }}
+                >
+                  <Coin zIndex={100} />
+                </div>
+              ))}
             <VisualTag variant="toss_pay" ref={tossPayTagRef} />
             <VisualTag variant="here" ref={hereTagRef} />
             <VisualTag variant="thx" ref={thxTagRef} />
