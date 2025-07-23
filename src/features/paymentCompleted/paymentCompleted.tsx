@@ -3,7 +3,8 @@ import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './paymentCompletedContainer.module.scss';
 import Card from './Card';
-import SpeechBubble from './SpeechBubble';
+import VisualTag from './VisualTag';
+import Coin from '@/components/Coin';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -13,6 +14,10 @@ const PaymentCompletedContainer = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bottomRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+
+  const tossPayTagRef = useRef<HTMLDivElement>(null);
+  const hereTagRef = useRef<HTMLDivElement>(null);
+  const thxTagRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,8 +68,47 @@ const PaymentCompletedContainer = () => {
       gsap.to(cardRef.current, {
         rotationY: 360,
         duration: 1,
-        ease: 'out',
+        ease: 'power1.out',
         delay: 3.8,
+        onComplete: () => {
+          if (tossPayTagRef.current) {
+            gsap.fromTo(
+              tossPayTagRef.current,
+              {
+                scale: 0,
+                transformPerspective: 800,
+                transformOrigin: '22% calc(100% + 15px)',
+              },
+              {
+                delay: 0.3,
+                duration: 1.8,
+                scale: 1,
+                ease: 'power3.out',
+                keyframes: [
+                  { rotateZ: -15, duration: 0.3 },
+                  { rotateZ: 30, duration: 0.6 },
+                  { rotateZ: -15, duration: 0.3 },
+                  { rotateZ: 15, duration: 0.3 },
+                ],
+                onComplete: () => {
+                  if (hereTagRef.current && thxTagRef.current) {
+                    const hereTagEl = hereTagRef.current;
+                    gsap.to(hereTagEl, {
+                      duration: 0.5,
+                      scale: 1,
+                    });
+
+                    const thxTagEl = thxTagRef.current;
+                    gsap.to(thxTagEl, {
+                      duration: 0.5,
+                      scale: 1,
+                    });
+                  }
+                },
+              },
+            );
+          }
+        },
       });
     }
 
@@ -94,8 +138,37 @@ const PaymentCompletedContainer = () => {
       <section className={`${styles.bottom} ${styles.section_container}`} ref={bottomRef}>
         <div className={styles.cont_wrap}>
           <div className={styles.card_wrap}>
-            <SpeechBubble />
+            <VisualTag variant="toss_pay" ref={tossPayTagRef} />
+            <VisualTag variant="here" ref={hereTagRef} />
+            <VisualTag variant="thx" ref={thxTagRef} />
             <Card ref={cardRef} />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '180px',
+                left: '-10px',
+              }}
+            >
+              <Coin scale={0.3} zIndex={100} />
+            </div>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '100px',
+                left: '180px',
+              }}
+            >
+              <Coin scale={0.3} zIndex={100} />
+            </div>
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '250px',
+                right: '30px',
+              }}
+            >
+              <Coin scale={0.3} zIndex={100} />
+            </div>
           </div>
           <h2>결제가 완료되었습니다.</h2>
         </div>

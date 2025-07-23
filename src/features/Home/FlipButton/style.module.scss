@@ -1,0 +1,44 @@
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  perspective: 1000px;
+  width: 32px;
+  height: 32px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(0.2, 0.9, 0.9, 0.2);
+}
+
+.isFlipped {
+  transform: rotateY(180deg);
+}
+
+.cardFace {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.cardFront {
+  z-index: 2;
+  
+}
+
+.cardBack {
+  z-index: 1;
+  filter: invert(100%);
+  transform: rotateY(180deg);
+}

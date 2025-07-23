@@ -16,7 +16,7 @@ const PaymentInfoList = () => (
         label={item.label}
         value={item.value}
         isDiscount={item.isDiscount}
-        style={{ animationDelay: `${idx * 0.12}s` }} // 0.12초 간격
+        style={{ animationDelay: `${idx * 0.12}s` }}
       />
     ))}
   </ul>

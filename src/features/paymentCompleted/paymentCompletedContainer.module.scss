@@ -55,11 +55,11 @@
   border: solid 1px blue;
   width: 100%;
   height: 70dvh;
-  // padding-top: 10dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  perspective: 1000px;
 }
 
 .section_container.bottom .cont_wrap h2 {
