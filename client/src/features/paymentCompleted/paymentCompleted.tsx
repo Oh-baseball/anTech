@@ -1,12 +1,13 @@
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-import styles from "./paymentCompletedContainer.module.scss";
-import Card from "./Card";
-import VisualTag from "./VisualTag";
-import Coin from "@/components/Coin";
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import styles from './paymentCompletedContainer.module.scss';
+import Card from './Card';
+import VisualTag from './VisualTag';
+import Coin from '@/components/Coin';
 
 gsap.registerPlugin(ScrollToPlugin);
+const FALLING_COIN_COUNT = 30;
 
 const PaymentCompletedContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -18,6 +19,10 @@ const PaymentCompletedContainer = () => {
   const tossPayTagRef = useRef<HTMLDivElement>(null);
   const hereTagRef = useRef<HTMLDivElement>(null);
   const thxTagRef = useRef<HTMLDivElement>(null);
+
+  const coinRefs = useRef<HTMLDivElement[]>([]);
+
+  const [showFallingCoins, setShowFallingCoins] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,17 +36,17 @@ const PaymentCompletedContainer = () => {
     };
     const containerEl = containerRef.current;
     if (containerEl) {
-      containerEl.addEventListener("scroll", handleScroll);
+      containerEl.addEventListener('scroll', handleScroll);
     }
 
     if (titleRef.current) {
-      const divs = titleRef.current.querySelectorAll("div");
+      const divs = titleRef.current.querySelectorAll('div');
       divs.forEach((div) => {
         gsap.from(div, {
           autoAlpha: 0,
           delay: Math.random() * 1,
           duration: 1,
-          ease: "power3.easeInOut",
+          ease: 'power3.easeInOut',
         });
       });
     }
@@ -52,7 +57,7 @@ const PaymentCompletedContainer = () => {
         scrollTo: { y: bottomEl },
         delay: 1.7,
         duration: 2,
-        ease: "power4.inOut",
+        ease: 'power4.inOut',
       });
 
       gsap.from(bottomEl, {
@@ -60,7 +65,7 @@ const PaymentCompletedContainer = () => {
         y: 100,
         delay: 2.2,
         duration: 2.5,
-        ease: "power3.inOut",
+        ease: 'power3.inOut',
       });
     }
 
@@ -68,22 +73,23 @@ const PaymentCompletedContainer = () => {
       gsap.to(cardRef.current, {
         rotationY: 360,
         duration: 1,
-        ease: "power1.out",
+        ease: 'power1.out',
         delay: 3.8,
         onComplete: () => {
           if (tossPayTagRef.current) {
+            setShowFallingCoins(true);
             gsap.fromTo(
               tossPayTagRef.current,
               {
                 scale: 0,
                 transformPerspective: 800,
-                transformOrigin: "22% calc(100% + 15px)",
+                transformOrigin: '22% calc(100% + 15px)',
               },
               {
                 delay: 0.3,
                 duration: 1.8,
                 scale: 1,
-                ease: "power3.out",
+                ease: 'power3.out',
                 keyframes: [
                   { rotateZ: -15, duration: 0.3 },
                   { rotateZ: 30, duration: 0.6 },
@@ -105,19 +111,56 @@ const PaymentCompletedContainer = () => {
                     });
                   }
                 },
-              }
+              },
             );
           }
         },
       });
-    }
 
-    return () => {
-      if (containerEl) {
-        containerEl.removeEventListener("scroll", handleScroll);
-      }
-    };
+      return () => {
+        if (containerEl) {
+          containerEl.removeEventListener('scroll', handleScroll);
+        }
+      };
+    }
   }, []);
+
+  useEffect(() => {
+    if (showFallingCoins && bottomRef.current && containerRef.current) {
+      const dvw = containerRef.current.offsetWidth;
+      coinRefs.current.forEach((coinEl, i) => {
+        if (!coinEl) return;
+        console.log(coinEl);
+
+        const randomX = (Math.random() - 0.5) * dvw * 2;
+        const randomScale = 0.5 + Math.random() * 0.9;
+        const randomRotationX = (Math.random() - 0.5) * 90;
+        const randomRotationY = (Math.random() - 0.5) * 90;
+        const randomRotationZ = (Math.random() - 0.5) * 720;
+
+        gsap.set(coinEl, {
+          y: -1500,
+          opacity: 1,
+          x: 0,
+          scale: randomScale,
+          rotationZ: 0,
+          position: 'absolute',
+        });
+
+        gsap.to(coinEl, {
+          duration: 5,
+          y: 0,
+          x: randomX,
+          rotationZ: randomRotationZ * 6,
+          rotationX: randomRotationX * 10,
+          rotationY: randomRotationY * 6,
+          ease: 'power3.out',
+          delay: (i % 10) * 0.15,
+          onComplete: () => {},
+        });
+      });
+    }
+  }, [showFallingCoins]);
 
   return (
     <div className={styles.container} ref={containerRef}>
@@ -135,11 +178,29 @@ const PaymentCompletedContainer = () => {
           <div>다</div>
         </h1>
       </section>
-      <section
-        className={`${styles.bottom} ${styles.section_container}`}
-        ref={bottomRef}
-      >
+      <section className={`${styles.bottom} ${styles.section_container}`} ref={bottomRef}>
         <div className={styles.cont_wrap}>
+          {showFallingCoins &&
+            Array.from({ length: FALLING_COIN_COUNT }).map((_, i) => (
+              <div
+                key={`fallingCoin_${i}`}
+                ref={(el) => {
+                  if (el) {
+                    coinRefs.current[i] = el;
+                  }
+                }}
+                className={styles.fallingCoin}
+                style={{
+                  bottom: -300,
+                  left: '50%',
+                  pointerEvents: 'none',
+                  transform: 'translateX(-50%)',
+                  position: 'absolute',
+                }}
+              >
+                <Coin scale={0.3} zIndex={1} />
+              </div>
+            ))}
           <div className={styles.card_wrap}>
             <VisualTag variant="toss_pay" ref={tossPayTagRef} />
             <VisualTag variant="here" ref={hereTagRef} />
@@ -147,34 +208,34 @@ const PaymentCompletedContainer = () => {
             <Card ref={cardRef} />
             <div
               style={{
-                position: "absolute",
-                bottom: "180px",
-                left: "-10px",
+                position: 'absolute',
+                bottom: '10%',
+                left: '-15%',
               }}
             >
               <Coin scale={0.3} zIndex={100} />
             </div>
             <div
               style={{
-                position: "absolute",
-                bottom: "100px",
-                left: "180px",
+                position: 'absolute',
+                bottom: '30%',
+                right: '0%',
               }}
             >
               <Coin scale={0.3} zIndex={100} />
             </div>
             <div
               style={{
-                position: "absolute",
-                bottom: "250px",
-                right: "30px",
+                position: 'absolute',
+                bottom: '0%',
+                right: '10%',
               }}
             >
               <Coin scale={0.3} zIndex={100} />
             </div>
           </div>
-          <h2>결제가 완료되었습니다.</h2>
         </div>
+        <h2>결제가 완료되었습니다.</h2>
       </section>
     </div>
   );

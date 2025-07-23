@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
   overflow: hidden;
   background-image: url('/assets/star-bg.jpg');
 }
@@ -33,7 +34,6 @@
 .section_container.bottom {
   background: url('/assets/island.png') center bottom/300% no-repeat;
   min-height: 100dvh;
-  border: solid 1px orange;
 }
 
 .section_container.bottom .cont_wrap {
@@ -45,14 +45,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  // border: solid 1px red;
+  overflow: hidden;
 }
 
 .card_wrap {
   display: block;
   width: fit-content;
   height: fit-content;
-  border: solid 1px blue;
   width: 100%;
   height: 70dvh;
   display: flex;
@@ -62,7 +61,7 @@
   perspective: 1000px;
 }
 
-.section_container.bottom .cont_wrap h2 {
+.section_container.bottom h2 {
   text-align: center;
   color: #fff;
   font-weight: $font-weight-bold;
