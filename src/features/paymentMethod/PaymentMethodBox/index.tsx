@@ -31,7 +31,7 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
     };
 
     return(
-        <div style={{height:'105px', overflow:'auto', scrollbarWidth:'none', msOverflowStyle:'none'}}>
+        <div style={{height:'98px', overflow:'auto', scrollbarWidth:'none', msOverflowStyle:'none'}}>
             {filtered.map((method) => (     
                 <div 
                     key={method.id}

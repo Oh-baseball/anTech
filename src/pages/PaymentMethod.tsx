@@ -15,7 +15,7 @@ const PaymentMethod = () => {
   ];
 
   return (
-    <>
+    <div style={{padding: '0 20px'}}>
       <Header 
         prevBtn={true}
         title="결제수단 선택"
@@ -46,7 +46,7 @@ const PaymentMethod = () => {
 
         <PaymentButton />
       </div>
-    </>
+    </div>
   )
 };
 
