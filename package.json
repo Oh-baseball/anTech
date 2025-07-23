@@ -1,45 +1,26 @@
 {
-  "name": "package.json",
+  "name": "antech-monorepo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@tanstack/react-query": "^5.81.5",
-    "@types/react-router": "^5.1.20",
-    "axios": "^1.10.0",
-    "framer-motion": "^12.23.3",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-router-dom": "^7.6.3",
-    "sass": "^1.89.2",
-    "zustand": "^5.0.6"
+    "dev": "concurrently \"pnpm run dev:server\" \"pnpm run dev:client\" --names \"SERVER,CLIENT\" --prefix-colors \"yellow,cyan\"",
+    "dev:client": "cd client && pnpm dev",
+    "dev:server": "cd server && pnpm dev",
+    "build": "pnpm run build:server && pnpm run build:client",
+    "build:client": "cd client && pnpm build",
+    "build:server": "cd server && pnpm build",
+    "start": "concurrently \"pnpm run start:server\" \"pnpm run start:client\" --names \"SERVER,CLIENT\" --prefix-colors \"yellow,cyan\"",
+    "start:client": "cd client && pnpm preview",
+    "start:server": "cd server && pnpm start",
+    "install:all": "pnpm install",
+    "clean": "cd client && rm -rf dist node_modules && cd ../server && rm -rf dist node_modules && rm -rf node_modules",
+    "lint": "cd client && pnpm lint && cd ../server && pnpm lint",
+    "type-check": "cd client && pnpm type-check && cd ../server && pnpm type-check",
+    "setup": "pnpm run clean && pnpm install && pnpm run build",
+    "dev:fresh": "pnpm run clean && pnpm install && pnpm run dev"
   },
   "devDependencies": {
-    "@eslint/js": "^9.29.0",
-    "@types/node": "^24.0.10",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "@typescript-eslint/eslint-plugin": "^8.35.1",
-    "@typescript-eslint/parser": "^8.35.1",
-    "@vitejs/plugin-react": "^4.5.2",
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.5.1",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.2.0",
-    "prettier": "^3.6.2",
-    "rollup-plugin-visualizer": "^6.0.3",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0",
-    "vite-tsconfig-paths": "^5.1.4"
+    "concurrently": "^9.2.0"
   }
 }

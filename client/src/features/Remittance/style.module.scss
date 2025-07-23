@@ -1,0 +1,92 @@
+.coin-area {
+  position: relative;
+  width: 400px;  // 필요에 따라 조절
+  height: 400px;
+}
+
+.coin {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd700 70%, #b89f43 100%);
+  box-shadow: 0 4px 16px rgba(0,0,0,.22);
+  left: 20px;   // a지점 X값 (조절)
+  top: 30px;    // a지점 Y값 (조절)
+  // 시작 상태 (a점)
+}
+
+@keyframes coinMove1 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(40px, -20px);}
+  50%  { transform: translate(80px, 30px);}
+  75%  { transform: translate(120px, 10px);}
+  100% { transform: translate(160px, 0);}
+}
+@keyframes coinMove2 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(45px, -23px);}
+  50%  { transform: translate(84px, 32px);}
+  75%  { transform: translate(123px, 6px);}
+  100% { transform: translate(162px, 0);}
+}
+@keyframes coinMove3 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(50px, -26px);}
+  50%  { transform: translate(88px, 34px);}
+  75%  { transform: translate(126px, 2px);}
+  100% { transform: translate(164px, 0);}
+}
+@keyframes coinMove4 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(55px, -29px);}
+  50%  { transform: translate(92px, 36px);}
+  75%  { transform: translate(129px, -2px);}
+  100% { transform: translate(166px, 0);}
+}
+@keyframes coinMove5 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(60px, -32px);}
+  50%  { transform: translate(96px, 38px);}
+  75%  { transform: translate(132px, -6px);}
+  100% { transform: translate(168px, 0);}
+}
+@keyframes coinMove6 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(65px, -35px);}
+  50%  { transform: translate(100px, 40px);}
+  75%  { transform: translate(135px, -10px);}
+  100% { transform: translate(170px, 0);}
+}
+@keyframes coinMove7 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(70px, -38px);}
+  50%  { transform: translate(104px, 42px);}
+  75%  { transform: translate(138px, -14px);}
+  100% { transform: translate(172px, 0);}
+}
+@keyframes coinMove8 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(75px, -41px);}
+  50%  { transform: translate(108px, 44px);}
+  75%  { transform: translate(141px, -18px);}
+  100% { transform: translate(174px, 0);}
+}
+@keyframes coinMove9 {
+  0%   { transform: translate(0,0);}
+  25%  { transform: translate(80px, -44px);}
+  50%  { transform: translate(112px, 46px);}
+  75%  { transform: translate(144px, -22px);}
+  100% { transform: translate(176px, 0);}
+}
+
+// 각 동전에 다른 애니메이션 명과 지속 시간(속도) 지정
+.coin1 { animation: coinMove1 1.5s cubic-bezier(.5,.15,.2,1) forwards; }
+.coin2 { animation: coinMove2 1.65s cubic-bezier(.58,.2,.17,1.1) forwards; }
+.coin3 { animation: coinMove3 1.8s cubic-bezier(.47,.18,.29,1) forwards; }
+.coin4 { animation: coinMove4 1.95s cubic-bezier(.6,.23,.2,1) forwards; }
+.coin5 { animation: coinMove5 2.1s cubic-bezier(.5,.17,.31,1.1) forwards; }
+.coin6 { animation: coinMove6 2.25s cubic-bezier(.44,.16,.21,1.02) forwards; }
+.coin7 { animation: coinMove7 2.4s cubic-bezier(.52,.17,.37,1.04) forwards; }
+.coin8 { animation: coinMove8 2.55s cubic-bezier(.61,.22,.22,1) forwards; }
+.coin9 { animation: coinMove9 2.7s cubic-bezier(.48,.13,.32,1.1) forwards; }
