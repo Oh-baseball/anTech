@@ -298,14 +298,10 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
         {/* StoreButtonBox에 selectedId를 prop으로 전달 */}
         <StoreButtonBox
         selectedId={selectedId}
-        setCartCount={setCartCount}
-        selectedImgEl={selectedId ? imgRef.current[selectedId] : null}
-        cartIconEl={cartIconRef?.current ?? null} />
+        setCartCount={setCartCount}/>
       </>
     );
   }
 );
-
-//StoreMenuBox.displayName = 'StoreMenuBox';
 
 export default StoreMenuBox;

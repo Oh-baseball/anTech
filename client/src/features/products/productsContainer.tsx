@@ -11,7 +11,6 @@ const ProductsContainer = () => {
   const menuBoxRef = useRef<StoreMenuBoxRef>(null);
   const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(0);
-  const cartIconRef = useRef<HTMLSpanElement>(null);
 
   //장바구니 개수
   useEffect(() => {
@@ -40,7 +39,7 @@ const ProductsContainer = () => {
         title="스타벅스 강남점"
         right={
           <div className={styles.cartbox} onClick={() => navigate("/cart") }>
-            <span className={styles.cart} ref={cartIconRef}>🛒</span>
+            <span className={styles.cart}>🛒</span>
             <span className={styles.cartcount}>{cartCount}</span>
           </div>
         }
@@ -52,17 +51,9 @@ const ProductsContainer = () => {
         scrollToCategory={handleTabClick}
         ref={menuBoxRef}
         setCartCount={setCartCount}
-        cartIconRef={cartIconRef}
       />
-      {/* <StoreButtonBox/> */}
     </>
   );
 };
-
-// const ProductsContainer = () => (
-//   <CartProvider>
-//     <ProductsContainerInner />
-//   </CartProvider>
-// );
 
 export default ProductsContainer;

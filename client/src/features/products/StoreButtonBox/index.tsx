@@ -1,7 +1,7 @@
 import StoreButton from '../StoreButton';
 import styles from './style.module.scss';
 import { useNavigate } from "react-router-dom";
-import { addToCart, flyToCartAnimation } from "../../../utils/utils";
+import { addToCart } from "../../../utils/utils";
 
 interface StoreButtonBoxProps {
   selectedId: number | null;
@@ -17,9 +17,6 @@ const StoreButtonBox = ({selectedId, setCartCount, selectedImgEl, cartIconEl}: S
     addToCart(selectedId);
     const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
     setCartCount(cart.reduce((sum, item) => sum + item.count, 0));
-    if (selectedImgEl && cartIconEl) {
-      flyToCartAnimation(selectedImgEl, cartIconEl);
-    }
   };
 
   return (
