@@ -1,92 +1,542 @@
-.coin-area {
+.transfer_container {
   position: relative;
-  width: 400px;  // 필요에 따라 조절
-  height: 400px;
+  padding: 0 20px;
 }
 
-.coin {
+.accountBox {
   position: absolute;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffd700 70%, #b89f43 100%);
-  box-shadow: 0 4px 16px rgba(0,0,0,.22);
-  left: 20px;   // a지점 X값 (조절)
-  top: 30px;    // a지점 Y값 (조절)
-  // 시작 상태 (a점)
+  width: calc(100% - 40px);
+  top:120px;
 }
 
-@keyframes coinMove1 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(40px, -20px);}
-  50%  { transform: translate(80px, 30px);}
-  75%  { transform: translate(120px, 10px);}
-  100% { transform: translate(160px, 0);}
-}
-@keyframes coinMove2 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(45px, -23px);}
-  50%  { transform: translate(84px, 32px);}
-  75%  { transform: translate(123px, 6px);}
-  100% { transform: translate(162px, 0);}
-}
-@keyframes coinMove3 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(50px, -26px);}
-  50%  { transform: translate(88px, 34px);}
-  75%  { transform: translate(126px, 2px);}
-  100% { transform: translate(164px, 0);}
-}
-@keyframes coinMove4 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(55px, -29px);}
-  50%  { transform: translate(92px, 36px);}
-  75%  { transform: translate(129px, -2px);}
-  100% { transform: translate(166px, 0);}
-}
-@keyframes coinMove5 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(60px, -32px);}
-  50%  { transform: translate(96px, 38px);}
-  75%  { transform: translate(132px, -6px);}
-  100% { transform: translate(168px, 0);}
-}
-@keyframes coinMove6 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(65px, -35px);}
-  50%  { transform: translate(100px, 40px);}
-  75%  { transform: translate(135px, -10px);}
-  100% { transform: translate(170px, 0);}
-}
-@keyframes coinMove7 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(70px, -38px);}
-  50%  { transform: translate(104px, 42px);}
-  75%  { transform: translate(138px, -14px);}
-  100% { transform: translate(172px, 0);}
-}
-@keyframes coinMove8 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(75px, -41px);}
-  50%  { transform: translate(108px, 44px);}
-  75%  { transform: translate(141px, -18px);}
-  100% { transform: translate(174px, 0);}
-}
-@keyframes coinMove9 {
-  0%   { transform: translate(0,0);}
-  25%  { transform: translate(80px, -44px);}
-  50%  { transform: translate(112px, 46px);}
-  75%  { transform: translate(144px, -22px);}
-  100% { transform: translate(176px, 0);}
+.sectionTitle {
+  position: absolute;
+  font-weight: bold;
+  left: 24px;
+  top: 320px;
+  color: #000000;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
-// 각 동전에 다른 애니메이션 명과 지속 시간(속도) 지정
-.coin1 { animation: coinMove1 1.5s cubic-bezier(.5,.15,.2,1) forwards; }
-.coin2 { animation: coinMove2 1.65s cubic-bezier(.58,.2,.17,1.1) forwards; }
-.coin3 { animation: coinMove3 1.8s cubic-bezier(.47,.18,.29,1) forwards; }
-.coin4 { animation: coinMove4 1.95s cubic-bezier(.6,.23,.2,1) forwards; }
-.coin5 { animation: coinMove5 2.1s cubic-bezier(.5,.17,.31,1.1) forwards; }
-.coin6 { animation: coinMove6 2.25s cubic-bezier(.44,.16,.21,1.02) forwards; }
-.coin7 { animation: coinMove7 2.4s cubic-bezier(.52,.17,.37,1.04) forwards; }
-.coin8 { animation: coinMove8 2.55s cubic-bezier(.61,.22,.22,1) forwards; }
-.coin9 { animation: coinMove9 2.7s cubic-bezier(.48,.13,.32,1.1) forwards; }
+.infoCard {
+  position: absolute;
+  background-color: #e5f1fe;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 301px;
+  align-items: center;
+  justify-content: flex-start;
+  left: 19px;
+  top: 364px;
+  width: calc(100% - 40px);
+  padding: 24px;
+  border-radius: 20px;
+
+  transform-origin: bottom; /* 오른쪽 아래 기준 */
+  transition: transform 0.5s ease; /* 애니메이션 시간과 타이밍 함수 */
+
+  &.reduce {
+    transform: scale(0); /* 크기를 50%로 줄임 */
+  }
+}
+
+.infoCardTitle {
+  font-weight: 500;
+  color: #808080;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-weight: bold;
+  color: #528eff;
+  display: flex;
+  font-size: 36px;
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  input {
+    border: none;
+    border-radius: 5px;
+    padding: 0 10px;
+    margin-right: 5px;
+    font-size: 20px;
+    text-align: right;
+
+    &:focus {
+      outline: none;
+      border-color: #528eff;
+    }
+
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+}
+
+.divider {
+  background-color: rgba(0, 0, 0, 0.1);
+  height: 1px;
+  width: 287px;
+  flex-shrink: 0;
+}
+
+.detailsList {
+  background-color: #e5f1fe;
+  height: 152px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.detailsContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 152px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 10px 5px;
+  width: 100%;
+}
+
+.detailItem {
+  background-color: #e5f1fe;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 24px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-radius: 10px;
+  width: 100%;
+  font-size: 15px;
+}
+
+.detailLabel {
+  font-weight: 400;
+  color: #808080;
+  flex-shrink: 0;
+}
+
+.detailValue {
+  font-weight: 600;
+  color: #000000;
+  flex-shrink: 0;
+  
+  input {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 15px;
+
+    &:focus {
+      outline: none;
+      border-color: #528eff;
+    }
+  }
+}
+
+.detailValueBlue {
+  color: #528eff;
+}
+
+.card_icon {
+  position: absolute;
+  color: #528eff;
+  top: 650px;
+  width: calc(100% - 40px);
+  text-align: center;
+  opacity: 0;
+  transform: rotateZ(-10deg);
+  transition: opacity 0.5 ease;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+.buttonGroup {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  height: 52px;
+  width: calc(100% - 40px);
+  align-items: center;
+  justify-content: space-around;
+  top: 740px;
+  padding: 10px;
+}
+
+.cancelButton {
+  background-color: #ebebeb;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  width: 120px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.cancelButtonText {
+  font-weight: 600;
+  color: #333333;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.confirmButton {
+  background-color: #528eff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: 16px;
+  width: 203px;
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+}
+
+.confirmButtonText {
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.coin1 {
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  animation: xAxis1 4s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 4s forwards, yAxis1 4s;
+  }
+}
+
+@keyframes yAxis1 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(350px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis1 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(70px);
+  }
+  70% {
+    transform: translateX(130px);
+  }
+  90% {
+    transform: translateX(190px);
+  }
+  100% {
+    transform: translateX(230px);
+  }
+}
+
+@keyframes reduce1 {
+  0% {
+    transform: scale(1);
+  }
+  98% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }  
+}
+
+.coin2 {
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  animation: xAxis2 5s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 5s forwards, yAxis2 5s;
+  }
+}
+
+@keyframes yAxis2 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(300px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis2 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(400px);
+  }
+  70% {
+    transform: translateX(315px);
+  }
+  90% {
+    transform: translateX(230px);
+  }
+  100% {
+    transform: translateX(200px);
+  }
+}
+
+.coin3 {
+  position: absolute;
+  top: 50px;
+  right: -20px;
+  animation: xAxis3 3s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 3s forwards, yAxis3 3s;
+  }
+}
+
+@keyframes yAxis3 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(350px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis3 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(-70px);
+  }
+  70% {
+    transform: translateX(-130px);
+  }
+  90% {
+    transform: translateX(-190px);
+  }
+  100% {
+    transform: translateX(-230px);
+  }
+}
+
+.coin4 {
+  position: absolute;
+  top: 50px;
+  right: -50px;
+  animation: xAxis4 5s 0.5s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 5s 0.5s forwards, yAxis4 5s 0.5s;
+  }
+}
+
+@keyframes yAxis4 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(300px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis4 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(-430px);
+  }
+  70% {
+    transform: translateX(-345px);
+  }
+  90% {
+    transform: translateX(-260px);
+  }
+  100% {
+    transform: translateX(-230px);
+  }
+}
+
+.coin5 {
+  position: absolute;
+  top: 50px;
+  left: 150px;
+  animation: xAxis5 2s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 2s forwards, yAxis5 2s;
+  }
+}
+
+@keyframes yAxis5 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis5 {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(50px);
+  }
+}
+
