@@ -21,8 +21,8 @@ const router = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: 'login', element: <Login/>},
-      { path: 'Remittance', element: <Remittance/>},
+      { path: 'login', element: <Login /> },
+      { path: 'Remittance', element: <Remittance /> },
       { path: 'products', element: <Products /> },
       { path: 'cart', element: <Cart /> },
       { path: 'verify', element: <Verify /> },
@@ -34,8 +34,13 @@ const router = createBrowserRouter([
           { path: 'completed', element: <PaymentCompleted /> },
         ],
       },
-      { path: 'authentication', element: <Authentication /> },
-      { path: 'pattern', element: <PatternLockDemo /> },
+      {
+        path: 'auth',
+        children: [
+          { path: 'pattern', element: <PatternLockDemo /> },
+          { path: 'pin', element: <Authentication /> },
+        ],
+      },
       { path: '*', element: <NotFound /> },
     ],
   },

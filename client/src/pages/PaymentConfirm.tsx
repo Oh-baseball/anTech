@@ -1,5 +1,7 @@
+import PaymentConfirmContainer from '@/features/paymentConfirm/paymentConfirm';
+
 const PaymentConfirm = () => {
-  return <div>PaymentConfirm</div>;
+  return <PaymentConfirmContainer />;
 };
 
 export default PaymentConfirm;
