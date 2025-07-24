@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styles from "./style.module.scss";
-import { FaLock } from "react-icons/fa";
-import { MdEditDocument } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { Lock, FileUser } from 'lucide-react';
 
 const Loading = () => {
   const navigate = useNavigate()
@@ -33,13 +32,13 @@ const Loading = () => {
         </div>
         <div className={styles.button_part}>
           <button className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`} onClick={Login} disabled={clickedLogin}>
-            <span className={styles.lock_icon}><FaLock /></span>
+            <span className={styles.lock_icon}><Lock /></span>
             <div className={styles.login_box}>
               <span className={styles.login_text}>로그인</span>
             </div>
           </button>
           <button className={styles.signup_btn}>
-            <span className={styles.doc_icon}><MdEditDocument /></span>
+            <span className={styles.doc_icon}><FileUser /></span>
             <div>
               <span className={styles.signup_text}>회원가입</span>
             </div>

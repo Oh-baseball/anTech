@@ -39,7 +39,7 @@
   transition: transform 0.5s ease; /* 애니메이션 시간과 타이밍 함수 */
 
   &.reduce {
-    transform: scale(0.01); /* 크기를 50%로 줄임 */
+    transform: scale(0); /* 크기를 50%로 줄임 */
   }
 }
 
@@ -149,7 +149,6 @@
   position: absolute;
   color: #528eff;
   top: 650px;
-  font-size: 40px;
   width: calc(100% - 40px);
   text-align: center;
   opacity: 0;
@@ -221,52 +220,323 @@
   white-space: nowrap;
 }
 
-
-.coin {
-  margin-left: 50px;
-  margin-top: 50px;
-  animation: xAxis 4.5s
-  // animation: xAxis 4.5s cubic-bezier(0.02, 0.01, 0.21, 1) forwards;
-  /* coin 자체의 x축 이동 애니메이션 */
+.coin1 {
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  animation: xAxis1 4s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 4s forwards, yAxis1 4s;
+  }
 }
 
-.coin::after {
-  content: '';
-  display: block;
-  width: 90px;
-  height: 90px;
-  background-color: lightpink;
-  animation: yAxis 4.5s
-  // animation: yAxis 4.5s cubic-bezier(0.3, 0.27, 0.07, 1.64) forwards;
-  /* y축 이동 애니메이션 */
-}
-
-@keyframes yAxis {
-  50% {
-    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-    transform: translateY(550px);
+@keyframes yAxis1 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(350px);
   }
   70% {
-    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis1 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(70px);
+  }
+  70% {
+    transform: translateX(130px);
+  }
+  90% {
+    transform: translateX(190px);
+  }
+  100% {
+    transform: translateX(230px);
+  }
+}
+
+@keyframes reduce1 {
+  0% {
+    transform: scale(1);
+  }
+  98% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }  
+}
+
+.coin2 {
+  position: absolute;
+  top: 50px;
+  left: -20px;
+  animation: xAxis2 5s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 5s forwards, yAxis2 5s;
+  }
+}
+
+@keyframes yAxis2 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
     transform: translateY(300px);
   }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
   100% {
-    animation-timing-function: cubic-bezier(0.02, 0.01, 0.21, 1);
-    transform: translateY(550px);
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
   }
 }
 
-@keyframes xAxis {
-  50% {
-    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    transform: translateX(25px);
+@keyframes xAxis2 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(400px);
   }
   70% {
-    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    transform: translateX(50px);
+    transform: translateX(315px);
+  }
+  90% {
+    transform: translateX(230px);
   }
   100% {
-    animation-timing-function: cubic-bezier(0.3, 0.27, 0.07, 1.64);
-    transform: translateX(100px);
+    transform: translateX(200px);
   }
 }
+
+.coin3 {
+  position: absolute;
+  top: 50px;
+  right: -20px;
+  animation: xAxis3 3s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 3s forwards, yAxis3 3s;
+  }
+}
+
+@keyframes yAxis3 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  55% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(350px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis3 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(-70px);
+  }
+  70% {
+    transform: translateX(-130px);
+  }
+  90% {
+    transform: translateX(-190px);
+  }
+  100% {
+    transform: translateX(-230px);
+  }
+}
+
+.coin4 {
+  position: absolute;
+  top: 50px;
+  right: -50px;
+  animation: xAxis4 5s 0.5s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 5s 0.5s forwards, yAxis4 5s 0.5s;
+  }
+}
+
+@keyframes yAxis4 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  40% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(300px);
+  }
+  70% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  80% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(460px);
+  }
+  90% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+  95% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(520px);
+  }
+  100% {
+    animation-timing-function: cubic-bezier(0.5, 1, 0.89, 1);
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis4 {
+  0% {
+    transform: translateX(0px);
+  }
+  40% {
+    transform: translateX(-430px);
+  }
+  70% {
+    transform: translateX(-345px);
+  }
+  90% {
+    transform: translateX(-260px);
+  }
+  100% {
+    transform: translateX(-230px);
+  }
+}
+
+.coin5 {
+  position: absolute;
+  top: 50px;
+  left: 150px;
+  animation: xAxis5 2s linear forwards;
+  
+  &::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: lightpink;
+    animation: reduce1 2s forwards, yAxis5 2s;
+  }
+}
+
+@keyframes yAxis5 {
+  0% {
+    animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(600px);
+  }
+}
+
+@keyframes xAxis5 {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(50px);
+  }
+}
+

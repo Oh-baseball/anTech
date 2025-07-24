@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import AccountBox, { AccountBoxProps } from './AccountBox';
 import styles from './style.module.scss';
 import { useState } from 'react';
-import { FaRegCreditCard } from "react-icons/fa6";
+import { CreditCard } from 'lucide-react';
 
 interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
@@ -35,7 +35,14 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
         prevBtn={true}
         title="입금"
       />
-      <div className={styles.coin}></div>
+      <div className={styles.coinBox}>
+        <div className={styles.coin1}></div>
+        <div className={styles.coin2}></div>
+        <div className={styles.coin3}></div>
+        <div className={styles.coin4}></div>
+        <div className={styles.coin5}></div>
+      </div>
+
       <div className={styles.accountBox}>
         <AccountBox accountInfo={userAccount}/>
       </div>
@@ -92,7 +99,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
         </div>
       </div>
         
-      <span className={`${styles.card_icon} ${checkTransfer ? styles.visible : ''}`}><FaRegCreditCard/></span>
+      <span className={`${styles.card_icon} ${checkTransfer ? styles.visible : ''}`}><CreditCard size={64}/></span>
 
       {/* Button Group */}
       <div className={styles.buttonGroup}>
