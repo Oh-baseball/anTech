@@ -24,25 +24,27 @@ const PaymentMethod = () => {
       <div className='payment_method'>
       
         <PaymentStore />
-
+        
+        <div style={{ height: '500px',overflow : 'auto', scrollbarWidth:'none', msOverflowStyle:'none'}}>
         {sections.map((section) => (
           <div key={section.title}>
             <PaymentTitle title={section.title} />
             {section.categories.length === 1 ? (
               <PaymentMethodBox
-                category={section.categories[0]}
-                selectedId={selectedId}
-                setSelectedId={setSelectedId} 
+              category={section.categories[0]}
+              selectedId={selectedId}
+              setSelectedId={setSelectedId} 
               />
             ) : (
               <PaymentMethodBox
-                category="card_or_account"
-                selectedId={selectedId}
-                setSelectedId={setSelectedId} 
+              category="card_or_account"
+              selectedId={selectedId}
+              setSelectedId={setSelectedId} 
               />
             )}
           </div>
         ))}
+        </div>
 
         <PaymentButton />
       </div>

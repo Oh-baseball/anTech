@@ -1,8 +1,9 @@
-import toss_icon from '@/assets/tossicon.svg'
-import after_select from '@/assets/selection.svg'
-import before_select from '@/assets/unselection.svg'
-
+import toss_icon from '@/assets/tossicon.svg';
+import after_select from '@/assets/selection.svg';
+import before_select from '@/assets/unselection.svg';
+import kakao_icon from '@/assets/kakao_payment_icon.png';
 import styles from './style.module.scss';
+import { img } from 'framer-motion/client';
 
 type PaymentMethodBoxProps = {
     category: string;
@@ -14,8 +15,8 @@ type PaymentMethodBoxProps = {
 const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodBoxProps) => {
 
     const paymentMethods = [
-        {id: 1, category: 'easy_payment', name: '토스페이', balance: '1,234,560원'},
-        {id: 2, category: 'easy_payment', name: '카카오페이', balance: '1,560원'},
+        {id: 1, category: 'easy_payment', name: '토스페이', balance: '1,234,560원', img: toss_icon},
+        {id: 2, category: 'easy_payment', name: '카카오페이', balance: '1,560원', img: kakao_icon},
         {id: 3, category: 'easy_payment', name: '네이버페이', balance: '999,000원'},
         {id: 4, category: 'card_payment', name: '신한카드', balance: '999,000원'},
         {id: 5, category: 'account_payment', name: '국민은행', balance: '999,000원'},
@@ -31,7 +32,7 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
     };
 
     return(
-        <div style={{height:'98px', overflow:'auto', scrollbarWidth:'none', msOverflowStyle:'none'}}>
+        <div>
             {filtered.map((method) => (     
                 <div 
                     key={method.id}
@@ -42,7 +43,7 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
                     onClick={() => handleClick(method.id)}
                 >
                     <div>
-                        <img src={toss_icon} alt="토스 아이콘"/>
+                        <img src={method.img} alt="토스 아이콘"/>
                         <div className={styles.payment_method_info}>
                             <p>{method.name}</p>
                             <p>잔액 {method.balance}</p>
