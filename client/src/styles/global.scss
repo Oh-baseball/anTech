@@ -93,6 +93,10 @@ a {
   text-decoration: none;
 }
 
+@keyframes stand-on {
+  from { opacity: 1; }
+  to { opacity: 1; }
+}
 @keyframes fade-out {
   from { opacity: 1; }
   to { opacity: 0; }
@@ -110,23 +114,23 @@ a {
   animation: 0.8s ease both fade-in;
 }
 
-// @keyframes move-out {
-//   from { transform: translateY(0%); }
-//   to { transform: translateY(-100%); }
-// }
+@keyframes move-out {
+  from { transform: translateY(0%); }
+  to { transform: translateY(-100%); }
+}
 
-// @keyframes move-in {
-//   from { transform: translateY(100%); }
-//   to { transform: translateY(0%); }
-// }
+@keyframes move-in {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0%); }
+}
 
-// ::view-transition-old(shared-elem) {
-//   animation: 0.6s ease both move-out;
-//   animation-duration: 600ms;
-//   animation-timing-function: ease-in;
-// }
-// ::view-transition-new(shared-elem) {
-//   animation: 0.6s ease both move-in;
-//   animation-duration: 600ms;
-//   animation-timing-function: ease-in;
-// }
+::view-transition-old(account-box2) {
+  animation: 0.6s ease both fade-out;
+  // animation-duration: 600ms;
+  // animation-timing-function: ease-in;
+}
+::view-transition-new(account-box2) {
+  animation: 0.6s ease both stand-on;
+  // animation-duration: 600ms;
+  // animation-timing-function: ease-in;
+}

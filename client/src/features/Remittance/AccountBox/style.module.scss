@@ -1,0 +1,46 @@
+.accountBox {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  padding: 24px 24px 23px 24px;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  background-color: #528EFF;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  view-transition-name: account-box2;
+
+
+  p:nth-of-type(1) {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: $font-weight-semibold;
+  }
+  
+  p:nth-of-type(2) {
+    align-self: flex-end;
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: $font-weight-bold;
+  }
+  
+  div {
+    width: 100%;
+    height: 45px;
+    padding: 0 16px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    
+    button {
+      width: 45px;
+      height: 100%;
+      font-size: 14px;
+      font-weight: $font-weight-semibold;
+      color: #000000;
+    }
+  }
+}
+
