@@ -269,12 +269,12 @@
       }
     }
 
-    .coin5Outside {
+    .coin0Outside {
       position: absolute;
       left: 45px;
       animation: xAxis5 2s linear forwards;
 
-      .coin5Inside {
+      .coin0Inside {
         animation: reduce1 2s forwards, yAxis5 2s;
       }
     }

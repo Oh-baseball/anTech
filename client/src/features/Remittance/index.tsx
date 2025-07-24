@@ -21,6 +21,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
   const [memo, setMemo] = useState('input');
   const [checkTransfer, setCheckTransfer] = useState(false);
   const [checkCoin, setCheckCoin] = useState(false);
+  const coinsRefs = useRef<(HTMLDivElement)[]>([]);
   const coin1 = useRef<HTMLDivElement>(null);
 
   const handleCancel = () => {
@@ -30,8 +31,23 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
   const handletransfer = () => {
     setCheckTransfer(true);
     setCheckCoin(true);
-    if (coin1.current) {
-      coin1.current.style.transform = "rotate(30deg)";
+
+    if (coinsRefs.current) {
+      coinsRefs.current.forEach((coinEl, i) => {
+        if (!coinEl) return;
+        const coin = coinEl.firstElementChild;
+        
+        if (coin instanceof HTMLElement) {
+          coin.style.transform = 'rotateY(720deg)';
+          coin.style.transition = 'transform 4s linear';
+        }
+      })
+    }
+
+    if (coin1.current && coin1.current.firstElementChild instanceof HTMLElement) {
+      const el = coin1.current.firstElementChild;
+      el.style.transform = 'rotateY(720deg)';
+      el.style.transition = 'transform 4s linear';
     }
   };
 
@@ -43,14 +59,22 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
       />
 
       <div className={`${styles.coin_container} ${checkCoin ? styles.coin_check : ''}`}>
-        {/* {Array.from({ length: 5}).map((_, i) => (
-          <div
-            key={`coinNev${i}`}
-            className={`${styles['coin' + i + 'Outside']}`}
-            ref={}
-          ></div>
-        ))} */}
-        <div className={styles.coin1Outside}>
+        {Array.from({ length: 5}).map((_, i) => (
+          <div key={`coinNev${i}`} className={`${styles['coin' + i + 'Outside']}`}>
+            <div
+              key={`coinNev${i}`}
+              className={`${styles['coin' + i + 'Inside']}`}
+              ref={(el) => {
+                if (el) {
+                  coinsRefs.current[i] = el;
+                }
+              }}
+              >
+              <Coin scale={0.2}/>
+            </div>
+          </div>
+        ))}
+        {/* <div className={styles.coin1Outside}>
           <div className={styles.coin1Inside} ref={coin1}>
             <Coin scale={0.2}/>
           </div>
@@ -74,7 +98,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
           <div className={styles.coin5Inside}>
             <Coin scale={0.2}/>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className={styles.accountBox}>
