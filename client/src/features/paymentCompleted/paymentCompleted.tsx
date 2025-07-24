@@ -8,7 +8,7 @@ import Coin from '@/components/Coin';
 import ActionButton from '@/components/ActionButton';
 
 gsap.registerPlugin(ScrollToPlugin);
-const FALLING_COIN_COUNT = 50;
+const FALLING_COIN_COUNT = 30;
 
 const initialPositions = [
   { x: -200, y: 0 },
