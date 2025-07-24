@@ -10,15 +10,16 @@
 
 .storeMenu{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 335px;
+    width: 385px;
     height: 120px;
     border-radius: $radius-md;
     background-color: $color-secondary;
     padding: 20px 16px 20px 16px;
     margin-bottom: 16px;
     cursor: pointer;
+    box-sizing: border-box;
 
     &.pressed{
         transform: scale(0.95);

@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import StoreInfoBox from "@/features/products/StoreInfoBox";
 import StoreMenuBox, { StoreMenuBoxRef } from "@/features/products/StoreMenuBox";
-import StoreButtonBox from "@/features/products/StoreButtonBox";
 import StoreTabBox from "@/features/products/StoreTabBox";
 import Header from "@/components/Header";
-// import { CartProvider, useCart } from "@/features/cart/CartContext";
 import { useNavigate } from "react-router-dom";
 import styles from "./style.module.scss";
 
@@ -13,6 +11,7 @@ const ProductsContainer = () => {
   const menuBoxRef = useRef<StoreMenuBoxRef>(null);
   const navigate = useNavigate();
   const [cartCount, setCartCount] = useState(0);
+  const cartIconRef = useRef<HTMLSpanElement>(null);
 
   //장바구니 개수
   useEffect(() => {
@@ -41,7 +40,7 @@ const ProductsContainer = () => {
         title="스타벅스 강남점"
         right={
           <div className={styles.cartbox} onClick={() => navigate("/cart") }>
-            <span className={styles.cart}>🛒</span>
+            <span className={styles.cart} ref={cartIconRef}>🛒</span>
             <span className={styles.cartcount}>{cartCount}</span>
           </div>
         }

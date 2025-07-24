@@ -2,6 +2,16 @@ import { useRef, useEffect, useState, forwardRef, useImperativeHandle } from "re
 import styles from "./style.module.scss";
 import { motion } from "framer-motion";
 import StoreButtonBox from "../StoreButtonBox";
+import americanoImg from "@/assets/americano2.jpg";
+import latteImg from "@/assets/latte.jpg";
+import cappuImg from "@/assets/cappuccino.jpg";
+import chocoImg from "@/assets/chococake.jpg";
+import strImg from "@/assets/strcake.jpg";
+import creamImg from "@/assets/creamcake.jpg";
+import carrotImg from "@/assets/carrot.jpg";
+import eggImg from "@/assets/egg.jpg";
+import chickenImg from "@/assets/chicken.jpg";
+
 
 export interface StoreMenuBoxItem {
   id: number;
@@ -16,7 +26,6 @@ interface StoreMenuBoxProps {
   StoreMenuBoxItmes?: StoreMenuBoxItem[];
   StoreCategories?: string[];
   onTabChange?: (category: string) => void;
-  scrollToCategory?: (category: string) => void;
   setCartCount: (count: number) => void;
 }
 
@@ -29,7 +38,7 @@ const dummyCategories = ["커피", "디저트", "샌드위치"];
 export const dummyMenuItems = [
   {
     id:1,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: americanoImg,
     name: '아메리카노',
     content: '깔끔하고 진한 에스프레소의 맛',
     price: 4500,
@@ -37,7 +46,7 @@ export const dummyMenuItems = [
   },
   {
     id:2,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: latteImg,
     name: '카페라떼',
     content: '부드러운 우유와 에스프레소의 맛',
     price: 5000,
@@ -45,7 +54,7 @@ export const dummyMenuItems = [
   },
   {
     id:3,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: cappuImg,
     name: '카푸치노',
     content: '진한 에스프레소와 부드러운 폼밀크의 맛',
     price: 5500,
@@ -53,7 +62,7 @@ export const dummyMenuItems = [
   },
   {
     id:4,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: americanoImg,
     name: '아메리카노',
     content: '깔끔하고 진한 에스프레소의 맛',
     price: 4500,
@@ -61,7 +70,7 @@ export const dummyMenuItems = [
   },
   {
     id:5,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: latteImg,
     name: '카페라떼',
     content: '부드러운 우유와 에스프레소의 맛',
     price: 5000,
@@ -69,7 +78,7 @@ export const dummyMenuItems = [
   },
   {
     id:6,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: cappuImg,
     name: '카푸치노',
     content: '진한 에스프레소와 부드러운 폼밀크의 맛',
     price: 5500,
@@ -77,7 +86,7 @@ export const dummyMenuItems = [
   },
   {
     id:7,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: chocoImg,
     name: '초코케이크',
     content: '깔끔하고 진한 초코의 맛',
     price: 4500,
@@ -85,7 +94,7 @@ export const dummyMenuItems = [
   },
   {
     id:8,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: strImg,
     name: '딸기케이크',
     content: '부드러운 우유와 딸기의 맛',
     price: 5000,
@@ -93,7 +102,7 @@ export const dummyMenuItems = [
   },
   {
     id:9,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: creamImg,
     name: '생크림케이크',
     content: '진한 생크림 부드러운 폼밀크의 맛',
     price: 5500,
@@ -101,7 +110,7 @@ export const dummyMenuItems = [
   },
   {
     id:10,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: chocoImg,
     name: '초코케이크',
     content: '깔끔하고 진한 초코의 맛',
     price: 4500,
@@ -109,7 +118,7 @@ export const dummyMenuItems = [
   },
   { 
     id:11,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: strImg,
     name: '딸기케이크',
     content: '부드러운 우유와 딸기의 맛',
     price: 5000,
@@ -117,7 +126,7 @@ export const dummyMenuItems = [
   },
   {
     id:12,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
+    img: creamImg,
     name: '생크림케이크',
     content: '진한 생크림 부드러운 폼밀크의 맛',
     price: 5500,
@@ -125,56 +134,56 @@ export const dummyMenuItems = [
   },
   {
     id:13,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '크림샌드위치',
-    content: '부드러운 크림과 샌드위치의 맛',
+    img: carrotImg,
+    name: '당근샌드위치',
+    content: '부드러운 당근 샌드위치',
     price: 5500,
     category: '샌드위치'
   },
   {
     id:14,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '초코샌드위치',
-    content: '깔끔하고 진한 초코의 맛',
+    img: chickenImg,
+    name: '치킨샌드위치',
+    content: '진한 치킨의 맛',
     price: 4500,
     category: '샌드위치'
   },
   { 
     id:15,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '딸기샌드위치',
-    content: '부드러운 우유와 딸기의 맛',
+    img: eggImg,
+    name: '에그샌드위치',
+    content: '부드러운 계란의 맛',
     price: 5000,
     category: '샌드위치'
   },
   {
     id:16,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '크림샌드위치',
-    content: '부드러운 크림과 샌드위치의 맛',
+    img: carrotImg,
+    name: '당근샌드위치',
+    content: '부드러운 당근 샌드위치',
     price: 5500,
     category: '샌드위치'
   },
   {
     id:17,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '초코샌드위치',
-    content: '깔끔하고 진한 초코의 맛',
+    img: eggImg,
+    name: '에그샌드위치',
+    content: '부드러운 계란의 맛',
     price: 4500,
     category: '샌드위치'
   },
   {
     id:18,
-    img: 'https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp',
-    name: '딸기샌드위치',
-    content: '부드러운 우유와 딸기의 맛',
+    img: chickenImg,
+    name: '치킨샌드위치',
+    content: '진한 치킨의 맛',
     price: 5000,
     category: '샌드위치'
   }
 ];
 
 const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
-  ({ StoreMenuBoxItmes, StoreCategories, onTabChange, scrollToCategory, setCartCount }, ref) => {
+  ({ StoreMenuBoxItmes, StoreCategories, scrollToCategory, onTabChange, setCartCount }, ref) => {
     const items = StoreMenuBoxItmes ?? dummyMenuItems;
     const categories = StoreCategories ?? dummyCategories;
 
@@ -182,6 +191,8 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
     const [selectedId, setSelectedId] = useState<number | null>(null);
     const [pressedIdx, setPressedIdx] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState(categories[0]);
+
+    const imgRef = useRef<Record<number, HTMLImageElement|null>>({});
 
     //부모(productsContainer)로 넘김
     const categoryRefs = useRef<Record<string, HTMLDivElement|null>>({});
@@ -230,21 +241,8 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
       });
 
       return () => observer.disconnect();
-      // eslint-disable-next-line
     }, [activeTab, categories]);
 
-    // addToCart 함수 (임시, utils로 분리 가능)
-    // function addToCart(productId: number | null) {
-    //   if (!productId) return;
-    //   const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    //   const idx = cart.findIndex((item: any) => item.id === productId);
-    //   if (idx !== -1) {
-    //     cart[idx].count += 1;
-    //   } else {
-    //     cart.push({ id: productId, count: 1 });
-    //   }
-    //   localStorage.setItem("cartItems", JSON.stringify(cart));
-    // }
 
     return (
       <>
@@ -286,7 +284,9 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
                       <p>{item.price.toLocaleString()}원</p>
                     </div>
                     <div className={styles.right_items}>
-                      <img src={item.img} />
+                      <img
+                      src={item.img}
+                      ref={el=>{imgRef.current[item.id]=el;}} />
                     </div>
                   </motion.div>
                 );

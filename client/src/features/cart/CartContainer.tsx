@@ -16,7 +16,7 @@ const CartContainer = () => {
 
 
   // 수량 변경
-  const handleIncrease = (idx) => {
+  const handleIncrease = (idx: number) => {
     setItems(prev => {
       const newItems = prev.map((item, i) =>
         i === idx ? { ...item, count: item.count + 1 } : item
@@ -33,7 +33,7 @@ const CartContainer = () => {
     });
   };
   
-  const handleDecrease = (idx) => {
+  const handleDecrease = (idx: number) => {
     setItems(prev => {
       const newItems = prev.map((item, i) =>
         i === idx && item.count > 1 ? { ...item, count: item.count - 1 } : item

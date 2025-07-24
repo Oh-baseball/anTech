@@ -1,4 +1,5 @@
 import styles from './style.module.scss';
+import storeImg from "@/assets/store.svg";
 
 export interface StoreInfoBoxItem {
   img: string;
@@ -11,7 +12,7 @@ interface StoreInfoBoxProps {
 }
 
 const dummyData: StoreInfoBoxItem = {
-  img: "https://i.namu.wiki/i/eD5ENNNkE_YkPJcXYYW4ZBH8B6xg5EGbba3rhLjRU5yXJB79AJdRY7ppnQozazY9fqnSPEbB0ne7Lu-PG_CuMMesIZJy0QpPXygqtCzkVz321fvaJaGyUxRWPR_QaZiC1bZpOcEtxdZb-kSG1Ilr6A.webp",
+  img: storeImg,
   name: "스타벅스 강남점",
   address: "서울 강남구 테헤란로 152",
 };

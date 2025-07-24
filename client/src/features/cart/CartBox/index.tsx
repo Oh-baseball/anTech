@@ -1,20 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import CartTotalBox from "../CartTotalBox";
-import {dummyMenuItems} from "../../products/StoreMenuBox";
-
-// export interface CartBoxItem {
-//   img: string;
-//   name: string;
-//   price: number;
-//   category: string;
-//   count: number;
-// }
-
-// interface CartBoxProps {
-//   CartBoxItmes?: CartBoxItem[];
-// }
-
 
 const CartBox = ({ items, onIncrease, onDecrease }) => {
 
