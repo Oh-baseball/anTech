@@ -38,8 +38,7 @@ const PaymentCompletedContainer = () => {
     if (isPaymentComplete) {
       const timer = setTimeout(() => {
         setShowButtons(true);
-      }, 500); // 버튼 컨테이너가 렌더링된 후 show 클래스 부여
-
+      }, 200);
       return () => clearTimeout(timer);
     } else {
       setShowButtons(false);
