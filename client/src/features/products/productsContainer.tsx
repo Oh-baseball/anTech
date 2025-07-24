@@ -52,6 +52,7 @@ const ProductsContainer = () => {
         scrollToCategory={handleTabClick}
         ref={menuBoxRef}
         setCartCount={setCartCount}
+        cartIconRef={cartIconRef}
       />
       {/* <StoreButtonBox/> */}
     </>

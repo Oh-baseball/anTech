@@ -1,20 +1,25 @@
 import StoreButton from '../StoreButton';
 import styles from './style.module.scss';
 import { useNavigate } from "react-router-dom";
-import { addToCart } from "../../../utils/utils";
+import { addToCart, flyToCartAnimation } from "../../../utils/utils";
 
 interface StoreButtonBoxProps {
   selectedId: number | null;
   setCartCount: (count: number) => void;
+  selectedImgEl: HTMLImageElement | null;
+  cartIconEl: HTMLElement | null;
 }
 
-const StoreButtonBox = ({selectedId, setCartCount}: StoreButtonBoxProps) => {
+const StoreButtonBox = ({selectedId, setCartCount, selectedImgEl, cartIconEl}: StoreButtonBoxProps) => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
     addToCart(selectedId);
     const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
     setCartCount(cart.reduce((sum, item) => sum + item.count, 0));
+    if (selectedImgEl && cartIconEl) {
+      flyToCartAnimation(selectedImgEl, cartIconEl);
+    }
   };
 
   return (

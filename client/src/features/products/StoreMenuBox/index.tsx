@@ -27,6 +27,7 @@ interface StoreMenuBoxProps {
   StoreCategories?: string[];
   onTabChange?: (category: string) => void;
   setCartCount: (count: number) => void;
+  cartIconRef: React.RefObject<HTMLSpanElement>;
 }
 
 export interface StoreMenuBoxRef {
@@ -183,7 +184,7 @@ export const dummyMenuItems = [
 ];
 
 const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
-  ({ StoreMenuBoxItmes, StoreCategories, scrollToCategory, onTabChange, setCartCount }, ref) => {
+  ({ StoreMenuBoxItmes, StoreCategories, scrollToCategory, onTabChange, setCartCount, cartIconRef }, ref) => {
     const items = StoreMenuBoxItmes ?? dummyMenuItems;
     const categories = StoreCategories ?? dummyCategories;
 
@@ -295,7 +296,11 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
           ))}
         </div>
         {/* StoreButtonBox에 selectedId를 prop으로 전달 */}
-        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount} />
+        <StoreButtonBox
+        selectedId={selectedId}
+        setCartCount={setCartCount}
+        selectedImgEl={selectedId ? imgRef.current[selectedId] : null}
+        cartIconEl={cartIconRef?.current ?? null} />
       </>
     );
   }
