@@ -5,6 +5,7 @@ import styles from './paymentCompletedContainer.module.scss';
 import Card from './Card';
 import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
+import ActionButton from '@/components/ActionButton';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 50;
@@ -30,6 +31,20 @@ const PaymentCompletedContainer = () => {
   const fixedCoinRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [showFallingCoins, setShowFallingCoins] = useState(false);
+  const [isPaymentComplete, setIsPaymentComplete] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+
+  useEffect(() => {
+    if (isPaymentComplete) {
+      const timer = setTimeout(() => {
+        setShowButtons(true);
+      }, 500); // 버튼 컨테이너가 렌더링된 후 show 클래스 부여
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowButtons(false);
+    }
+  }, [isPaymentComplete]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -198,7 +213,11 @@ const PaymentCompletedContainer = () => {
           x: randomX,
           ease: 'linear',
           delay: (i % 10) * 0.15,
-          onComplete: () => {},
+          onComplete: () => {
+            if (i === coinRefs.current.length - 1) {
+              setIsPaymentComplete(true);
+            }
+          },
         });
       });
     }
@@ -259,8 +278,27 @@ const PaymentCompletedContainer = () => {
             ))}
           </div>
         </div>
-        <h2>결제가 완료되었습니다.</h2>
+        {isPaymentComplete && (
+          <h2
+            className={`${styles.payment_complete_message} ${isPaymentComplete ? styles.show : ''}`}
+          >
+            결제가 완료되었습니다.
+          </h2>
+        )}
       </section>
+      {isPaymentComplete && (
+        <div
+          className={`${styles.button_container} ${showButtons && styles.show}`}
+          style={{ position: 'absolute', display: 'flex', width: '100%' }}
+        >
+          <div style={{ flex: 3 }}>
+            <ActionButton label="영수증 보기" onClick={() => null} />
+          </div>
+          <div style={{ flex: 7 }}>
+            <ActionButton label="확인" onClick={() => null} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
