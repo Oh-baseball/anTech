@@ -37,7 +37,7 @@ async function bootstrap() {
     .addTag('stores', '매장 관리')
     .addTag('categories', '카테고리 관리')
     .addTag('pay-history', '포인트 관리')
-    .addServer('http://localhost:3000', '개발 서버')
+    .addServer('http://localhost:5000', '개발 서버')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -49,7 +49,7 @@ async function bootstrap() {
   });
 
   // 포트 설정
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 8000;
   await app.listen(port);
 
   console.log(`🚀 Application is running on: http://localhost:${port}`);

@@ -1,4 +1,4 @@
-import styles from "./style.module.scss";
+import styles from './style.module.scss';
 
 const CartTotalBox = ({ items }) => {
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);

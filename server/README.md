@@ -85,7 +85,7 @@ SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-supabase-anon-key
 
 # 서버 설정
-PORT=3000
+PORT=8000
 NODE_ENV=development
 ```
 

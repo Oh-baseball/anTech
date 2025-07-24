@@ -1,0 +1,58 @@
+@mixin coin_base {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border: solid 16px #ffe32a;
+  background: radial-gradient(ellipse at 40% 40%, #ebc64a 90%, #eac95e 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ffef16;
+  font-weight: 900;
+  box-shadow:
+    0 0 18px #b5974b inset,
+    0 5px 40px #49402470;
+
+  z-index: 3;
+}
+
+.coin {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 2, 0.6, 1);
+  cursor: pointer;
+}
+
+.coin_face {
+  @include coin_base;
+  transform: translateZ(4px);
+}
+.coin_back {
+  @include coin_base;
+  transform: rotateY(180deg) translateZ(20px);
+}
+
+.coin_side {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+}
+
+.coin_edge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  height: 50px;
+  transform-origin: 50% 100%;
+}
+
+.coin_inner {
+  font-size: 130px;
+  text-shadow: 2px 2px 5px #b5974b;
+}
