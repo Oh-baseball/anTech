@@ -4,7 +4,6 @@ const PaymentStore = () => {
     return(
         <div className={styles.payment_info}>
             <div className={styles.store_info}>
-                {/* <img src={store_icon} alt="" /> */}
                 <img src="https://url.kr/fb9r49" alt="스타벅스 로고" />
                 <p>스타벅스 강남점</p>
             </div>
