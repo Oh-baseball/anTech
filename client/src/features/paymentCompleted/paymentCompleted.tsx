@@ -9,6 +9,12 @@ import Coin from '@/components/Coin';
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 50;
 
+const initialPositions = [
+  { x: -200, y: 0 },
+  { x: 0, y: 1000 },
+  { x: 200, y: 0 },
+];
+
 const PaymentCompletedContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const starBgRef = useRef<HTMLDivElement>(null);
@@ -21,6 +27,7 @@ const PaymentCompletedContainer = () => {
   const thxTagRef = useRef<HTMLDivElement>(null);
 
   const coinRefs = useRef<HTMLDivElement[]>([]);
+  const fixedCoinRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [showFallingCoins, setShowFallingCoins] = useState(false);
 
@@ -117,6 +124,36 @@ const PaymentCompletedContainer = () => {
         },
       });
 
+      fixedCoinRefs.current.forEach((el, idx) => {
+        if (!el) return;
+
+        const startPos = initialPositions[idx];
+        const midPos = {
+          x: startPos.x * 0.5,
+          y: idx === 0 ? -180 : idx === 1 ? 180 : 0,
+        };
+        const endPos = { x: 0, y: 0, z: 0 };
+
+        gsap.set(el, { x: startPos.x, y: startPos.y });
+
+        gsap
+          .timeline({ delay: 5 + idx * 0.2 })
+          .to(el, {
+            duration: 0.7,
+            x: midPos.x,
+            y: midPos.y,
+            ease: 'power2.in',
+          })
+          .to(el, {
+            duration: 0.6,
+            x: endPos.x,
+            y: endPos.y,
+            z: endPos.z,
+            rotationY: 360,
+            ease: 'power2.out',
+          });
+      });
+
       return () => {
         if (containerEl) {
           containerEl.removeEventListener('scroll', handleScroll);
@@ -131,7 +168,6 @@ const PaymentCompletedContainer = () => {
       coinRefs.current.forEach((coinEl, i) => {
         if (!coinEl) return;
         const coin = coinEl.firstElementChild;
-        console.log(coin);
 
         const randomX = (Math.random() - 0.5) * dvw * 2;
         const randomScale = 0.5 + Math.random() * 0.5;
@@ -210,15 +246,17 @@ const PaymentCompletedContainer = () => {
             <VisualTag variant="here" ref={hereTagRef} />
             <VisualTag variant="thx" ref={thxTagRef} />
             <Card ref={cardRef} />
-            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--first']}`}>
-              <Coin scale={0.3} zIndex={100} />
-            </div>
-            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--second']}`}>
-              <Coin scale={0.3} zIndex={100} />
-            </div>
-            <div className={`${styles.coin_wrapper} ${styles['coin_wrapper--third']}`}>
-              <Coin scale={0.3} zIndex={100} />
-            </div>
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className={`${styles.coin_wrapper} ${styles[`coin_wrapper--${['first', 'second', 'third'][i]}`]}`}
+                ref={(el) => {
+                  fixedCoinRefs.current[i] = el;
+                }}
+              >
+                <Coin scale={0.3} zIndex={300} />
+              </div>
+            ))}
           </div>
         </div>
         <h2>결제가 완료되었습니다.</h2>
