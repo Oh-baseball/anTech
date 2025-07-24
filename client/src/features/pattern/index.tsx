@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 
@@ -154,7 +154,7 @@ const PatternLockDemo: React.FC = () => {
 
   const drawPatternInProgress = useCallback(
     (e: React.MouseEvent | React.TouchEvent) => {
-      e.preventDefault();
+      // e.preventDefault();
       if (!state.isDrawing || state.isLocked) return;
 
       const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
@@ -302,7 +302,7 @@ const PatternLockDemo: React.FC = () => {
   };
 
   const goToPinAuth = () => {
-    navigate('/authentication');
+    navigate('/auth/pin');
   };
 
   const createSVGPath = (points: Point[]) => {
