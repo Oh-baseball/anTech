@@ -3,12 +3,18 @@ import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { Category } from '@/types/store';
 
-type FetchCategoriesResponse = Category[];
+type CreateCategoryRequest = Pick<Category, 'category_name' | 'description'>;
 
-const fetchCategories = async (): Promise<APIResponse<FetchCategoriesResponse>> => {
+type CreateCategoryResponse = Category;
+
+const createCategory = async (
+  req: CreateCategoryRequest,
+): Promise<APIResponse<CreateCategoryResponse>> => {
   try {
-    const response =
-      await axiosInstance.get<APIResponse<FetchCategoriesResponse>>(`stores/categories`);
+    const response = await axiosInstance.post<APIResponse<CreateCategoryResponse>>(
+      `/stores/categories`,
+      req,
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -20,4 +26,4 @@ const fetchCategories = async (): Promise<APIResponse<FetchCategoriesResponse>> 
   }
 };
 
-export default fetchCategories;
+export default createCategory;

@@ -12,4 +12,17 @@ export interface Store {
 
 export interface Category {
   category_id: number;
+  category_name: string;
+  description: string;
+  is_active: boolean;
+}
+
+export interface Menu {
+  menu_id: number;
+  menu_name: string;
+  created_at: string;
+  description: string;
+  image_url: string;
+  is_available: boolean;
+  price: number;
 }

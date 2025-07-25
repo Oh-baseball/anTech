@@ -1,4 +1,4 @@
-import fetchCategories from '@/apis/stores/fetchCategories';
+import fetchMenusByCategoryId from '@/apis/stores/fetchMenusByCategoryId';
 import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
 import { useEffect } from 'react';
 
@@ -6,7 +6,7 @@ const PaymentCompleted = () => {
   useEffect(() => {
     (async () => {
       try {
-        const userApiRes = await fetchCategories();
+        const userApiRes = await fetchMenusByCategoryId(1);
         if (userApiRes.success) {
           console.log('데이터:', userApiRes.data);
         } else {
