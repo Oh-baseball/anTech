@@ -18,8 +18,9 @@ export type ErrorResponse = {
 export type User = {
   user_id: string;
   name: string;
-  pw_number: number;
-  pw_pattern: number;
+  password: string;
+  pw_number: string;
+  pw_pattern: string;
   created_at: string;
   updated_at: string;
 };

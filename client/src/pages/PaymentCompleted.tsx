@@ -1,4 +1,4 @@
-import fetchUser from '@/apis/users/fetchUser';
+import createUser from '@/apis/users/createUser';
 import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
 import { useEffect } from 'react';
 
@@ -6,7 +6,12 @@ const PaymentCompleted = () => {
   useEffect(() => {
     (async () => {
       try {
-        const userApiRes = await fetchUser();
+        const userApiRes = await createUser({
+          password: 'password123',
+          name: '홍길동',
+          pw_number: '123456',
+          pw_pattern: '1234',
+        });
         if (userApiRes.success) {
           console.log('사용자 데이터:', userApiRes.data);
         } else {

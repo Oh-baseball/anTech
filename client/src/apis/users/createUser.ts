@@ -2,13 +2,13 @@ import { APIResponse, ErrorResponse, User } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
 
-export type CreateUserRequest = Omit<User, 'created_at' | 'updated_at'>;
+export type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
 
-export type CreateUserResponse = User;
+export type CreateUserResponse = Omit<User, 'password'>;
 
 const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUserResponse>> => {
   try {
-    const response = await axiosInstance.post<APIResponse<CreateUserResponse>>(`/endpoint`, req);
+    const response = await axiosInstance.post<APIResponse<CreateUserResponse>>(`/users`, req);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
