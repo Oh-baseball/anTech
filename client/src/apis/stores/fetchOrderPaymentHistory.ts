@@ -3,17 +3,14 @@ import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { Order } from '@/types/order';
 
-type CreateOrderPaymentRequest = Order;
+type FetchOrderPaymentHistoryResponse = Order;
 
-type CreateOrderPaymentResponse = Order;
-
-const createOrderPayment = async (
-  req: CreateOrderPaymentRequest,
-): Promise<APIResponse<CreateOrderPaymentResponse>> => {
+const fetchOrderPaymentHistory = async (
+  user_id: number,
+): Promise<APIResponse<FetchOrderPaymentHistoryResponse>> => {
   try {
-    const response = await axiosInstance.post<APIResponse<CreateOrderPaymentResponse>>(
-      `/orders/payment`,
-      req,
+    const response = await axiosInstance.get<APIResponse<FetchOrderPaymentHistoryResponse>>(
+      `/orders/payment/history/${user_id}`,
     );
     return response.data;
   } catch (error) {
@@ -26,4 +23,4 @@ const createOrderPayment = async (
   }
 };
 
-export default createOrderPayment;
+export default fetchOrderPaymentHistory;
