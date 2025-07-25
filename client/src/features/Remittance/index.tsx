@@ -9,16 +9,8 @@ interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
 }
 
-interface DetailItem {
-  label: string;
-  value: string;
-  isBlue?: boolean;
-}
 
 const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
-  const [amount, setAmount] = useState('input');
-  const [accountNumber, setAccountNumber] = useState('input');
-  const [memo, setMemo] = useState('input');
   const [checkTransfer, setCheckTransfer] = useState(false);
   const [checkCoin, setCheckCoin] = useState(false);
   const coinsRefs = useRef<(HTMLDivElement)[]>([]);
@@ -33,13 +25,13 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
     setCheckCoin(true);
 
     if (coinsRefs.current) {
-      coinsRefs.current.forEach((coinEl, i) => {
+      coinsRefs.current.forEach((coinEl) => {
         if (!coinEl) return;
         const coin = coinEl.firstElementChild;
         
         if (coin instanceof HTMLElement) {
-          coin.style.transform = 'rotateY(720deg)';
-          coin.style.transition = 'transform 4s linear';
+          coin.style.transform = 'rotateY(2200deg)';
+          coin.style.transition = 'transform 3.8s linear';
         }
       })
     }
@@ -74,31 +66,6 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
             </div>
           </div>
         ))}
-        {/* <div className={styles.coin1Outside}>
-          <div className={styles.coin1Inside} ref={coin1}>
-            <Coin scale={0.2}/>
-          </div>
-        </div>
-        <div className={styles.coin2Outside}>
-          <div className={styles.coin2Inside}>
-            <Coin scale={0.2}/>
-          </div>
-        </div>
-        <div className={styles.coin3Outside}>
-          <div className={styles.coin3Inside}>
-            <Coin scale={0.2}/>
-          </div>
-        </div>
-        <div className={styles.coin4Outside}>
-          <div className={styles.coin4Inside}>
-            <Coin scale={0.2}/>
-          </div>
-        </div>
-        <div className={styles.coin5Outside}>
-          <div className={styles.coin5Inside}>
-            <Coin scale={0.2}/>
-          </div>
-        </div> */}
       </div>
 
       <div className={styles.accountBox}>
