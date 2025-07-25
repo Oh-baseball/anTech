@@ -1,10 +1,11 @@
-import { APIResponse, ErrorResponse, User } from '@/types/api';
-import { axiosInstance } from '../axiosInstance';
+import { APIResponse, ErrorResponse } from '@/types/api';
+import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
+import { Order } from '@/types/order';
 
-const fetchUser = async (): Promise<APIResponse<User>> => {
+const fetchOrderByUserId = async (orderId: number): Promise<APIResponse<Order>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<User>>(`users`);
+    const response = await axiosInstance.get<APIResponse<Order>>(`orders/store/${orderId}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -16,4 +17,4 @@ const fetchUser = async (): Promise<APIResponse<User>> => {
   }
 };
 
-export default fetchUser;
+export default fetchOrderByUserId;

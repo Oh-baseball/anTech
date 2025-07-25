@@ -1,12 +1,14 @@
-import { APIResponse, Category, ErrorResponse } from '@/types/api';
+import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
+import { Category } from '@/types/store';
 
 type FetchCategoriesResponse = Category[];
 
 const fetchCategories = async (): Promise<APIResponse<FetchCategoriesResponse>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<FetchCategoriesResponse>>(`/categories`);
+    const response =
+      await axiosInstance.get<APIResponse<FetchCategoriesResponse>>(`stores/categories`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

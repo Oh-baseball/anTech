@@ -3,9 +3,9 @@ import { axiosInstance } from '../axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { User } from '@/types/user';
 
-const fetchUserById = async (userId: number): Promise<APIResponse<User>> => {
+const fetchUsers = async (): Promise<APIResponse<User[]>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<User>>(`users/${userId}`);
+    const response = await axiosInstance.get<APIResponse<User[]>>(`users`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -17,4 +17,4 @@ const fetchUserById = async (userId: number): Promise<APIResponse<User>> => {
   }
 };
 
-export default fetchUserById;
+export default fetchUsers;

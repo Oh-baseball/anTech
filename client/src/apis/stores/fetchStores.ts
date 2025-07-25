@@ -1,12 +1,13 @@
-import { APIResponse, ErrorResponse, Store } from '@/types/api';
+import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
+import { Store } from '@/types/store';
 
 type FetchStoresResponse = Store[];
 
 const fetchStores = async (): Promise<APIResponse<FetchStoresResponse>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<FetchStoresResponse>>(`/stores`);
+    const response = await axiosInstance.get<APIResponse<FetchStoresResponse>>(`stores`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
