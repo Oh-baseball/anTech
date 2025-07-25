@@ -1,4 +1,4 @@
-import fetchUser from '@/apis/user/fetchUser';
+import fetchUser from '@/apis/users/fetchUser';
 import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
 import { useEffect } from 'react';
 

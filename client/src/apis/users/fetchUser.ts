@@ -1,14 +1,19 @@
-import { APIResponse, User } from '@/types/api';
+import { APIResponse, ErrorResponse, User } from '@/types/api';
 import { axiosInstance } from '../axiosInstance';
+import axios, { AxiosError } from 'axios';
 
-const fetchUser = async (): Promise<APIResponse<User[]>> => {
+const fetchUserById = async (): Promise<APIResponse<User>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<User[]>>(`users`);
+    const response = await axiosInstance.get<APIResponse<User>>(`users`);
     return response.data;
-  } catch (error: any) {
-    console.error('사용자 조회 실패:', error.response?.data || error.message);
-    throw error;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const errorResponse = (error as AxiosError<ErrorResponse>).response?.data;
+      console.error(errorResponse);
+      throw new Error(errorResponse?.message || '네트워크 요청을 확인해주세요');
+    }
+    throw new Error('다시 시도해주세요');
   }
 };
 
-export default fetchUser;
+export default fetchUserById;

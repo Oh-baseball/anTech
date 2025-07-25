@@ -57,15 +57,16 @@ export type PaymentMethod = {
 
 export type Account = {
   account_id: string;
-  user_id: number;
-  company_id: string;
   number: string;
   logo_id: string;
 };
 
 export type Card = {
   card_id: string;
-  user_id: number;
-  company_id: string;
   number: string;
+};
+
+export type Toss = {
+  toss_id: number;
+  toss_amount: number;
 };
