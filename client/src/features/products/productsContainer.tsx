@@ -39,7 +39,7 @@ const ProductsContainer = () => {
         prevBtn={true}
         title="스타벅스 강남점"
         right={
-          <div className={styles.cartbox} onClick={() => navigate("/cart") }>
+          <div className={styles.cartbox} onClick={() => navigate("/cart", {viewTransition: true}) }>
             <span className={styles.cart} ref={cartIconRef}>🛒</span>
             <span className={styles.cartcount}>{cartCount}</span>
           </div>

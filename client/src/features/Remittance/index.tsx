@@ -44,7 +44,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
         const coin = coinEl.firstElementChild;
         
         if (coin instanceof HTMLElement) {
-          coin.style.transform = 'rotateY(2200deg)';
+          coin.style.transform = 'rotateY(500deg)';
           coin.style.transition = 'transform 3.8s linear';
         }
       })
