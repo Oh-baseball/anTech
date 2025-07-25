@@ -24,6 +24,7 @@
   font-weight: $font-weight-semibold;
   perspective: 800px;
   transform-style: preserve-3d;
+  @include disableUserSelect;
 }
 
 .visual_tag::before {
