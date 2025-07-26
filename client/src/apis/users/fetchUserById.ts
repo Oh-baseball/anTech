@@ -3,9 +3,11 @@ import { axiosInstance } from '../axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { User } from '@/types/user';
 
-const fetchUserById = async (userId: number): Promise<APIResponse<User>> => {
+type FetchUserByIdResponse = Omit<User, 'password'>;
+
+const fetchUserById = async (userId: number): Promise<APIResponse<FetchUserByIdResponse>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<User>>(`users/${userId}`);
+    const response = await axiosInstance.get<APIResponse<FetchUserByIdResponse>>(`users/${userId}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

@@ -1,4 +1,4 @@
-import fetchOrderPaymentHistory from '@/apis/stores/fetchOrderPaymentHistory';
+import fetchUsers from '@/apis/users/fetchUsers';
 import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
 import { useEffect } from 'react';
 
@@ -6,7 +6,7 @@ const PaymentCompleted = () => {
   useEffect(() => {
     (async () => {
       try {
-        const userApiRes = await fetchOrderPaymentHistory(1);
+        const userApiRes = await fetchUsers();
         if (userApiRes.success) {
           console.log('데이터:', userApiRes.data);
         } else {
