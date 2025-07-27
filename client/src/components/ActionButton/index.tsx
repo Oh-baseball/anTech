@@ -4,7 +4,7 @@ import styles from './style.module.scss';
 export type ActionButtonProps = {
   label: string;
   onClick: () => void;
-  variant?: 'primary' | 'secondary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'danger' | 'neutral';
   disabled?: boolean;
   icon?: ReactNode;
 };

@@ -5,10 +5,9 @@ const EDGE_COUNT = 40;
 
 interface CoinProps {
   scale?: number;
-  zIndex?: number;
 }
 
-const Coin = ({ scale = 1, zIndex = 1 }: CoinProps) => {
+const Coin = ({ scale = 1 }: CoinProps) => {
   const coinRef = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
 
@@ -80,7 +79,7 @@ const Coin = ({ scale = 1, zIndex = 1 }: CoinProps) => {
   }, []);
 
   return (
-    <div className={styles.coin} style={{ scale, zIndex }} ref={coinRef}>
+    <div className={styles.coin} style={{ scale }} ref={coinRef}>
       <div className={styles.coin_face}>
         <span className={styles.coin_inner}>$</span>
       </div>

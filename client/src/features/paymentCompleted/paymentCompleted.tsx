@@ -5,7 +5,7 @@ import styles from './paymentCompletedContainer.module.scss';
 import Card from './Card';
 import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
-import ActionButton from '@/components/ActionButton';
+import ButtonContainer from './ButtonContainer';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 30;
@@ -257,7 +257,7 @@ const PaymentCompletedContainer = () => {
                     position: 'absolute',
                   }}
                 >
-                  <Coin zIndex={100} />
+                  <Coin />
                 </div>
               ))}
             <VisualTag variant="toss_pay" ref={tossPayTagRef} />
@@ -272,7 +272,7 @@ const PaymentCompletedContainer = () => {
                   fixedCoinRefs.current[i] = el;
                 }}
               >
-                <Coin scale={0.3} zIndex={300} />
+                <Coin scale={0.3} />
               </div>
             ))}
           </div>
@@ -285,19 +285,7 @@ const PaymentCompletedContainer = () => {
           </h2>
         )}
       </section>
-      {isPaymentComplete && (
-        <div
-          className={`${styles.button_container} ${showButtons && styles.show}`}
-          style={{ position: 'absolute', display: 'flex', width: '100%' }}
-        >
-          <div style={{ flex: 3 }}>
-            <ActionButton label="영수증 보기" onClick={() => null} />
-          </div>
-          <div style={{ flex: 7 }}>
-            <ActionButton label="확인" onClick={() => null} />
-          </div>
-        </div>
-      )}
+      {isPaymentComplete && <ButtonContainer showButtons={showButtons} />}
     </div>
   );
 };
