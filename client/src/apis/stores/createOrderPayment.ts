@@ -1,15 +1,20 @@
 import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
-import { User } from '@/types/user';
+import { Order } from '@/types/order';
 
-type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
+type CreateOrderPaymentRequest = Order;
 
-type CreateUserResponse = Omit<User, 'password'>;
+type CreateOrderPaymentResponse = Order;
 
-const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUserResponse>> => {
+const createOrderPayment = async (
+  req: CreateOrderPaymentRequest,
+): Promise<APIResponse<CreateOrderPaymentResponse>> => {
   try {
-    const response = await axiosInstance.post<APIResponse<CreateUserResponse>>(`/users`, req);
+    const response = await axiosInstance.post<APIResponse<CreateOrderPaymentResponse>>(
+      `/orders/payment`,
+      req,
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -21,4 +26,4 @@ const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUse
   }
 };
 
-export default createUser;
+export default createOrderPayment;
