@@ -9,6 +9,7 @@
     font-weight: $font-weight-bold;
     position: relative;
     cursor: pointer;
+    view-transition-name: pay-btn;
 
     &.pressed{
         transform: scale(0.95);

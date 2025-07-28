@@ -22,6 +22,12 @@
     padding: 16px 20px;
     font-weight: $font-weight-semibold;
   }
+
+  h4 {
+    padding: 20px;
+    font-size: 16px;
+    opacity: 0.8;
+  }
 }
 
 .authentication_container h4 {
@@ -62,6 +68,7 @@ main {
   background-color: $color-dark-bg;
   padding: 0px 37.5px;
   color: $color-primary;
+  margin: 20px 0;
 }
 
 .patternRow {
@@ -132,6 +139,7 @@ main {
   align-items: center;
   padding: 10px;
   //   border: 2px solid $color-bg;
+  margin-top: 33px;
   margin-bottom: 34px;
 
   button {
@@ -159,7 +167,7 @@ main {
   .footer_divider {
     width: 1px;
     height: 20px;
-    background-color: $color-bg;
+    background-color: rgba(229, 241, 254, 0.2);
   }
 }
 

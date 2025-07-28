@@ -1,6 +1,17 @@
 .transfer_container {
   position: relative;
+  height: 100%;
+  width: 100%;
   padding: 0 20px;
+
+  &.dark_mode {
+    background-color: #000000;
+
+    >header {
+      background-color: #000000;
+    }
+  }
+
 }
 
 .accountBox {
@@ -65,10 +76,11 @@
     margin-right: 5px;
     font-size: 20px;
     text-align: right;
+    caret-color: transparent;
+
 
     &:focus {
-      outline: none;
-      border-color: #528eff;
+      outline: 1px solid #528eff;
     }
 
     &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
@@ -133,10 +145,10 @@
   border-radius: 5px;
   padding: 5px 15px;
   font-size: 15px;
+  caret-color: transparent;
 
     &:focus {
-      outline: none;
-      border-color: #528eff;
+      outline: 1px solid #528eff;
     }
   }
 }
@@ -220,20 +232,72 @@
   white-space: nowrap;
 }
 
-.coin1 {
+.coin_container {
   position: absolute;
-  top: 50px;
-  left: -20px;
-  animation: xAxis1 4s linear forwards;
+  width: calc(100% - 40px);
+  opacity: 0;
   
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: lightpink;
-    animation: reduce1 4s forwards, yAxis1 4s;
+  &.coin_check {
+    z-index: 100;
+    opacity: 1;
+    
+    .coin1Outside {
+      position: absolute;
+      left: -120px;
+      animation: xAxis1 4s linear forwards;
+
+      .coin1Inside {
+        animation: reduce1 4s forwards, yAxis1 4s;
+      }
+    }
+
+    .coin2Outside {
+      position: absolute;
+      left: -120px;
+      animation: xAxis2 5s linear forwards;
+
+      .coin2Inside {
+        animation: reduce1 5s forwards, yAxis2 5s;
+      }
+    }
+
+    .coin3Outside {
+      position: absolute;
+      right: -120px;
+      animation: xAxis3 3s linear forwards;
+
+      .coin3Inside {
+        animation: reduce1 3s forwards, yAxis3 3s;
+      }
+    }
+
+    .coin4Outside {
+      position: absolute;
+      right: -150px;
+      animation: xAxis4 4s 0.5s linear forwards;
+
+      .coin4Inside {
+        animation: reduce1 4s 0.5s forwards, yAxis4 4s 0.5s;
+      }
+    }
+
+    .coin0Outside {
+      position: absolute;
+      left: 45px;
+      animation: xAxis5 2s linear forwards;
+
+      .coin0Inside {
+        animation: reduce1 2s forwards, yAxis5 2s;
+      }
+    }
+  }
+}
+@keyframes spin {
+  0%{
+    transform: rotateX(0);
+  }
+  100%{
+    transform: rotateX(300deg);
   }
 }
 
@@ -302,23 +366,6 @@
   }  
 }
 
-.coin2 {
-  position: absolute;
-  top: 50px;
-  left: -20px;
-  animation: xAxis2 5s linear forwards;
-  
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: lightpink;
-    animation: reduce1 5s forwards, yAxis2 5s;
-  }
-}
-
 @keyframes yAxis2 {
   0% {
     animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
@@ -365,23 +412,6 @@
   }
   100% {
     transform: translateX(200px);
-  }
-}
-
-.coin3 {
-  position: absolute;
-  top: 50px;
-  right: -20px;
-  animation: xAxis3 3s linear forwards;
-  
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: lightpink;
-    animation: reduce1 3s forwards, yAxis3 3s;
   }
 }
 
@@ -438,23 +468,6 @@
   }
 }
 
-.coin4 {
-  position: absolute;
-  top: 50px;
-  right: -50px;
-  animation: xAxis4 5s 0.5s linear forwards;
-  
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: lightpink;
-    animation: reduce1 5s 0.5s forwards, yAxis4 5s 0.5s;
-  }
-}
-
 @keyframes yAxis4 {
   0% {
     animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
@@ -504,23 +517,6 @@
   }
 }
 
-.coin5 {
-  position: absolute;
-  top: 50px;
-  left: 150px;
-  animation: xAxis5 2s linear forwards;
-  
-  &::after {
-    content: '';
-    display: block;
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    background-color: lightpink;
-    animation: reduce1 2s forwards, yAxis5 2s;
-  }
-}
-
 @keyframes yAxis5 {
   0% {
     animation-timing-function: cubic-bezier(0.11, 0, 0.5, 0);
@@ -539,4 +535,3 @@
     transform: translateX(50px);
   }
 }
-

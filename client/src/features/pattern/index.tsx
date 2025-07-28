@@ -302,7 +302,7 @@ const PatternLockDemo: React.FC = () => {
   };
 
   const goToPinAuth = () => {
-    navigate('/auth/pin');
+    navigate('/auth/pin', {viewTransition: true});
   };
 
   const createSVGPath = (points: Point[]) => {
