@@ -22,7 +22,7 @@ const Receipt = ({ open, onClose, storeName, date, items, total }: ReceiptProps)
 
   return (
     <div className={styles.overlay}>
-      <div className={styles.modal}>
+      <div className={`${styles.modal} ${styles.shimmerEffect}`}>
         <button className={styles.close_btn} onClick={onClose}>
           &times;
         </button>

@@ -109,3 +109,36 @@
   font-size: 0.95rem;
   letter-spacing: 1px;
 }
+
+.shimmerEffect {
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+}
+
+.shimmerEffect::after {
+  content: '';
+  position: absolute; // ✅ fixed → absolute 로 바꿔야 부모 기준으로 움직임
+  top: -150%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerDiagonal 1s infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes shimmerDiagonal {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(75%, 75%);
+  }
+}
