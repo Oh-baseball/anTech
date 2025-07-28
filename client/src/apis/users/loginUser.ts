@@ -1,16 +1,14 @@
 import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
+import { User } from '@/types/user';
 
 export type LoginUserRequest = {
   email: string;
   password: string;
 }
 
-type LoginUserResponse = {
-  email: string;
-  password: string;
-}
+type LoginUserResponse = Omit<User, 'password'>
 
 const loginUser = async (req: LoginUserRequest): Promise<APIResponse<LoginUserResponse>> => {
   try {
