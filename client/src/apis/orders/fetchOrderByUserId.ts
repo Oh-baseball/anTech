@@ -1,15 +1,11 @@
 import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
-import { User } from '@/types/user';
+import { Order } from '@/types/order';
 
-type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
-
-type CreateUserResponse = Omit<User, 'password'>;
-
-const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUserResponse>> => {
+const fetchOrderByUserId = async (orderId: number): Promise<APIResponse<Order>> => {
   try {
-    const response = await axiosInstance.post<APIResponse<CreateUserResponse>>(`/users`, req);
+    const response = await axiosInstance.get<APIResponse<Order>>(`orders/store/${orderId}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -21,4 +17,4 @@ const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUse
   }
 };
 
-export default createUser;
+export default fetchOrderByUserId;
