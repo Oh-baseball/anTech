@@ -50,7 +50,6 @@ const HomeLayout = ({ userAccount, metrixCodeMenu, recordList }: HomeLayoutProps
           <FlipButton />
         </div>
       </div>
-      {/* <div className={styles.baseBox}/> */}
       <div className={styles.accountBox}>
         <AccountBox accountInfo={userAccount} />
       </div>

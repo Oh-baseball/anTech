@@ -93,6 +93,36 @@ a {
   text-decoration: none;
 }
 
+
+// view-transition section
+// 모든 페이지 전환시 적용
+::view-transition-old(transition_layout) {
+  animation: 0.8s ease both fade-out;
+}
+::view-transition-new(transition_layout) {
+  animation: 0.8s ease both fade-in;
+}
+
+// 홈 -> 송금, 충전
+::view-transition-old(account-box2) {
+  animation: 0.6s ease both fade-out;
+  // animation-duration: 600ms;
+  // animation-timing-function: ease-in;
+}
+::view-transition-new(account-box2) {
+  animation: 0.6s ease both stand-on;
+}
+
+// 홈 -> 결제 수단 선택
+::view-transition-old(account-box3) {
+  animation: 0.6s ease  move-in;
+}
+::view-transition-new(account-box3) {
+  animation: 0.6s ease  fade-in;
+}
+
+
+
 @keyframes stand-on {
   from { opacity: 1; }
   to { opacity: 1; }
@@ -106,31 +136,19 @@ a {
   to { opacity: 1; }
 }
 
-::view-transition-old(transition_layout) {
-  animation: 0.8s ease both fade-out;
-}
-
-::view-transition-new(transition_layout) {
-  animation: 0.8s ease both fade-in;
-}
-
 @keyframes move-out {
   from { transform: translateY(0%); }
   to { transform: translateY(-100%); }
 }
-
 @keyframes move-in {
   from { transform: translateY(100%); }
   to { transform: translateY(0%); }
 }
-
-::view-transition-old(account-box2) {
-  animation: 0.6s ease both fade-out;
-  // animation-duration: 600ms;
-  // animation-timing-function: ease-in;
-}
-::view-transition-new(account-box2) {
-  animation: 0.6s ease both stand-on;
-  // animation-duration: 600ms;
-  // animation-timing-function: ease-in;
-}
+// @keyframes move-up {
+//   from { transform: translateY(100%); }
+//   to { transform: translateY(0%); }
+// }
+// @keyframes move-down {
+//   from { transform: translateY(100%); }
+//   to { transform: translateY(0%); }
+// }
