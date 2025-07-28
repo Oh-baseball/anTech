@@ -14,7 +14,8 @@ const StoreButtonBox = ({selectedId, setCartCount}: StoreButtonBoxProps) => {
   const handleAddToCart = () => {
     addToCart(selectedId);
     const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    setCartCount(cart.reduce((sum, item) => sum + item.count, 0));
+    const totalCount = cart.reduce((sum: number, item: { count: number }) => sum + item.count, 0);
+    setCartCount(totalCount);
   };
 
   return (

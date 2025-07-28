@@ -26,3 +26,16 @@ export interface Menu {
   is_available: boolean;
   price: number;
 }
+
+export interface StoreMenuBoxItem {
+  id: number;
+  img: string;
+  name: string;
+  content: string;
+  price: number;
+  category: string;
+}
+
+export interface CartItem extends StoreMenuBoxItem{
+  count: number;
+}
