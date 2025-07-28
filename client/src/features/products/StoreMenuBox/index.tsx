@@ -2,196 +2,28 @@ import { useRef, useEffect, useState, forwardRef, useImperativeHandle } from "re
 import styles from "./style.module.scss";
 import { motion } from "framer-motion";
 import StoreButtonBox from "../StoreButtonBox";
-import americanoImg from "@/assets/americano2.jpg";
-import latteImg from "@/assets/latte.jpg";
-import cappuImg from "@/assets/cappuccino.jpg";
-import chocoImg from "@/assets/chococake.jpg";
-import strImg from "@/assets/strcake.jpg";
-import creamImg from "@/assets/creamcake.jpg";
-import carrotImg from "@/assets/carrot.jpg";
-import eggImg from "@/assets/egg.jpg";
-import chickenImg from "@/assets/chicken.jpg";
-
-
-export interface StoreMenuBoxItem {
-  id: number;
-  img: string;
-  name: string;
-  content: string;
-  price: number;
-  category: string;
-}
+import { StoreMenuBoxItem } from '@/types/store';
 
 interface StoreMenuBoxProps {
   StoreMenuBoxItmes?: StoreMenuBoxItem[];
   StoreCategories?: string[];
   onTabChange?: (category: string) => void;
   setCartCount: (count: number) => void;
-  cartIconRef: React.RefObject<HTMLSpanElement>;
 }
 
 export interface StoreMenuBoxRef {
   categoryRefs: Record<string, HTMLDivElement | null>; //{카테고리명: div DOM} 형태
 }
 
-const dummyCategories = ["커피", "디저트", "샌드위치"];
-
-export const dummyMenuItems = [
-  {
-    id:1,
-    img: americanoImg,
-    name: '아메리카노',
-    content: '깔끔하고 진한 에스프레소의 맛',
-    price: 4500,
-    category: '커피'
-  },
-  {
-    id:2,
-    img: latteImg,
-    name: '카페라떼',
-    content: '부드러운 우유와 에스프레소의 맛',
-    price: 5000,
-    category: '커피'
-  },
-  {
-    id:3,
-    img: cappuImg,
-    name: '카푸치노',
-    content: '진한 에스프레소와 부드러운 폼밀크의 맛',
-    price: 5500,
-    category: '커피'
-  },
-  {
-    id:4,
-    img: americanoImg,
-    name: '아메리카노',
-    content: '깔끔하고 진한 에스프레소의 맛',
-    price: 4500,
-    category: '커피'
-  },
-  {
-    id:5,
-    img: latteImg,
-    name: '카페라떼',
-    content: '부드러운 우유와 에스프레소의 맛',
-    price: 5000,
-    category: '커피'
-  },
-  {
-    id:6,
-    img: cappuImg,
-    name: '카푸치노',
-    content: '진한 에스프레소와 부드러운 폼밀크의 맛',
-    price: 5500,
-    category: '커피'
-  },
-  {
-    id:7,
-    img: chocoImg,
-    name: '초코케이크',
-    content: '깔끔하고 진한 초코의 맛',
-    price: 4500,
-    category: '디저트'
-  },
-  {
-    id:8,
-    img: strImg,
-    name: '딸기케이크',
-    content: '부드러운 우유와 딸기의 맛',
-    price: 5000,
-    category: '디저트'
-  },
-  {
-    id:9,
-    img: creamImg,
-    name: '생크림케이크',
-    content: '진한 생크림 부드러운 폼밀크의 맛',
-    price: 5500,
-    category: '디저트'
-  },
-  {
-    id:10,
-    img: chocoImg,
-    name: '초코케이크',
-    content: '깔끔하고 진한 초코의 맛',
-    price: 4500,
-    category: '디저트'
-  },
-  { 
-    id:11,
-    img: strImg,
-    name: '딸기케이크',
-    content: '부드러운 우유와 딸기의 맛',
-    price: 5000,
-    category: '디저트'
-  },
-  {
-    id:12,
-    img: creamImg,
-    name: '생크림케이크',
-    content: '진한 생크림 부드러운 폼밀크의 맛',
-    price: 5500,
-    category: '디저트'
-  },
-  {
-    id:13,
-    img: carrotImg,
-    name: '당근샌드위치',
-    content: '부드러운 당근 샌드위치',
-    price: 5500,
-    category: '샌드위치'
-  },
-  {
-    id:14,
-    img: chickenImg,
-    name: '치킨샌드위치',
-    content: '진한 치킨의 맛',
-    price: 4500,
-    category: '샌드위치'
-  },
-  { 
-    id:15,
-    img: eggImg,
-    name: '에그샌드위치',
-    content: '부드러운 계란의 맛',
-    price: 5000,
-    category: '샌드위치'
-  },
-  {
-    id:16,
-    img: carrotImg,
-    name: '당근샌드위치',
-    content: '부드러운 당근 샌드위치',
-    price: 5500,
-    category: '샌드위치'
-  },
-  {
-    id:17,
-    img: eggImg,
-    name: '에그샌드위치',
-    content: '부드러운 계란의 맛',
-    price: 4500,
-    category: '샌드위치'
-  },
-  {
-    id:18,
-    img: chickenImg,
-    name: '치킨샌드위치',
-    content: '진한 치킨의 맛',
-    price: 5000,
-    category: '샌드위치'
-  }
-];
-
 const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
-  ({ StoreMenuBoxItmes, StoreCategories, scrollToCategory, onTabChange, setCartCount, cartIconRef }, ref) => {
-    const items = StoreMenuBoxItmes ?? dummyMenuItems;
-    const categories = StoreCategories ?? dummyCategories;
+  ({ StoreMenuBoxItmes, StoreCategories, onTabChange, setCartCount }, ref) => {
+    const items = StoreMenuBoxItmes ?? [];
+    const categories = StoreCategories ?? [];
 
     // selectedIdx를 상품 id로 관리
     const [selectedId, setSelectedId] = useState<number | null>(null);
     const [pressedIdx, setPressedIdx] = useState<string | null>(null);
-    const [activeTab, setActiveTab] = useState(categories[0]);
+    const [activeTab, setActiveTab] = useState<string | null>(categories[0] ?? null);
 
     const imgRef = useRef<Record<number, HTMLImageElement|null>>({});
 
@@ -296,12 +128,12 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
           ))}
         </div>
         {/* StoreButtonBox에 selectedId를 prop으로 전달 */}
-        <StoreButtonBox
-        selectedId={selectedId}
-        setCartCount={setCartCount}/>
+        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount} />
       </>
     );
   }
 );
+
+//StoreMenuBox.displayName = 'StoreMenuBox';
 
 export default StoreMenuBox;

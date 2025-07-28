@@ -6,17 +6,16 @@ import { addToCart } from "../../../utils/utils";
 interface StoreButtonBoxProps {
   selectedId: number | null;
   setCartCount: (count: number) => void;
-  selectedImgEl: HTMLImageElement | null;
-  cartIconEl: HTMLElement | null;
 }
 
-const StoreButtonBox = ({selectedId, setCartCount, selectedImgEl, cartIconEl}: StoreButtonBoxProps) => {
+const StoreButtonBox = ({selectedId, setCartCount}: StoreButtonBoxProps) => {
   const navigate = useNavigate();
 
   const handleAddToCart = () => {
     addToCart(selectedId);
     const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    setCartCount(cart.reduce((sum, item) => sum + item.count, 0));
+    const totalCount = cart.reduce((sum: number, item: { count: number }) => sum + item.count, 0);
+    setCartCount(totalCount);
   };
 
   return (

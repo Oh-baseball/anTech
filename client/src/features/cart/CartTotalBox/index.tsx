@@ -1,6 +1,11 @@
 import styles from './style.module.scss';
+import { CartItem } from '@/types/store';
 
-const CartTotalBox = ({ items }) => {
+interface CartTotalBoxProps {
+  items: CartItem[];
+}
+
+const CartTotalBox = ({ items }: CartTotalBoxProps) => {
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const totalPrice = items.reduce((sum, item) => sum + item.price * item.count, 0);
 
