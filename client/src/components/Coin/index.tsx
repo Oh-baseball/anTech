@@ -34,7 +34,7 @@ const Coin = ({ scale = 1, x = -16, y = 20, z = 0 }: CoinProps) => {
     }
 
     const coin = coinRef.current;
-    if (coin) coin.style.transform = `rotateX(${y}deg) rotateY(${x}deg) rotateZ(${z}deg)`;
+    if (coin) coin.style.transform = `rotateX(${x}deg) rotateY(${y}deg) rotateZ(${z}deg)`;
   }, []);
 
   useEffect(() => {

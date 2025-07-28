@@ -6,6 +6,7 @@ import Card from './Card';
 import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
 import ButtonContainer from './ButtonContainer';
+import Receipt from './Receipt';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 30;
@@ -33,6 +34,7 @@ const PaymentCompletedContainer = () => {
   const [showFallingCoins, setShowFallingCoins] = useState(false);
   const [isPaymentComplete, setIsPaymentComplete] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
+  const [receiptOpen, setReceiptOpen] = useState(false);
 
   useEffect(() => {
     if (isPaymentComplete) {
@@ -272,7 +274,7 @@ const PaymentCompletedContainer = () => {
                   fixedCoinRefs.current[i] = el;
                 }}
               >
-                <Coin scale={0.3} />
+                <Coin scale={0.3} x={-20 + 10 * i} y={20 + 10 * i} />
               </div>
             ))}
           </div>
@@ -285,7 +287,25 @@ const PaymentCompletedContainer = () => {
           </h2>
         )}
       </section>
-      {isPaymentComplete && <ButtonContainer showButtons={showButtons} />}
+      {isPaymentComplete && (
+        <ButtonContainer
+          showButtons={showButtons}
+          handleClickReceipt={() => setReceiptOpen(!receiptOpen)}
+          handleClickComplete={() => null}
+        />
+      )}
+      <Receipt
+        open={receiptOpen}
+        onClose={() => setReceiptOpen(false)}
+        storeName="야무진상점"
+        date="2025-07-28 13:00"
+        items={[
+          { name: '사과', qty: 3, price: 1200 },
+          { name: '우유', qty: 1, price: 2200 },
+          { name: '빵', qty: 2, price: 1500 },
+        ]}
+        total={8800}
+      />
     </div>
   );
 };
