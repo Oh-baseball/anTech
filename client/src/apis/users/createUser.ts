@@ -3,9 +3,9 @@ import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { User } from '@/types/user';
 
-type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
+export type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
 
-type CreateUserResponse = Omit<User, 'password'>;
+export type CreateUserResponse = Omit<User, 'password'>;
 
 const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUserResponse>> => {
   try {
