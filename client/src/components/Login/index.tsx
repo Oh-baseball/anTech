@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
-import { ErrorResponse, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Lock, FileUser } from 'lucide-react';
-import loginUser from "@/apis/users/loginUser";
-import axios, { AxiosError } from "axios";
 import useLogin from "@/hooks/queries/useLogin";
+import useUserStore from "@/store/useUserStore";
 
 const Loading = () => {
   const navigate = useNavigate();
@@ -12,30 +11,24 @@ const Loading = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const loginMutation = useLogin()
+  const setUserId = useUserStore((state) => state.setUserId);
 
   const Login = async () => {
     setClickedLogin(true);
 
     loginMutation.mutate({ email, password }, {
-      onSuccess: () => {
+      onSuccess: (res) => {
+        setUserId(res.data.user_id.toString());
         setTimeout(() => {
           navigate('/', { viewTransition: true });
         }, 800);
-        setClickedLogin(false); // 성공시 버튼 다시 활성화
+        setClickedLogin(false);
       },
       onError: () => {
-        // 에러 안내처리 등
         alert('로그인 실패! 이메일/비밀번호를 확인하세요.');
-        setClickedLogin(false); // 실패해도 버튼 다시 활성화
+        setClickedLogin(false);
       },
     });
-  
-      // loginMutation.mutate({ email, password}, onSuccess: () => {
-      //   setTimeout(() => {
-      //     navigate('/', { viewTransition: true });
-      //   }, 800);
-      // })
-
   }
 
   return (

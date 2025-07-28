@@ -1,6 +1,17 @@
 .transfer_container {
   position: relative;
+  height: 100%;
+  width: 100%;
   padding: 0 20px;
+
+  &.dark_mode {
+    background-color: #000000;
+
+    >header {
+      background-color: #000000;
+    }
+  }
+
 }
 
 .accountBox {

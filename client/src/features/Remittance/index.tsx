@@ -4,12 +4,13 @@ import styles from './style.module.scss';
 import { useState, useRef, ChangeEvent } from 'react';
 import { CreditCard } from 'lucide-react';
 import Coin from '@/components/Coin';
-
+import useDarkModeStore from '@/store/useDarkModeStore';
 interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
 }
 
 const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
+  const darkMode = useDarkModeStore((state) => state.darkMode);
   const [checkTransfer, setCheckTransfer] = useState(false);
   const [checkCoin, setCheckCoin] = useState(false);
   const coinsRefs = useRef<(HTMLDivElement)[]>([]);
@@ -60,7 +61,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
   };
 
   return (
-    <div className={styles.transfer_container}>
+    <div className={`${styles.transfer_container} ${darkMode ? styles.dark_mode : ''}`}>
       <Header 
         prevBtn={true}
         title="입금"
