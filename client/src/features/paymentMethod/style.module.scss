@@ -1,0 +1,12 @@
+.wrapper{
+    padding: 0 20px;
+    
+    .payment_methodebox_container{
+        // height: calc(100% - 1000px);
+        // height: 420px;
+        max-height: calc(100vh - 280px);
+        overflow : auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+}

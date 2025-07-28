@@ -10,7 +10,8 @@
     
     box-shadow: inset 0 0 0 0px $color-primary;
     transition: box-shadow 0.3s ease;
-    
+    // display: none;
+
     &:hover{
         box-shadow: inset 0 0 0 2px $color-primary;
     }
@@ -31,6 +32,8 @@
         img{
             width: 40px;
             height: 40px;
+            border-radius: 8px;
+            
         }
         
         .payment_method_info{
@@ -101,5 +104,4 @@
 
 .payment_method_container:last-child{
     margin-bottom: 20px;
-    
 }
