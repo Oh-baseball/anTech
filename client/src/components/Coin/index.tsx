@@ -5,9 +5,12 @@ const EDGE_COUNT = 40;
 
 interface CoinProps {
   scale?: number;
+  x?: number;
+  y?: number;
+  z?: number;
 }
 
-const Coin = ({ scale = 1 }: CoinProps) => {
+const Coin = ({ scale = 1, x = -16, y = 20, z = 0 }: CoinProps) => {
   const coinRef = useRef<HTMLDivElement>(null);
   const sideRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +34,7 @@ const Coin = ({ scale = 1 }: CoinProps) => {
     }
 
     const coin = coinRef.current;
-    if (coin) coin.style.transform = 'rotateY(20deg) rotateX(-16deg)';
+    if (coin) coin.style.transform = `rotateX(${y}deg) rotateY(${x}deg) rotateZ(${z}deg)`;
   }, []);
 
   useEffect(() => {
