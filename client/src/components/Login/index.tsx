@@ -1,16 +1,34 @@
-import { useState } from "react";
 import styles from "./style.module.scss";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Lock, FileUser } from 'lucide-react';
+import useLogin from "@/hooks/queries/useLogin";
+import useUserStore from "@/store/useUserStore";
 
 const Loading = () => {
-  const navigate = useNavigate()
-  const [clickedLogin, setClickedLogin] = useState(false)
-  const Login = () => {
+  const navigate = useNavigate();
+  const [clickedLogin, setClickedLogin] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const loginMutation = useLogin()
+  const setUserId = useUserStore((state) => state.setUserId);
+
+  const Login = async () => {
     setClickedLogin(true);
-    setTimeout(() => {
-      navigate('/', { viewTransition: true });
-    }, 800);
+
+    loginMutation.mutate({ email, password }, {
+      onSuccess: (res) => {
+        setUserId(res.data.user_id.toString());
+        setTimeout(() => {
+          navigate('/', { viewTransition: true });
+        }, 800);
+        setClickedLogin(false);
+      },
+      onError: () => {
+        alert('로그인 실패! 이메일/비밀번호를 확인하세요.');
+        setClickedLogin(false);
+      },
+    });
   }
 
   return (
@@ -27,8 +45,22 @@ const Loading = () => {
       </div>
       <div className={`${styles.login_section} ${styles.growUp}`}>
         <div className={styles.input_part}>
-          <input className={styles.user_email} type="text" placeholder="아이디" required/>
-          <input className={styles.user_password} type="text" placeholder="비밀번호" required/>
+          <input
+            className={styles.user_email}
+            type="text"
+            placeholder="아이디"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            className={styles.user_password}
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </div>
         <div className={styles.button_part}>
           <button className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`} onClick={Login} disabled={clickedLogin}>

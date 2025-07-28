@@ -1,50 +1,92 @@
 import Header from '@/components/Header';
 import AccountBox, { AccountBoxProps } from './AccountBox';
 import styles from './style.module.scss';
-import { useState } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 import { CreditCard } from 'lucide-react';
-
+import Coin from '@/components/Coin';
+import useDarkModeStore from '@/store/useDarkModeStore';
 interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
 }
 
-interface DetailItem {
-  label: string;
-  value: string;
-  isBlue?: boolean;
-}
-
 const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
-  const [amount, setAmount] = useState('input');
-  const [accountNumber, setAccountNumber] = useState('input');
-  const [memo, setMemo] = useState('input');
+  const darkMode = useDarkModeStore((state) => state.darkMode);
   const [checkTransfer, setCheckTransfer] = useState(false);
+  const [checkCoin, setCheckCoin] = useState(false);
+  const coinsRefs = useRef<(HTMLDivElement)[]>([]);
+  const coin1 = useRef<HTMLDivElement>(null);
 
+  const [amount, setAmount] = useState('');
+  const [displayAccount, setDisplayAccount] = useState(userAccount);
+
+  const onlyNumber = (e: ChangeEvent<HTMLInputElement>) => {
+    setAmount(e.target.value.replace(/[^0-9]/g, '').replace(/^0+/, ''));
+  }
+  
   const handleCancel = () => {
     console.log('취소 버튼 클릭');
   };
 
   const handletransfer = () => {
     setCheckTransfer(true);
+    setCheckCoin(true);
+    
+    const { title, balance, menu } = displayAccount;
+    const newBalance = balance - Number(amount);
+    setDisplayAccount({
+      title,
+      balance: newBalance,
+      menu,
+    });
+
+    if (coinsRefs.current) {
+      coinsRefs.current.forEach((coinEl) => {
+        if (!coinEl) return;
+        const coin = coinEl.firstElementChild;
+        
+        if (coin instanceof HTMLElement) {
+          coin.style.transform = 'rotateY(500deg)';
+          coin.style.transition = 'transform 3.8s linear';
+        }
+      })
+    }
+
+    if (coin1.current && coin1.current.firstElementChild instanceof HTMLElement) {
+      const el = coin1.current.firstElementChild;
+      el.style.transform = 'rotateY(720deg)';
+      el.style.transition = 'transform 4s linear';
+    }
+
 
   };
 
   return (
-    <div className={styles.transfer_container}>
+    <div className={`${styles.transfer_container} ${darkMode ? styles.dark_mode : ''}`}>
       <Header 
         prevBtn={true}
         title="입금"
       />
-      <div className={styles.coinBox}>
-        <div className={styles.coin1}></div>
-        <div className={styles.coin2}></div>
-        <div className={styles.coin3}></div>
-        <div className={styles.coin4}></div>
-        <div className={styles.coin5}></div>
+
+      <div className={`${styles.coin_container} ${checkCoin ? styles.coin_check : ''}`}>
+        {Array.from({ length: 5}).map((_, i) => (
+          <div key={`coinNev${i}`} className={`${styles['coin' + i + 'Outside']}`}>
+            <div
+              key={`coinNev${i}`}
+              className={`${styles['coin' + i + 'Inside']}`}
+              ref={(el) => {
+                if (el) {
+                  coinsRefs.current[i] = el;
+                }
+              }}
+              >
+              <Coin scale={0.2}/>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className={styles.accountBox}>
-        <AccountBox accountInfo={userAccount}/>
+        <AccountBox accountInfo={displayAccount}/>
       </div>
 
       <div className={styles.sectionTitle}>
@@ -57,7 +99,9 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
           <p>입금할 금액</p>
         </div>
         <div className={styles.amount}>
-          <input type='number' placeholder=''/>
+          <input type='text' value={amount} placeholder=''
+            onChange={onlyNumber}
+          />
           <p>원</p>
         </div>
         <div className={styles.divider} />

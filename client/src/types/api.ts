@@ -22,7 +22,7 @@ export type UseQueryCustomOptions<TQueryFnData = unknown, TData = TQueryFnData> 
   'queryKey'
 >;
 
-export type UseMutationCustomOptions<TData = unknown, TVariables = void> = Omit<
+export type UseMutationCustomOptions<TData = unknown, TVariables = unknown> = Omit<
   UseMutationOptions<TData, APIResponse<ErrorResponse>, TVariables, unknown>,
   'mutationFn'
 >;
