@@ -1,10 +1,13 @@
-import { APIResponse, ErrorResponse, User } from '@/types/api';
+import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '../axiosInstance';
 import axios, { AxiosError } from 'axios';
+import { User } from '@/types/user';
 
-const fetchUser = async (): Promise<APIResponse<User>> => {
+type FetchUsersResponse = Omit<User, 'password'>[];
+
+const fetchUsers = async (): Promise<APIResponse<FetchUsersResponse>> => {
   try {
-    const response = await axiosInstance.get<APIResponse<User>>(`users`);
+    const response = await axiosInstance.get<APIResponse<FetchUsersResponse>>(`users`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -16,4 +19,4 @@ const fetchUser = async (): Promise<APIResponse<User>> => {
   }
 };
 
-export default fetchUser;
+export default fetchUsers;

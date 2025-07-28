@@ -1,4 +1,4 @@
-import createUser from '@/apis/users/createUser';
+import fetchUsers from '@/apis/users/fetchUsers';
 import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
 import { useEffect } from 'react';
 
@@ -6,14 +6,9 @@ const PaymentCompleted = () => {
   useEffect(() => {
     (async () => {
       try {
-        const userApiRes = await createUser({
-          password: 'password123',
-          name: '홍길동',
-          pw_number: '123456',
-          pw_pattern: '1234',
-        });
+        const userApiRes = await fetchUsers();
         if (userApiRes.success) {
-          console.log('사용자 데이터:', userApiRes.data);
+          console.log('데이터:', userApiRes.data);
         } else {
           console.warn('API 호출은 성공했으나 success가 false입니다:', userApiRes.message);
         }

@@ -1,15 +1,17 @@
 import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
-import { User } from '@/types/user';
+import { Category } from '@/types/store';
 
-type CreateUserRequest = Omit<User, 'user_id' | 'created_at' | 'updated_at'>;
+type fetchCategoryByIdResponse = Category[];
 
-type CreateUserResponse = Omit<User, 'password'>;
-
-const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUserResponse>> => {
+const fetchCategoryById = async (
+  category_id: number,
+): Promise<APIResponse<fetchCategoryByIdResponse>> => {
   try {
-    const response = await axiosInstance.post<APIResponse<CreateUserResponse>>(`/users`, req);
+    const response = await axiosInstance.get<APIResponse<fetchCategoryByIdResponse>>(
+      `stores/categories/${category_id}`,
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -21,4 +23,4 @@ const createUser = async (req: CreateUserRequest): Promise<APIResponse<CreateUse
   }
 };
 
-export default createUser;
+export default fetchCategoryById;
