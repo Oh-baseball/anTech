@@ -53,6 +53,7 @@
 }
 
 .coin_inner {
+  @include disableUserSelect;
   font-size: 130px;
   text-shadow: 2px 2px 5px #b5974b;
 }
