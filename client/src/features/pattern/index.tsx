@@ -1,6 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
+import useDarkModeStore from '@/store/useDarkModeStore';
+import useUserStore from '@/store/useUserStore';
+import { sendAuthPattern } from '@/utils/patterApi';
+import { PaymentMethodType } from '@/types/payment';
 
 interface Point {
   id: number;
@@ -26,11 +30,12 @@ interface PatternLine {
 }
 
 const PatternLockDemo: React.FC = () => {
+  const { userId } = useUserStore();
+
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // 설정된 패턴 (실제로는 서버에서 가져와야 함)
-  const correctPattern = [1, 2, 3, 6, 9, 8, 7, 4, 5];
 
   const [state, setState] = useState<DrawingState>({
     pattern: [],
@@ -232,7 +237,7 @@ const PatternLockDemo: React.FC = () => {
     [state.isDrawing, state.isLocked, state.currentPath, findPointAt],
   );
 
-  const completePattern = () => {
+  const completePattern = async () => {
     if (!state.isDrawing || state.isLocked) return;
 
     if (state.pattern.length < 4) {
@@ -242,22 +247,72 @@ const PatternLockDemo: React.FC = () => {
       return;
     }
 
-    const isCorrect =
-      state.pattern.length === correctPattern.length &&
-      state.pattern.every((id, index) => id === correctPattern[index]);
-
-    if (isCorrect) {
+    // 서버에서 패턴 검증을 하므로 클라이언트 검증 제거
+    if (state.pattern.length >= 4) {
       setState((prev) => ({
         ...prev,
         isDrawing: false,
-        errorMessage: '인증 성공!',
+        errorMessage: '인증 중...',
       }));
 
-      setTimeout(() => {
+      // 주문 조회에서 받은 실제 데이터와 정확히 일치시키기
+      const authData = {
+        user_id: 1,
+        auth_type: 'PATTERN' as const,
+        auth_value: state.pattern.join(''),
+        device_info: navigator.userAgent,
+        order_id: 'ORD20250729001',
+        method_id: 1,
+        payment_method: 'MOBILE_PAY' as PaymentMethodType, // TOSS_PAY의 provider_type 값
+        payment_amount: 8000, // final_amount와 일치
+        point_used: 1000, // 주문 조회 응답과 일치
+      };
+
+      console.log(authData);
+
+      try {
+        const result = await sendAuthPattern(authData);
+        console.log(result);
+
+        if (result.success) {
+          setState((prev) => ({
+            ...prev,
+            errorMessage: '인증 성공!',
+          }));
+          setTimeout(() => {
+            setPatternLines([]);
+            setCurrentPos(null);
+            navigate('/payment/completed');
+          }, 1000);
+        } else {
+          // 서버에서 실패 응답이 온 경우
+          const failureReason = result.data?.failure_reason || '인증에 실패했습니다.';
+          setState((prev) => ({
+            ...prev,
+            isDrawing: false,
+            errorMessage: failureReason,
+            pattern: [],
+            currentPath: [],
+          }));
+          setPatternLines([]);
+          setCurrentPos(null);
+        }
+      } catch (error: any) {
+        console.error('Error sending auth pattern:', error);
+        const errorMsg =
+          error.response?.data?.data?.failure_reason ||
+          error.response?.data?.message ||
+          '서버 오류가 발생했습니다.';
+        setState((prev) => ({
+          ...prev,
+          isDrawing: false,
+          errorMessage: errorMsg,
+          pattern: [],
+          currentPath: [],
+        }));
         setPatternLines([]);
         setCurrentPos(null);
-        navigate('/');
-      }, 1000);
+      }
     } else {
       const newAttemptCount = state.attemptCount + 1;
       const remainingAttempts = 5 - newAttemptCount;
@@ -302,7 +357,7 @@ const PatternLockDemo: React.FC = () => {
   };
 
   const goToPinAuth = () => {
-    navigate('/auth/pin', {viewTransition: true});
+    navigate('/auth/pin', { viewTransition: true });
   };
 
   const createSVGPath = (points: Point[]) => {

@@ -1,16 +1,13 @@
 import CartButton from '../CartButton';
 import styles from './style.module.scss';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-const CartButtonBox = ({ amount }) => {
+const CartButtonBox = ({ amount }: { amount: number }) => {
   const navigate = useNavigate();
 
   return (
     <div className={styles.cartButtonBox}>
-      <CartButton
-        CartButtonItem={{ amount }}
-        onClick={() => navigate("/payment/method")}
-      />
+      <CartButton CartButtonItem={{ amount }} onClick={() => navigate('/payment/method')} />
     </div>
   );
 };
