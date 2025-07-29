@@ -48,13 +48,13 @@ const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButton
 
       const res = await createOrder(req);
       if (res.success) {
-        alert('주문이 성공적으로 생성되었습니다.');
+      //  alert('주문이 성공적으로 생성되었습니다.');
         navigate('/payment/method');  
       } else {
-        alert(`주문 실패: ${res.message}`);
+     //   alert(`주문 실패: ${res.message}`);
       }
     } catch (error) {
-      alert((error as Error).message || '주문 처리 중 오류가 발생했습니다.');
+   //   alert((error as Error).message || '주문 처리 중 오류가 발생했습니다.');
     }
   };
 
