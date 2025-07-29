@@ -6,6 +6,7 @@ import Card from './Card';
 import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
 import ButtonContainer from './ButtonContainer';
+import Receipt from './Receipt';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 40;
@@ -293,59 +294,59 @@ const PaymentCompletedContainer = () => {
           handleClickComplete={() => null}
         />
       )}
-      {/* <Receipt
-      // open={receiptOpen}
-      // onClose={() => setReceiptOpen(false)}
-      // storeName="야무진상점"
-      // date="2025-07-28 13:00"
-      // items={[
-      //   { name: '스타벅스 아메리카노', qty: 3, price: 1200 },
-      //   { name: '우유', qty: 1, price: 2200 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '아메리카노', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      //   { name: '빵', qty: 2, price: 1500 },
-      // ]}
-      // total={8800}
-      /> */}
+      <Receipt
+        open={receiptOpen}
+        onClose={() => setReceiptOpen(false)}
+        // storeName="야무진상점"
+        // date="2025-07-28 13:00"
+        // items={[
+        //   { name: '스타벅스 아메리카노', qty: 3, price: 1200 },
+        //   { name: '우유', qty: 1, price: 2200 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '아메리카노', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        //   { name: '빵', qty: 2, price: 1500 },
+        // ]}
+        // total={8800}
+      />
     </div>
   );
 };

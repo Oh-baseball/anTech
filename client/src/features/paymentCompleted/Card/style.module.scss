@@ -56,3 +56,43 @@
   object-fit: cover;
   backface-visibility: hidden;
 }
+
+.shimmer_effect {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+}
+
+.shimmer_effect::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 47%,
+    rgba(255, 255, 255, 0.4) 48%,
+    rgba(255, 255, 255, 0.6) 49%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.6) 51%,
+    rgba(255, 255, 255, 0.4) 52%,
+    rgba(255, 255, 255, 0) 53%,
+    rgba(255, 255, 255, 0) 100%
+  );
+
+  animation: shimmer_diagonal 1s 3;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes shimmer_diagonal {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(75%, 75%);
+  }
+}

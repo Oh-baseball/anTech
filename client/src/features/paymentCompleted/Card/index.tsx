@@ -5,7 +5,7 @@ const Card = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <>
       <div className={styles.card_container} ref={ref}>
-        <div className={styles.card}>
+        <div className={`${styles.card} ${styles.shimmer_effect}`}>
           <div className={`${styles.card_face} ${styles.front}`}></div>
           <div className={styles.card_edge}></div>
           <div className={`${styles.card_face} ${styles.back}`}>Back</div>
