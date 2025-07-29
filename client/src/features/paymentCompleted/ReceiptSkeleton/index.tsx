@@ -10,54 +10,46 @@ interface ReceiptSkeletonProps {
 const ReceiptSkeleton = ({ expanded, skeletonRef, onTransitionEnd }: ReceiptSkeletonProps) => (
   <div
     ref={skeletonRef}
-    className={`${styles.skeletonContainer} ${
-      expanded ? styles.skeletonExpanded : styles.skeletonCollapsed
+    className={`${styles.skeleton_container} ${
+      expanded ? styles.skeleton_expanded : styles.skeleton_collapsed
     }`}
     onTransitionEnd={onTransitionEnd}
   >
-    <div className={styles.line}></div>
-    <div className={styles.skeletonTitle} />
-
-    {/* label + short text */}
-    <div className={styles.skeletonRowGroup}>
-      <div className={styles.skeletonLabel} />
-      <div className={styles.skeletonTextShort} />
+    <div>
+      <div className={styles.line}></div>
+      <div className={styles.skeleton_title} />
+      <div className={styles.skeleton_row_group}>
+        <div className={styles.skeleton_label} />
+        <div className={styles.skeleton_text_short} />
+      </div>
+      <div className={styles.skeleton_row_group}>
+        <div className={styles.skeleton_label} />
+        <div className={styles.skeleton_text_full} />
+      </div>
+      <div className={styles.skeleton_row_double}>
+        <div className={styles.skeleton_block} />
+        <div className={styles.skeleton_block} />
+      </div>
+      <div className={styles.skeleton_button} />
     </div>
 
-    {/* label + full width text */}
-    <div className={styles.skeletonRowGroup}>
-      <div className={styles.skeletonLabel} />
-      <div className={styles.skeletonTextFull} />
+    <div>
+      <div className={styles.line}></div>
+      <div className={styles.skeleton_title} />
+      <div className={styles.skeleton_row_group}>
+        <div className={styles.skeleton_label} />
+        <div className={styles.skeleton_text_short} />
+      </div>
+      <div className={styles.skeleton_row_group}>
+        <div className={styles.skeleton_label} />
+        <div className={styles.skeleton_text_full} />
+      </div>
+      <div className={styles.skeleton_row_double}>
+        <div className={styles.skeleton_block} />
+        <div className={styles.skeleton_block} />
+      </div>
+      <div className={styles.skeleton_button} />
     </div>
-
-    {/* two-column layout (like 가격 + 수량) */}
-    <div className={styles.skeletonRowDouble}>
-      <div className={styles.skeletonBlock} />
-      <div className={styles.skeletonBlock} />
-    </div>
-
-    {/* button placeholder */}
-    <div className={styles.skeletonButton} />
-    <div className={styles.line}></div>
-
-    <div className={styles.skeletonTitle} />
-
-    <div className={styles.skeletonRowGroup}>
-      <div className={styles.skeletonLabel} />
-      <div className={styles.skeletonTextShort} />
-    </div>
-
-    <div className={styles.skeletonRowGroup}>
-      <div className={styles.skeletonLabel} />
-      <div className={styles.skeletonTextFull} />
-    </div>
-
-    <div className={styles.skeletonRowDouble}>
-      <div className={styles.skeletonBlock} />
-      <div className={styles.skeletonBlock} />
-    </div>
-
-    <div className={styles.skeletonButton} />
   </div>
 );
 

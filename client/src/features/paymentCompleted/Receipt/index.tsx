@@ -24,7 +24,7 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
 
   const handleTransitionEnd = () => {
     if (expanded && !contentReady) {
-      setTimeout(() => setContentReady(true), 300);
+      setTimeout(() => setContentReady(true), 1300);
     }
   };
 
