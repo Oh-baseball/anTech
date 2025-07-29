@@ -8,7 +8,7 @@ interface CategoryNameOnly {
   category_name: string;
 }
 
-export interface MenuItem extends Menu {
+interface MenuItem extends Menu {
   category_id: number;
   store_id: number;
   category: CategoryNameOnly;
@@ -35,3 +35,4 @@ const fetchMenusByStoreId = async (
 };
 
 export default fetchMenusByStoreId;
+export type {MenuItem};

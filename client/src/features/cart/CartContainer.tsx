@@ -6,9 +6,12 @@ import { useState, useEffect } from 'react';
 import styles from './style.module.scss';
 import { getCartDetails } from '@/utils/utils';
 import { CartItem } from '@/types/store';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 const CartContainer = () => {
   const [items, setItems] = useState<CartItem[]>([]);
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   useEffect(() => {
     const cartDetails = getCartDetails();
