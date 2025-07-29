@@ -15,41 +15,37 @@ const ReceiptSkeleton = ({ expanded, skeletonRef, onTransitionEnd }: ReceiptSkel
     }`}
     onTransitionEnd={onTransitionEnd}
   >
-    <div>
-      <div className={styles.line}></div>
-      <div className={styles.skeleton_title} />
-      <div className={styles.skeleton_row_group}>
-        <div className={styles.skeleton_label} />
-        <div className={styles.skeleton_text_short} />
-      </div>
-      <div className={styles.skeleton_row_group}>
-        <div className={styles.skeleton_label} />
-        <div className={styles.skeleton_text_full} />
-      </div>
-      <div className={styles.skeleton_row_double}>
-        <div className={styles.skeleton_block} />
-        <div className={styles.skeleton_block} />
-      </div>
-      <div className={styles.skeleton_button} />
+    <div className={styles.line}></div>
+    <div className={styles.skeleton_title} />
+    <div className={styles.skeleton_row_group}>
+      <div className={styles.skeleton_label} />
+      <div className={styles.skeleton_text_short} />
     </div>
+    <div className={styles.skeleton_row_group}>
+      <div className={styles.skeleton_label} />
+      <div className={styles.skeleton_text_full} />
+    </div>
+    <div className={styles.skeleton_row_double}>
+      <div className={styles.skeleton_block} />
+      <div className={styles.skeleton_block} />
+    </div>
+    <div className={styles.skeleton_button} />
 
-    <div>
-      <div className={styles.line}></div>
-      <div className={styles.skeleton_title} />
-      <div className={styles.skeleton_row_group}>
-        <div className={styles.skeleton_label} />
-        <div className={styles.skeleton_text_short} />
-      </div>
-      <div className={styles.skeleton_row_group}>
-        <div className={styles.skeleton_label} />
-        <div className={styles.skeleton_text_full} />
-      </div>
-      <div className={styles.skeleton_row_double}>
-        <div className={styles.skeleton_block} />
-        <div className={styles.skeleton_block} />
-      </div>
-      <div className={styles.skeleton_button} />
+    <div className={styles.line}></div>
+    <div className={styles.skeleton_title} />
+    <div className={styles.skeleton_row_group}>
+      <div className={styles.skeleton_label} />
+      <div className={styles.skeleton_text_short} />
     </div>
+    <div className={styles.skeleton_row_group}>
+      <div className={styles.skeleton_label} />
+      <div className={styles.skeleton_text_full} />
+    </div>
+    <div className={styles.skeleton_row_double}>
+      <div className={styles.skeleton_block} />
+      <div className={styles.skeleton_block} />
+    </div>
+    <div className={styles.skeleton_button} />
   </div>
 );
 
