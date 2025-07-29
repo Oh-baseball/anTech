@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
+import ReceiptSkeleton from '../ReceiptSkeleton';
 
 interface ReceiptProps {
   open: boolean;
@@ -8,23 +9,23 @@ interface ReceiptProps {
 
 const Receipt = ({ open, onClose }: ReceiptProps) => {
   const [expanded, setExpanded] = useState(false);
-  const [contentReady, setContentReady] = useState(false); // 실제 내용 표시 여부
+  const [contentReady, setContentReady] = useState(false);
   const skeletonRef = useRef<HTMLDivElement>(null);
 
-  // 모달 열리면 자동으로 펼침 시작
   useEffect(() => {
     if (open) {
       setExpanded(false);
       setContentReady(false);
-      // 최초 마운트 후 100ms 뒤에 펼치기 (애니메이션 시간상 조정)
+
       const timer = setTimeout(() => setExpanded(true), 100);
       return () => clearTimeout(timer);
     }
   }, [open]);
 
-  // 애니메이션 종료 시 실제 내용으로 전환
   const handleTransitionEnd = () => {
-    if (expanded && !contentReady) setContentReady(true);
+    if (expanded && !contentReady) {
+      setTimeout(() => setContentReady(true), 300);
+    }
   };
 
   if (!open) {
@@ -43,17 +44,12 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
           <span>발급완료</span>
         </div>
         {!contentReady && (
-          <div
-            ref={skeletonRef}
-            className={`${styles.skeletonContainer} ${expanded ? styles.skeletonExpanded : styles.skeletonCollapsed}`}
+          <ReceiptSkeleton
+            expanded={expanded}
+            skeletonRef={skeletonRef}
             onTransitionEnd={handleTransitionEnd}
-            style={{ overflow: 'hidden', marginBottom: 16 }}
-          >
-            <div className={styles.skeletonRow} />
-            <div className={styles.skeletonRow} />
-          </div>
+          />
         )}
-
         {contentReady && (
           <div className={expanded ? styles.expandingContent : styles.contractingContent}>
             <div className={styles.line}></div>
