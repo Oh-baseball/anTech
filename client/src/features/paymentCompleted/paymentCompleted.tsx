@@ -6,10 +6,9 @@ import Card from './Card';
 import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
 import ButtonContainer from './ButtonContainer';
-import Receipt from './Receipt';
 
 gsap.registerPlugin(ScrollToPlugin);
-const FALLING_COIN_COUNT = 30;
+const FALLING_COIN_COUNT = 40;
 
 const initialPositions = [
   { x: -200, y: 0 },
@@ -185,35 +184,35 @@ const PaymentCompletedContainer = () => {
         if (!coinEl) return;
         const coin = coinEl.firstElementChild;
 
-        const randomX = (Math.random() - 0.5) * dvw * 2;
+        const randomX = (Math.random() - 0.15) * dvw * 1.3;
         const randomScale = 0.5 + Math.random() * 0.5;
-        const randomRotationX = (Math.random() - 0.5) * 90;
+        const randomRotationX = (Math.random() - 0.5) * 180;
         const randomRotationY = (Math.random() - 0.5) * 360;
         const randomRotationZ = (Math.random() - 0.5) * 720;
 
         if (coin) {
           gsap.set(coin, { rotationX: 0, rotationY: 0, rotationZ: 0 });
           gsap.to(coin, {
-            duration: 5,
-            rotationX: randomRotationX * 6,
-            rotationY: randomRotationY * 10,
-            rotationZ: randomRotationZ * 6,
+            duration: 7,
+            rotationX: randomRotationX * 8,
+            rotationY: randomRotationY * 14,
+            rotationZ: randomRotationZ * 8,
           });
         }
 
         gsap.set(coinEl, {
-          y: -1500,
+          y: -2300,
           x: 0,
           position: 'absolute',
           scale: 0.3 * randomScale,
         });
 
         gsap.to(coinEl, {
-          duration: 2,
+          duration: 3.3,
           y: 0,
           x: randomX,
           ease: 'linear',
-          delay: (i % 10) * 0.15,
+          delay: (i % 10) * 0.2,
           onComplete: () => {
             if (i === coinRefs.current.length - 1) {
               setIsPaymentComplete(true);
@@ -241,27 +240,27 @@ const PaymentCompletedContainer = () => {
         </h1>
       </section>
       <section className={`${styles.bottom} ${styles.section_container}`} ref={bottomRef}>
+        {showFallingCoins &&
+          Array.from({ length: FALLING_COIN_COUNT }).map((_, i) => (
+            <div
+              key={`fallingCoin_${i}`}
+              ref={(el) => {
+                if (el) {
+                  coinRefs.current[i] = el;
+                }
+              }}
+              className={styles.fallingCoin}
+              style={{
+                bottom: -300,
+                pointerEvents: 'none',
+                position: 'absolute',
+              }}
+            >
+              <Coin />
+            </div>
+          ))}
         <div className={styles.cont_wrap}>
           <div className={styles.card_wrap}>
-            {showFallingCoins &&
-              Array.from({ length: FALLING_COIN_COUNT }).map((_, i) => (
-                <div
-                  key={`fallingCoin_${i}`}
-                  ref={(el) => {
-                    if (el) {
-                      coinRefs.current[i] = el;
-                    }
-                  }}
-                  className={styles.fallingCoin}
-                  style={{
-                    bottom: -300,
-                    pointerEvents: 'none',
-                    position: 'absolute',
-                  }}
-                >
-                  <Coin />
-                </div>
-              ))}
             <VisualTag variant="toss_pay" ref={tossPayTagRef} />
             <VisualTag variant="here" ref={hereTagRef} />
             <VisualTag variant="thx" ref={thxTagRef} />
@@ -294,7 +293,7 @@ const PaymentCompletedContainer = () => {
           handleClickComplete={() => null}
         />
       )}
-      <Receipt
+      {/* <Receipt
       // open={receiptOpen}
       // onClose={() => setReceiptOpen(false)}
       // storeName="야무진상점"
@@ -346,7 +345,7 @@ const PaymentCompletedContainer = () => {
       //   { name: '빵', qty: 2, price: 1500 },
       // ]}
       // total={8800}
-      />
+      /> */}
     </div>
   );
 };

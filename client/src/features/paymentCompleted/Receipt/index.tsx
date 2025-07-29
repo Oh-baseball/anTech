@@ -7,7 +7,7 @@ const Receipt = () => {
         <button className={styles.close_btn} onClick={() => {}}>
           &times;
         </button>
-        <h2 className={styles.title}>현금영수증</h2>
+        <h2 className={styles.title}>영수증</h2>
 
         <div className={styles.metaRow}>
           <span>거래일 2025-07-28 16:12:23</span>
@@ -81,7 +81,7 @@ const Receipt = () => {
         </div>
 
         <div className={styles.shopInfo}>
-          <div>결제서비스 토스페이먼츠(주) | 대표자명: 김민수 | 사업자등록번호: 120-86-11005</div>
+          <div>결제서비스 An Pay(주) | 대표자명: 안다빈 | 사업자등록번호: 120-86-11005</div>
           <div>주소: 서울특별시 강남구 테헤란로 431</div>
         </div>
 
