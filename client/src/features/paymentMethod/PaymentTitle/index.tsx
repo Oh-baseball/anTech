@@ -1,7 +1,11 @@
-import style from './style.module.scss';
+import useDarkModeStore from '@/store/useDarkModeStore';
+import styles from './style.module.scss';
 
 const PaymentTitle = ({title}:{title: string}) => {
-    return <p className={style.payment_title}>{title}</p>
+
+    const darkMode = useDarkModeStore((state) => state.darkMode);
+
+    return <p className={`${styles.payment_title} ${darkMode ? styles.dark_mode : ''}`}>{title}</p>
 }
 
 export default PaymentTitle;

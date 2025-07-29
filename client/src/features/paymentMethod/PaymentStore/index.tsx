@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import styles from './style.module.scss';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface PaymentProvider {
   id: string;
@@ -11,6 +12,9 @@ interface PaymentProvider {
 }
 
 const PaymentStore = () => {
+  
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+
   const [data, setData] = useState<PaymentProvider[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,11 +26,14 @@ const PaymentStore = () => {
       
       try {
         const res = await axios.get<PaymentProvider[]>(
-          `${import.meta.env.VITE_BASE_URL}payment-methods/providers`
+
+            `${import.meta.env.VITE_BASE_URL}payment-methods/providers`
         );
-      
-        setData(res.data);
-        console.log('API 응답:', res.data);
+        const resData= await res.data
+
+        console.log(res.status)
+        setData(resData);
+        console.log('API 응답:', resData);
         
       } catch (error) {
         const errorMessage = axios.isAxiosError(error) 
@@ -63,12 +70,12 @@ const PaymentStore = () => {
   }
 
   return (
-    <div className={styles.payment_info}>
+    <div className={`${styles.payment_info} ${darkMode ? styles.dark_mode : ''}`}>
       <div className={styles.store_info}>
         <img src="https://url.kr/fb9r49" alt="스타벅스 로고" />
         <p>스타벅스 강남점</p>
       </div>
-      <div className={styles.payment_amount}>
+      <div className={`${styles.payment_amount} ${darkMode ? styles.payment_amount_dark_mode : ''}`}>
         <p>총 결제금액</p>
         <p>9,500원</p>
       </div>

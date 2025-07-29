@@ -1,12 +1,23 @@
 .wrapper{
     padding: 0 20px;
-    
+    background-color: $color-bg;
+
     .payment_methodebox_container{
-        // height: calc(100% - 1000px);
-        // height: 420px;
-        max-height: calc(100vh - 280px);
+        min-height: calc(100vh - 271px);
+        max-height: calc(100vh - 271px);
+        // max-height: calc(100vh - 280px);
         overflow : auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        padding-bottom: 80px;
+    }
+}
+
+.dark_mode{
+    background-color: $color-dark-bg;
+
+    >Header{
+        background-color: $color-dark-bg;
+        color: $color-dark-text;
     }
 }

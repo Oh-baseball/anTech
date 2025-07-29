@@ -6,6 +6,7 @@ import PaymentButton from "@/features/paymentMethod/PaymentButton";
 import styles from './style.module.scss';
 import { useState } from "react";
 import useDarkModeStore from "@/store/useDarkModeStore";
+import CancelButton from "@/components/CancelButton";
 
 const PaymentMethodContainer = () => {
 
@@ -19,14 +20,14 @@ const PaymentMethodContainer = () => {
     ];
 
     return(
-        <div className={`${styles.wrapper} ${darkMode?styles.dark_mode : ''}`}>
+        <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ''}`}>
             <Header 
                 prevBtn={true}
                 title="결제수단 선택"
-                right={<button style={{ fontSize: '20px' }}>X</button>}
+                right={<CancelButton />}
             />
 
-            <div className='payment_method'>
+            <div className={styles.payment_method}>
                 <PaymentStore />
         
                 <div className={styles.payment_methodebox_container}>
@@ -49,10 +50,10 @@ const PaymentMethodContainer = () => {
                         </div>
                     ))}
                 </div>
-            
-            <PaymentButton />
+                
+                <PaymentButton/>
+            </div>
         </div>
-    </div>
     )
 }
 export default PaymentMethodContainer;

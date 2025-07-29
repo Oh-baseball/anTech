@@ -36,3 +36,10 @@
 .right {
   @include align-items-center;
 }
+
+.backBtn{
+  img{
+    width: 20px;
+    height: 24px;
+  }
+}

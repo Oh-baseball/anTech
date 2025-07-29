@@ -7,7 +7,7 @@ import logo_shinhyup from '@/assets/logo_shinhyup.png';
 import after_select from '@/assets/selection.svg';
 import before_select from '@/assets/unselection.svg';
 import styles from './style.module.scss';
-// import { img } from 'framer-motion/client';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 type PaymentMethodBoxProps = {
     category: string;
@@ -17,6 +17,8 @@ type PaymentMethodBoxProps = {
 };
 
 const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodBoxProps) => {
+    
+    const darkMode = useDarkModeStore((state) => state.darkMode);
 
     const paymentMethods = [
         {id: 1, category: 'easy_payment', name: '토스페이', balance: '1,234,560원', img: logo_toss},
@@ -44,12 +46,13 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
                     className={`
                         ${styles.payment_method_container}
                         ${selectedId === method.id ? styles.selected:''}
+                        ${darkMode ? styles.dark_mode : ''}
                     `} 
                     onClick={() => handleClick(method.id)}
                 >
                     <div>
                         <img src={method.img} alt="토스 아이콘"/>
-                        <div className={styles.payment_method_info}>
+                        <div className={`${styles.payment_method_info} ${darkMode ? styles.payment_method_info_dark_mode : ''}`}>
                             <p>{method.name}</p>
                             <p>잔액 {method.balance}</p>
                         </div>
@@ -65,10 +68,10 @@ const PaymentMethodBox = ({category, selectedId, setSelectedId} : PaymentMethodB
                                 <img src={before_select} alt="선택 전 아이콘" />
                             </div>
                         )}
+                    </div>
                 </div>
-            </div>
-        ))}
-    </div>
+            ))}
+        </div>
     );
 };
 export default PaymentMethodBox;

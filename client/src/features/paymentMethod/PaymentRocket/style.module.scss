@@ -3,7 +3,10 @@
     // animation-delay: 1s;
         
     .rocket_container{
-        animation: launch 2.5s ease-out forwards;
+        // animation: launch 2.5s ease-out forwards;
+        // animation: launch 2.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+        // animation: launch 2.5s cubic-bezier(0, 0, 1, 1) forwards;
+        animation: launch 2.5s cubic-bezier(0.0, 0.5, 0.5, 1.0) forwards;
 
         .rocket_body{
             width: 120px;
@@ -186,6 +189,7 @@
 
 @keyframes launch{
     0% {
+        // transform: translate(0, 0) rotate(0deg);
         transform: translate(0, 0) rotate(0deg);
     }
     80%{
