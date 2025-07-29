@@ -28,3 +28,15 @@
     pointer-events: none;
 }
 
+.dark_mode {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+  
+    .cart {
+      background-color: $color-dark-box;
+    }
+  
+    .count button {
+      background-color: $color-dark-text;
+    }
+  }

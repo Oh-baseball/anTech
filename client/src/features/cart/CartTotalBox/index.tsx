@@ -1,5 +1,6 @@
 import styles from './style.module.scss';
 import { CartItem } from '@/types/store';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface CartTotalBoxProps {
   items: CartItem[];
@@ -9,8 +10,10 @@ const CartTotalBox = ({ items }: CartTotalBoxProps) => {
   const totalCount = items.reduce((sum, item) => sum + item.count, 0);
   const totalPrice = items.reduce((sum, item) => sum + item.price * item.count, 0);
 
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+
   return (
-    <div className={styles.cartTotalBox}>
+    <div className={`${styles.cartTotalBox} ${darkMode ? styles.dark_mode : ''}`}>
       <div className={styles.headerRow}>
         <span className={styles.headerTitle}>{totalCount}건 주문금액</span>
       </div>

@@ -1,14 +1,20 @@
-.storeButtonBox{
+.storeButtonBox {
     position: fixed;
     bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 17px;
-    width: 100%;
+    width: 420px; /* 부모 max-width와 같게 고정 */
     height: 67px;
     background-color: $color-bg;
     padding: 14px 18px 15px 18px;
-    margin: 0 auto;
     z-index: 2;
+    box-sizing: border-box;
+  }
+  
+  .dark_mode{
+    background-color: $color-dark-bg;
 }

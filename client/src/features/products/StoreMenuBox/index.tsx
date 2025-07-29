@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import StoreButtonBox from '../StoreButtonBox';
 import { StoreMenuBoxItem } from '@/types/store';
-import useDarkModeStore from '@/store/useDarkModeStore'
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface StoreMenuBoxProps {
   StoreMenuBoxItmes?: StoreMenuBoxItem[];
@@ -27,6 +27,11 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
     const [selectedId, setSelectedId] = useState<number | null>(null);
     const [pressedIdx, setPressedIdx] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState<string | null>(categories[0] ?? null);
+
+    //주문 생성을 위한 아이템 목록
+    const [selectedItems, setSelectedItems] = useState<
+      { menu_id: number; quantity: number }[]
+    >([]);
 
     const imgRef = useRef<Record<number, HTMLImageElement | null>>({});
 
@@ -105,7 +110,15 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
                     <motion.div
                       key={item.name + idx}
                       className={className}
-                      onClick={() => setSelectedId(item.id)}
+                      onClick={() => {
+                        setSelectedId(item.id);
+                        setSelectedItems([
+                          {
+                            menu_id: item.id,
+                            quantity: 1,
+                          },
+                        ]);
+                      }}
                       tabIndex={0}
                       onTapStart={() => setPressedIdx(item.name + idx)}
                       onTap={() => setPressedIdx(null)}
@@ -132,7 +145,7 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
           ))}
         </div>
         {/* StoreButtonBox에 selectedId를 prop으로 전달 */}
-        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount} />
+        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount} selectedItems={selectedItems} />
       </>
     );
   },

@@ -52,7 +52,7 @@ const ProductsContainer = () => {
   };
 
   return (
-    <>
+    <div className={`${styles.productsContainer} ${darkMode ? styles.dark_mode : ''}`}>
       <Header
         prevBtn={true}
         title="스타벅스 강남점"
@@ -79,8 +79,8 @@ const ProductsContainer = () => {
         ref={menuBoxRef}
         setCartCount={setCartCount}
       />
-    </>
-  );
+    </div>
+  );  
 };
 
 export default ProductsContainer;

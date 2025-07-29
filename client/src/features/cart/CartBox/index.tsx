@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import CartTotalBox from '../CartTotalBox';
 import { CartItem } from '@/types/store';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface CartBoxProps {
   items: CartItem[];
@@ -10,9 +11,10 @@ interface CartBoxProps {
 }
 
 const CartBox = ({ items, onIncrease, onDecrease }: CartBoxProps) => {
+  const darkMode = useDarkModeStore((state) => state.darkMode);
   return (
     <>
-      <div className={styles.cartScrollArea}>
+      <div className={`${styles.cartScrollArea} ${darkMode ? styles.dark_mode : ''}`}>
         <div className={styles.cartBox}>
           {items.map((boxItem, idx) => (
             <div key={idx} className={styles.cart}>
