@@ -1,8 +1,8 @@
-// import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
-import StarryNight from '@/features/paymentCompleted/StarryNight';
+import PaymentCompletedContainer from '@/features/paymentCompleted/paymentCompleted';
+// import StarryNight from '@/features/paymentCompleted/StarryNight';
 
 const PaymentCompleted = () => {
-  return <StarryNight />;
+  return <PaymentCompletedContainer />;
 };
 
 export default PaymentCompleted;
