@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import useMenuStore from '@/features/products/menuStore';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 const ProductsContainer = () => {
   const menuBoxRef = useRef<StoreMenuBoxRef>(null);
@@ -15,6 +16,7 @@ const ProductsContainer = () => {
   const [cartCount, setCartCount] = useState(0);
 
   const { menuItems, categories, fetchMenus } = useMenuStore();
+  
 
   // 장바구니 개수
   useEffect(() => {
