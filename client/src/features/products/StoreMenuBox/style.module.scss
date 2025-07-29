@@ -90,3 +90,29 @@
         object-fit: cover;
     }
 }
+
+.dark_mode{
+    background-color: $color-dark-bg;
+
+    .storeMenu {
+        background-color: $color-dark-box;
+      }
+    
+      .left_items {
+        p:nth-of-type(1) {
+          color: $color-dark-text;
+        }
+    
+        p:nth-of-type(2) {
+          color: $color-dark-text; // 흰색에 가까운 회색 (또는 직접 색상 입력 #AAAAAA 등)
+        }
+    
+        p:nth-of-type(3) {
+          color: $color-primary; // 가격은 유지
+        }
+      }
+    
+      .selected {
+        border: 2px solid $color-primary;
+      }
+}

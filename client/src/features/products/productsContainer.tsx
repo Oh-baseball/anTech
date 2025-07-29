@@ -16,7 +16,8 @@ const ProductsContainer = () => {
   const [cartCount, setCartCount] = useState(0);
 
   const { menuItems, categories, fetchMenus } = useMenuStore();
-  
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   // 장바구니 개수
   useEffect(() => {

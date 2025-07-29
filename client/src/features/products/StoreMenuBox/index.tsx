@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import { motion } from 'framer-motion';
 import StoreButtonBox from '../StoreButtonBox';
 import { StoreMenuBoxItem } from '@/types/store';
+import useDarkModeStore from '@/store/useDarkModeStore'
 
 interface StoreMenuBoxProps {
   StoreMenuBoxItmes?: StoreMenuBoxItem[];
@@ -19,6 +20,8 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
   ({ StoreMenuBoxItmes, StoreCategories, onTabChange, setCartCount }, ref) => {
     const items = StoreMenuBoxItmes ?? [];
     const categories = StoreCategories ?? [];
+
+    const darkMode = useDarkModeStore((state) => state.darkMode);
 
     // selectedIdx를 상품 id로 관리
     const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -78,7 +81,7 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
 
     return (
       <>
-        <div ref={scrollRef} className={styles.storeMenuBox}>
+        <div ref={scrollRef} className={`${styles.storeMenuBox} ${darkMode ? styles.dark_mode : ''}`}>
           {categories.map((cat) => (
             <div
               key={cat}
