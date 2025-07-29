@@ -5,9 +5,10 @@ import Header from '@/components/Header';
 import { useState, useEffect } from 'react';
 import styles from './style.module.scss';
 import { getCartDetails } from '@/utils/utils';
+import { CartItem } from '@/types/store';
 
 const CartContainer = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
     const cartDetails = getCartDetails();
@@ -23,7 +24,7 @@ const CartContainer = () => {
       // 로컬스토리지 동기화
       const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const id = newItems[idx].id;
-      const cartIdx = cart.findIndex((item) => item.id === id);
+      const cartIdx = cart.findIndex((item: { id: number; count: number }) => item.id === id);
       if (cartIdx !== -1) {
         cart[cartIdx].count = newItems[idx].count;
         localStorage.setItem('cartItems', JSON.stringify(cart));
@@ -39,7 +40,7 @@ const CartContainer = () => {
       );
       const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const id = newItems[idx].id;
-      const cartIdx = cart.findIndex((item) => item.id === id);
+      const cartIdx = cart.findIndex((item: { id: number; count: number }) => item.id === id);
       if (cartIdx !== -1) {
         cart[cartIdx].count = newItems[idx].count;
         localStorage.setItem('cartItems', JSON.stringify(cart));

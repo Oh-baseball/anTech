@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import styles from './style.module.scss';
 import backIcon from '@/assets/back-icon.svg';
+import backIconDarkMode from '@/assets/back-icon_dark_mode.svg';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface HeaderProps {
   prevBtn?: boolean;
@@ -9,6 +11,9 @@ interface HeaderProps {
 }
 
 const Header = ({ prevBtn, title, right }: HeaderProps) => {
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+
   const handleClickPrevBtn = () => {
     console.log('뒤로가기');
   };
@@ -17,7 +22,13 @@ const Header = ({ prevBtn, title, right }: HeaderProps) => {
       <div className={styles.left}>
         {prevBtn && (
           <button className={styles.backBtn} onClick={handleClickPrevBtn} aria-label="뒤로가기">
-            <img src={backIcon} alt="뒤로가기" />
+            {darkMode?
+              (
+                <img src={backIconDarkMode} alt="뒤로가기" />
+              ) : (
+                <img src={backIcon} alt="뒤로가기" />
+              )
+            }
           </button>
         )}
         {title && <span className={styles.title}>{title}</span>}

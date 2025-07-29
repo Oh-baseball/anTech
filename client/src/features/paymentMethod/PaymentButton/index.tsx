@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
-import box_icon from '@/assets/package.svg';
+import PaymentRocket from '../PaymentRocket';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
-const Button = () => {
+const PaymentButton = () => {
+
+    const darkMode = useDarkModeStore((state) => state.darkMode);
+
     const [showRocket, setShowRocket] = useState(false);
 
     const handleClick = () => {
@@ -12,23 +16,12 @@ const Button = () => {
     };
 
     return (
-        <div className={styles.button_container}>
+        <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
             <button className={styles.button} onClick={handleClick}>
                 <span>토스페이로 9,500원 결제</span>
             </button>
-            {showRocket && (
-                <div className={styles.rocket}>
-                    <div className={styles.body}>
-                        <div className={styles.window}>
-                            <img src={box_icon} alt="박스아이콘" />
-                        </div>
-                        <div className={styles.finfront}></div>
-                        <div className={styles.finleft}></div>
-                        <div className={styles.finright}></div>
-                    </div>
-                </div>
-            )}
+            {showRocket && <PaymentRocket/>}
         </div>
     );
 }
-export default Button;
+export default PaymentButton;

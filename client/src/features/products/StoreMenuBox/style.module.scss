@@ -1,7 +1,8 @@
 .storeMenuBox{
    margin: 6px auto 0px auto;
-   max-height: 456px;
+   height: auto;
    overflow: scroll;
+   padding-bottom: 70px;
 }
 
 .storeMenuBox::-webkit-scrollbar{

@@ -48,4 +48,14 @@
             font-weight:$font-weight-bold;
         }
     }
+    .payment_amount_dark_mode{
+        p:nth-of-type(2){
+            color: $color-primary;
+        }
+
+    }
+}
+
+.dark_mode{
+    background-color: $color-dark-box;
 }

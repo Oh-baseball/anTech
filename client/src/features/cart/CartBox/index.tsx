@@ -1,8 +1,15 @@
 import { useRef, useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import CartTotalBox from '../CartTotalBox';
+import { CartItem } from '@/types/store';
 
-const CartBox = ({ items, onIncrease, onDecrease }) => {
+interface CartBoxProps {
+  items: CartItem[];
+  onIncrease: (idx: number) => void;
+  onDecrease: (idx: number) => void;
+}
+
+const CartBox = ({ items, onIncrease, onDecrease }: CartBoxProps) => {
   return (
     <>
       <div className={styles.cartScrollArea}>
