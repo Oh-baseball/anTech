@@ -1,12 +1,11 @@
-import CartBox from "@/features/cart/CartBox";
-import StoreInfoBox from "@/features/products/StoreInfoBox";
-import CartButtonBox from "./CartButtonBox";
-import Header from "@/components/Header";
-import { useState, useEffect } from "react";
-import styles from "./style.module.scss";
-import { getCartDetails } from "@/utils/utils";
-import { CartItem } from "@/types/store";
-
+import CartBox from '@/features/cart/CartBox';
+import StoreInfoBox from '@/features/products/StoreInfoBox';
+import CartButtonBox from './CartButtonBox';
+import Header from '@/components/Header';
+import { useState, useEffect } from 'react';
+import styles from './style.module.scss';
+import { getCartDetails } from '@/utils/utils';
+import { CartItem } from '@/types/store';
 
 const CartContainer = () => {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -16,36 +15,35 @@ const CartContainer = () => {
     setItems(cartDetails);
   }, []);
 
-
   // 수량 변경
   const handleIncrease = (idx: number) => {
-    setItems(prev => {
+    setItems((prev) => {
       const newItems = prev.map((item, i) =>
-        i === idx ? { ...item, count: item.count + 1 } : item
+        i === idx ? { ...item, count: item.count + 1 } : item,
       );
       // 로컬스토리지 동기화
-      const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const id = newItems[idx].id;
       const cartIdx = cart.findIndex((item: { id: number; count: number }) => item.id === id);
       if (cartIdx !== -1) {
         cart[cartIdx].count = newItems[idx].count;
-        localStorage.setItem("cartItems", JSON.stringify(cart));
+        localStorage.setItem('cartItems', JSON.stringify(cart));
       }
       return newItems;
     });
   };
-  
+
   const handleDecrease = (idx: number) => {
-    setItems(prev => {
+    setItems((prev) => {
       const newItems = prev.map((item, i) =>
-        i === idx && item.count > 1 ? { ...item, count: item.count - 1 } : item
+        i === idx && item.count > 1 ? { ...item, count: item.count - 1 } : item,
       );
-      const cart = JSON.parse(localStorage.getItem("cartItems") || "[]");
+      const cart = JSON.parse(localStorage.getItem('cartItems') || '[]');
       const id = newItems[idx].id;
       const cartIdx = cart.findIndex((item: { id: number; count: number }) => item.id === id);
       if (cartIdx !== -1) {
         cart[cartIdx].count = newItems[idx].count;
-        localStorage.setItem("cartItems", JSON.stringify(cart));
+        localStorage.setItem('cartItems', JSON.stringify(cart));
       }
       return newItems;
     });
@@ -55,20 +53,23 @@ const CartContainer = () => {
 
   return (
     <>
-      <Header 
+      <Header
         prevBtn={true}
         title="장바구니"
-        right={<button className={styles.delete} onClick={() => {
-          setItems([]);
-          localStorage.removeItem("cartItems");
-        }}>전체삭제</button>}
+        right={
+          <button
+            className={styles.delete}
+            onClick={() => {
+              setItems([]);
+              localStorage.removeItem('cartItems');
+            }}
+          >
+            전체삭제
+          </button>
+        }
       />
-      <StoreInfoBox/>
-      <CartBox
-        items={items}
-        onIncrease={handleIncrease}
-        onDecrease={handleDecrease}
-      />
+      <StoreInfoBox />
+      <CartBox items={items} onIncrease={handleIncrease} onDecrease={handleDecrease} />
       {/* <CartTotalBox items={items}/> */}
       <CartButtonBox amount={totalPrice} />
     </>
