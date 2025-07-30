@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
+import { LucideIcon } from 'lucide-react';
 
 export interface SmallSquareBoxItem {
-  img?: string;
+  icon: LucideIcon;
   title: string;
   content?: string;
 }
@@ -19,20 +20,27 @@ const SmallSquareBox = ({SmallSquareBoxItems}: SmallSquareBoxProps) => {
   );
 
   return (
-  <>
-    {SmallSquareBoxItems.map((boxItem, idx) => (
-      <button key={idx} className={styles.smallSquareBox} onClick={paymentNav}>
-        <div>
-          <img src={boxItem.img}/>
-        </div>
-        <div className={styles.bottom_items}>
-          <p>{boxItem.title}</p>
-          <div>
-            <p>{boxItem.content}</p>
-          </div>
-        </div>
-      </button>
-    ))}
+    <>
+      {SmallSquareBoxItems.map((boxItem, idx) => {
+        const Icon = boxItem.icon;
+        return (
+          <button
+            key={idx}
+            className={styles.smallSquareBox}
+            onClick={paymentNav}
+          >
+            <div>
+              <Icon size={38} color="#528eff" />  {/* 크기/색상 자유조정 */}
+            </div>
+            <div className={styles.bottom_items}>
+              <p>{boxItem.title}</p>
+              <div>
+                <p>{boxItem.content}</p>
+              </div>
+            </div>
+          </button>
+        );
+      })}
   </>
   )
 };
