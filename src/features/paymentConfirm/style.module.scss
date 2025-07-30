@@ -1,8 +1,34 @@
 .container {
   width: 100%;
   height: 100%;
-  padding: 0 20px;
+  padding: 20px;
   padding-top: 84px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &.dark_mode {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+
+    :global(header) {
+      position: fixed;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+      z-index: 100;
+    }
+
+    header {
+      background-color: $color-dark-bg;
+      color: $color-dark-text;
+    }
+  }
 }
 
 .confirm_box {
@@ -10,4 +36,9 @@
   border-radius: $radius-md;
   padding: 24px;
   padding-bottom: 120px;
+}
+
+.confirm_box.dark_mode {
+  background-color: $color-dark-box;
+  color: $color-dark-text;
 }
