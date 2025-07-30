@@ -2,20 +2,21 @@ import logo_toss from '@/assets/logo_toss.svg';
 // import logo_kakao from '@/assets/logo_kakao.png'; // 카카오페이 로고가 있다면 주석 해제
 import logo_naver from '@/assets/logo_naver.svg';
 import logo_shinhan from '@/assets/logo_shinhan.png';
-import logo_shinhyup from '@/assets/logo_shinhyup.png';
+import logo_kb from '@/assets/logo_kb.png';
 import after_select from '@/assets/selection.svg';
 import before_select from '@/assets/unselection.svg';
 import styles from './style.module.scss';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import useUserStore from '@/store/useUserStore';
 
 // API의 provider_id와 프론트엔드의 로고, 카테고리를 매핑하는 헬퍼 객체
 const providerDetails: Record<string, { category: string; img: string }> = {
   TOSS_PAY: { category: 'easy_payment', img: logo_toss },
   NAVER_PAY: { category: 'easy_payment', img: logo_naver },
   SHINHAN_CARD: { category: 'card_payment', img: logo_shinhan },
-  KOOKMIN_BANK: { category: 'account_payment', img: logo_shinhyup },
+  KOOKMIN_BANK: { category: 'account_payment', img: logo_kb },
   // 필요한 다른 결제 수단들을 여기에 추가하세요.
   DEFAULT: { category: 'others_payment', img: '' }, // 기본값
 };
@@ -45,11 +46,19 @@ type PaymentMethodBoxProps = {
   category: string;
   selectedId: number | null;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedMethod: string | null;
+  setSelectedMethod: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethodBoxProps) => {
+const PaymentMethodBox = ({
+  category,
+  selectedId,
+  setSelectedId,
+  selectedMethod,
+  setSelectedMethod,
+}: PaymentMethodBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
-
+  const user_id = useUserStore((state) => state.userId);
   const [methods, setMethods] = useState<DisplayMethod[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -62,7 +71,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
       try {
         // API 응답 전체 구조에 맞게 타입 지정
         const res = await axios.get<{ data: PaymentMethodProvider[] }>(
-          `${import.meta.env.VITE_BASE_URL}payment-methods/users/3`,
+          `${import.meta.env.VITE_BASE_URL}payment-methods/users/${user_id}`,
         );
 
         // 실제 데이터 배열은 res.data.data에 있습니다.
@@ -134,6 +143,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
 
   const handleClick = (id: number) => {
     setSelectedId((prev) => (prev === id ? null : id));
+    setSelectedMethod(id.toString());
   };
 
   return (
@@ -155,7 +165,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
             >
               <p>{method.name}</p>
               {/* 잔액 대신 API에서 받은 카드/계좌 정보 표시 */}
-              <p>{method.description}</p>
+              {/* <p>{method.description}</p> */}
             </div>
           </div>
           <div className={styles.check}>
