@@ -1,36 +1,12 @@
-import PaymentMethodContainer from '@/features/paymentMethod/PaymentMethodContainer';
-import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import PaymentMethodContainer from "@/features/paymentMethod/PaymentMethodContainer";
 
 const PaymentMethod = () => {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-  const [searchParams] = useSearchParams();
-  const orderId = searchParams.get('orderId');
-
-  const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
-
-  const handleNext = () => {
-    const orderData = queryClient.getQueryData(['order', orderId]);
-
-    if (!orderData) {
-      alert('주문 정보를 찾을 수 없습니다.');
-      return;
-    }
-
-    navigate(`/payment/confirm?orderId=${orderId}&methodId=${selectedMethod}`);
-  };
-
   return (
     <>
-      <PaymentMethodContainer
-        selectedMethod={selectedMethod}
-        setSelectedMethod={setSelectedMethod}
-        handleNext={handleNext}
-      />
+      <PaymentMethodContainer />
     </>
-  );
+    
+  )
 };
 
 export default PaymentMethod;

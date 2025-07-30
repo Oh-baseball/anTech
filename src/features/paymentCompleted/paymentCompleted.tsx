@@ -8,7 +8,6 @@ import Coin from '@/components/Coin';
 import ButtonContainer from './ButtonContainer';
 import Receipt from './Receipt';
 import StarryNight from './StarryNight';
-import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 40;
@@ -20,7 +19,6 @@ const initialPositions = [
 ];
 
 const PaymentCompletedContainer = () => {
-  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bottomRef = useRef<HTMLElement>(null);
@@ -293,7 +291,7 @@ const PaymentCompletedContainer = () => {
         <ButtonContainer
           showButtons={showButtons}
           handleClickReceipt={() => setReceiptOpen(!receiptOpen)}
-          handleClickComplete={() => navigate('/', { viewTransition: true })}
+          handleClickComplete={() => null}
         />
       )}
       <Receipt open={receiptOpen} onClose={() => setReceiptOpen(false)} />
