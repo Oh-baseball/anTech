@@ -20,13 +20,13 @@ const useCreateOrder = (mutationOptions?: UseMutationCustomOptions) => {
 
   return useMutation({
     mutationFn: (req: CreateOrderRequest) => createOrder(req),
-    ...mutationOptions,
     onSuccess: (orderResponse) => {
       const orderId = orderResponse?.data.order_id;
       queryClient.setQueryData(['order', orderId], orderResponse.data);
       navigate(`/payment/method?orderId=${orderId}`);
     },
     onError: (error) => console.log('error', error),
+    ...mutationOptions,
   });
 };
 
