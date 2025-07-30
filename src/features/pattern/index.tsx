@@ -263,8 +263,8 @@ const PatternLockDemo: React.FC = () => {
         auth_type: 'PATTERN' as const,
         auth_value: state.pattern.join(''),
         device_info: navigator.userAgent,
-        order_id: 'ORD20250730001',
-        method_id: 1,
+        order_id: orderId,
+        method_id: methodId,
         payment_method: 'MOBILE_PAY' as PaymentMethodType, // TOSS_PAY의 provider_type 값
         payment_amount: 11900, // final_amount와 일치
         point_used: 0, // 주문 조회 응답과 일치
