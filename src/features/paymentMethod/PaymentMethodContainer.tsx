@@ -51,7 +51,7 @@ const PaymentMethodContainer = () => {
                     ))}
                 </div>
                 
-                <PaymentButton/>
+                <PaymentButton />
             </div>
         </div>
     )
