@@ -1,0 +1,135 @@
+.storeMenuBox {
+  margin: 6px auto 0px auto;
+  height: auto;
+  overflow: scroll;
+  padding-bottom: 70px;
+}
+
+.storeMenuBox::-webkit-scrollbar {
+  display: none;
+}
+
+.storeMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 385px;
+  height: 120px;
+  border-radius: $radius-md;
+  background-color: $color-secondary;
+  padding: 20px 16px 20px 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+
+  &.pressed {
+    transform: none;
+    height: auto;
+
+    .left_items {
+      height: auto;
+
+      p:nth-of-type(1),
+      p:nth-of-type(2) {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
+      }
+    }
+  }
+}
+
+.selected {
+  border: 2px solid $color-primary;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: inherit;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.left_items,
+.right_items {
+  position: relative;
+  z-index: 2;
+}
+
+.left_items {
+  width: 190px;
+  height: 88px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: 35px;
+
+  p:nth-of-type(1) {
+    font-size: 20px;
+    font-weight: $font-weight-bold;
+    color: #1a1a1a;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p:nth-of-type(2) {
+    font-size: 14px;
+    font-weight: $font-weight-regular;
+    color: #808080;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  p:nth-of-type(3) {
+    font-size: 18px;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+}
+
+.right_items {
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+}
+
+.dark_mode {
+  background-color: $color-dark-bg;
+
+  .storeMenu {
+    background-color: $color-dark-box;
+  }
+
+  .left_items {
+    p:nth-of-type(1) {
+      color: $color-dark-text;
+    }
+
+    p:nth-of-type(2) {
+      color: $color-dark-text;
+    }
+
+    p:nth-of-type(3) {
+      color: $color-primary;
+    }
+  }
+
+  .selected {
+    border: 2px solid $color-primary;
+  }
+}
