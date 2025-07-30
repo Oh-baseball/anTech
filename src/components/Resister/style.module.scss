@@ -1,0 +1,129 @@
+.login_container {
+  position: relative;
+  padding: 0 20px;
+  
+  .logo_section {
+    font-size: 40px;
+    top: -63px;
+    left: 133px;
+    position: absolute;
+    width: 100%;
+    color: #528eff;
+    font-weight: bold;
+
+  }
+
+  .login_section {
+    position: relative;
+    margin-top: 250px;
+    width: calc(100% - 40px);
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .input_part {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      input {
+        border: 1px solid #D9DEE5;
+        height: 45px;
+        border-radius: 10px;
+        padding: 10px;
+        outline: none;
+
+        &:focus {
+          border-color: #528eff;
+        }
+        
+        ::placeholder {
+          color: #D9DEE5;
+        }
+      }
+
+      .error_message {
+        font-size: 12px;
+        color: #f03030;
+      }
+    }
+
+    .button_part {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      button {
+        height: 38px;
+        width: 100%;
+        border-radius: 10px;
+        align-content: center;
+      }
+      
+      .signup_btn {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #fff;
+        transition: border-color 1s;
+
+        >span {
+          position: absolute;
+          margin-top: 4px;
+          color: #fff;
+          transition: color 1s;
+          font-size: 24px;
+        }
+
+        div {
+          display: flex;
+          border-radius: 10px;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;          
+          color: #528eff;
+          background-color: #e5f1fe;
+          
+          transition: transform 1.0s cubic-bezier(0.4,0.2,0.2,1);
+          transform-origin: bottom center;
+          transform: rotateX(0deg);
+          will-change: transform;
+          perspective: 1000px;
+          
+          span {
+            font-size: 14px;
+          }
+        }
+
+        &:hover {
+          border: 1px solid #D9DEE5;
+          
+          >span {
+            color: #808080;
+          }
+
+          div{
+            transform: rotateX(90deg);
+          }
+        }
+      }
+    }
+
+    .qna_part {
+      font-size: 10px;
+      color: #808080;
+      text-decoration: underline;
+      text-align: right;
+    }
+  }
+}
+
+.video_section {
+  position: absolute;
+  display: flex;
+  height: 400px;
+  z-index: 100;
+}

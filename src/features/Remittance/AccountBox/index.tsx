@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
+import useDarkModeStore from '@/store/useDarkModeStore';
+import useAccountBalance from '@/store/useAccountBalance';
 
 export interface AccountBoxProps {
   title: string;
@@ -12,6 +14,8 @@ type UserAccount = {
 };
 
 const AccountBox = ({ accountInfo }: UserAccount) => {
+  const setUserBalance = useAccountBalance(state => state.setUserBalance);
+  const darkMode = useDarkModeStore((state) => state.darkMode);
   const { title, balance, menu } = accountInfo;
   const [displayBalance, setDisplayBalance] = useState(balance);
   const prevBalanceRef = useRef(balance);
@@ -20,6 +24,7 @@ const AccountBox = ({ accountInfo }: UserAccount) => {
     if (prevBalanceRef.current !== balance) {
       animateSlot(prevBalanceRef.current, balance);
       prevBalanceRef.current = balance;
+      setUserBalance(balance.toString());
     }
   }, [balance]);
 
@@ -46,7 +51,7 @@ const AccountBox = ({ accountInfo }: UserAccount) => {
   const formattedBalance = displayBalance.toLocaleString();
 
   return (
-    <div className={styles.accountBox}>
+    <div className={`${styles.accountBox} ${darkMode ? styles.coin_check : ''}`}>
       <p>{title}</p>
       <p>{formattedBalance}원</p>
       <div>
