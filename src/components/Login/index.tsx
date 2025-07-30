@@ -31,6 +31,10 @@ const LoginLayout = () => {
     });
   }
 
+  const Resister = () => {
+    navigate('/resister', { viewTransition: true });
+  }
+
   return (
     <div className={styles.login_container}>
       <div className={styles.logo_section}>
@@ -63,13 +67,18 @@ const LoginLayout = () => {
           />
         </div>
         <div className={styles.button_part}>
-          <button className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`} onClick={Login} disabled={clickedLogin}>
+          <button 
+            className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`}
+            onClick={Login} disabled={clickedLogin}
+          >
             <span className={styles.lock_icon}><Lock /></span>
             <div className={styles.login_box}>
               <span className={styles.login_text}>로그인</span>
             </div>
           </button>
-          <button className={styles.signup_btn}>
+          <button className={styles.signup_btn}
+            onClick={Resister} 
+          >
             <span className={styles.doc_icon}><FileUser /></span>
             <div>
               <span className={styles.signup_text}>회원가입</span>
