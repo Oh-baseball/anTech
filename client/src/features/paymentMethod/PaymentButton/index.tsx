@@ -3,24 +3,56 @@ import styles from './style.module.scss';
 import PaymentRocket from '../PaymentRocket';
 import useDarkModeStore from '@/store/useDarkModeStore';
 
-const PaymentButton = () => {
+export interface PaymentButtonItem{
+    amount: number;
+}
+
+interface PaymentButtonProps{
+    PaymentButtonItem?: PaymentButtonItem;
+    onClick?:() => void;
+}
+
+const dummyData: PaymentButtonItem = {
+    amount: 14000
+}
+
+const PaymentButton = ({PaymentButtonItem, onClick} : PaymentButtonProps) => {
+    console.log('PaymentButton에서 onClick:', onClick);
+
+    const data = PaymentButtonItem ?? dummyData;
 
     const darkMode = useDarkModeStore((state) => state.darkMode);
-
     const [showRocket, setShowRocket] = useState(false);
 
+    // const handleClick = () => {
+    //     setTimeout(() => {
+    //         setShowRocket(true);
+    //     }, 500);
+    // };
     const handleClick = () => {
-        setTimeout(() => {
-            setShowRocket(true);
-        }, 500);
+        setShowRocket(true);
+        // setTimeout(() => {
+        //     if(onClick) onClick();
+        // }, 2000);
+    };
+
+    const handleRocketEnd = () => {
+         console.log('로켓 애니메이션 끝!');
+        // if(onClick) onClick();
+        if (onClick) {
+    console.log('onClick 실행함!'); // 디버깅용
+    onClick(); // <-- 이게 안 불리는 이유는 onClick이 undefined일 가능성이 큼
+  } else {
+    console.log('onClick 없음!');
+  }
     };
 
     return (
         <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
             <button className={styles.button} onClick={handleClick}>
-                <span>토스페이로 9,500원 결제</span>
+                <span>토스페이로 {data.amount.toLocaleString()}원 결제</span>
             </button>
-            {showRocket && <PaymentRocket/>}
+            {showRocket && <PaymentRocket onAnimationEnd={handleRocketEnd}/>}
         </div>
     );
 }

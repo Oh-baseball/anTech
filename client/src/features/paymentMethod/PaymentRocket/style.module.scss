@@ -191,12 +191,15 @@
     0% {
         // transform: translate(0, 0) rotate(0deg);
         transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
     }
     80%{
         transform: translate(0, -350px) rotateY(10deg);
+        opacity: 1;
     }
     100%{
         transform: translate(400px, -1000PX) rotate(30deg);
+        opacity: 0;
     }
 }
 

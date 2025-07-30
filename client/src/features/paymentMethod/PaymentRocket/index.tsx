@@ -1,11 +1,15 @@
 import styles from './style.module.scss';
 import box_icon from '@/assets/package.svg';
 
-const PaymentRocket = () => {
+interface Props {
+    onAnimationEnd?: () => void;
+}
+
+const PaymentRocket = ({onAnimationEnd}: Props) => {
     return(
-        <div className={styles.rocket}>
+        <div className={styles.rocket} >
             <div className={styles.rocket_wrapp}>
-                <div className={styles.rocket_container}>
+                <div className={styles.rocket_container} onAnimationEnd={onAnimationEnd}>
                     <div className={styles.rocket_body}>
                         <div className={styles.rocket_window}>
                             <img src={box_icon} alt="박스아이콘" />
