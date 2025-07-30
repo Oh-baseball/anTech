@@ -9,6 +9,7 @@ import styles from './style.module.scss';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import useUserStore from '@/store/useUserStore';
 
 // API의 provider_id와 프론트엔드의 로고, 카테고리를 매핑하는 헬퍼 객체
 const providerDetails: Record<string, { category: string; img: string }> = {
@@ -49,6 +50,7 @@ type PaymentMethodBoxProps = {
 
 const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethodBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
+  const userId = useUserStore((state) => state.userId);
 
   const [methods, setMethods] = useState<DisplayMethod[]>([]);
   const [loading, setLoading] = useState(true);
@@ -62,7 +64,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
       try {
         // API 응답 전체 구조에 맞게 타입 지정
         const res = await axios.get<{ data: PaymentMethodProvider[] }>(
-          `${import.meta.env.VITE_BASE_URL}payment-methods/users/3`,
+          `${import.meta.env.VITE_BASE_URL}payment-methods/users/${userId}`,
         );
 
         // 실제 데이터 배열은 res.data.data에 있습니다.

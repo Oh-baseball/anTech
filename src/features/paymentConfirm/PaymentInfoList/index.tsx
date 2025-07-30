@@ -5,6 +5,7 @@ import { Order } from '@/types/order';
 import { useEffect } from 'react';
 import useUserStore from '@/store/useUserStore';
 import { usePaymentMethod } from '@/hooks/queries/usePaymentMethod';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface PaymentInfoListProps {
   orderId: string | null;
@@ -16,13 +17,14 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
   const orderData = queryClient.getQueryData<Order>(['order', orderId]);
   const userId = useUserStore((state) => state.userId);
   const { paymentMethod, isPending } = usePaymentMethod({ userId, methodId });
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   useEffect(() => {
-    console.log('methodId', methodId);
-  }, [methodId]);
+    console.log('paymentMethod', paymentMethod);
+  }, [paymentMethod]);
 
   if (!orderData || isPending) {
-    return <></>;
+    return <div></div>;
   }
 
   const getAdditionalItemText = () => {
@@ -34,23 +36,25 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
   };
 
   const infoList = [
-    { label: '결제수단', value: `${paymentMethod?.alias_name} (${paymentMethod?.masked_number})` },
+    { label: '결제수단', value: `${paymentMethod?.alias_name}` },
     { label: '상품명', value: `${orderData.items[0].menu_name}${getAdditionalItemText()}` },
     { label: '주문금액', value: orderData.total_amount.toLocaleString() },
     { label: '할인혜택', value: orderData.discount_amount.toLocaleString(), isDiscount: true },
   ];
 
-  <ul className={styles.info_list}>
-    {infoList.map((item, idx) => (
-      <PaymentInfoItem
-        key={item.label}
-        label={item.label}
-        value={item.value}
-        isDiscount={item.isDiscount}
-        style={{ animationDelay: `${idx * 0.12}s` }}
-      />
-    ))}
-  </ul>;
+  return (
+    <ul className={`${styles.info_list} ${darkMode ? styles.dark_mode : ''}`}>
+      {infoList.map((item, idx) => (
+        <PaymentInfoItem
+          key={item.label}
+          label={item.label}
+          value={item.value}
+          isDiscount={item.isDiscount}
+          style={{ animationDelay: `${idx * 0.12}s` }}
+        />
+      ))}
+    </ul>
+  );
 };
 
 export default PaymentInfoList;
