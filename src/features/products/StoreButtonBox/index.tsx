@@ -1,10 +1,10 @@
 import StoreButton from '../StoreButton';
 import styles from './style.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../../../utils/utils';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import useUserStore from '@/store/useUserStore';
-import createOrder, { CreateOrderRequest } from '@/apis/orders/createOrder';
+import { CreateOrderRequest } from '@/apis/orders/createOrder';
+import { useCreateOrder } from '@/hooks/queries/useOrder';
 
 interface StoreButtonBoxProps {
   selectedId: number | null;
@@ -13,10 +13,10 @@ interface StoreButtonBoxProps {
 }
 
 const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButtonBoxProps) => {
-  const navigate = useNavigate();
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
   const userId = useUserStore((state) => state.userId);
+  const createOrderMutation = useCreateOrder();
 
   const handleAddToCart = () => {
     addToCart(selectedId);
@@ -26,36 +26,26 @@ const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButton
   };
 
   const handleCreateOrder = async () => {
-    // if (!userId) {
-    //   alert('로그인이 필요합니다.');
-    //   return;
-    // }
+    if (!userId) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
     if (selectedItems.length === 0) {
       alert('주문할 상품을 선택해주세요.');
       return;
     }
 
-    try {
-      const req: CreateOrderRequest = {
-        user_id: 1,
-        store_id: 1,
-        items: selectedItems.map((item) => ({
-          menu_id: item.menu_id,
-          quantity: 1,
-        })),
-        point_used: 0,
-      };
+    const req: CreateOrderRequest = {
+      user_id: Number(userId) || 1,
+      store_id: 1,
+      items: selectedItems.map((item) => ({
+        menu_id: item.menu_id,
+        quantity: 1,
+      })),
+      point_used: 0,
+    };
 
-      const res = await createOrder(req);
-      if (res.success) {
-        //  alert('주문이 성공적으로 생성되었습니다.');
-        navigate('/payment/method');
-      } else {
-        //   alert(`주문 실패: ${res.message}`);
-      }
-    } catch (error) {
-      //   alert((error as Error).message || '주문 처리 중 오류가 발생했습니다.');
-    }
+    createOrderMutation.mutate(req);
   };
 
   return (
