@@ -2,14 +2,21 @@ import { SmallSquareBoxItem } from "@/features/Home/SmallSquareBox";
 import { RecordBoxItem } from "@/features/Home/RecordBox";
 import HomeLayout from "@/features/Home";
 import { AccountBoxProps } from "@/features/Home/AccountBox";
+import useAccountBalance from "@/store/useAccountBalance";
 
 
 const Home = () => {
+  const userBalance = useAccountBalance((state) => state.userBalance);
+  const setUserBalance = useAccountBalance((state) => state.setUserBalance);
+
   const accountInfo: AccountBoxProps = {
     title: '토스페이',
-    balance: 1234560,
+    balance: 3782000,
     menu: ['송금', '충전', 'ATM'],
   };
+
+  accountInfo.balance = Number(userBalance);
+  setUserBalance(accountInfo.balance.toString());
 
   const metrixCodeMenu: SmallSquareBoxItem[] = [
     {  
