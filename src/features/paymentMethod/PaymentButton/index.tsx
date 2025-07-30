@@ -18,7 +18,6 @@ const dummyData: PaymentButtonItem = {
 };
 
 const PaymentButton = ({ PaymentButtonItem }: PaymentButtonProps) => {
-  console.log('PaymentButton에서 onClick:');
 
   const navigate = useNavigate();
 
@@ -27,27 +26,11 @@ const PaymentButton = ({ PaymentButtonItem }: PaymentButtonProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const [showRocket, setShowRocket] = useState(false);
 
-  // const handleClick = () => {
-  //     setTimeout(() => {
-  //         setShowRocket(true);
-  //     }, 500);
-  // };
   const handleClick = () => {
     setShowRocket(true);
-    // setTimeout(() => {
-    //     if(onClick) onClick();
-    // }, 2000);
   };
 
   const handleRocketEnd = () => {
-    console.log('로켓 애니메이션 끝!');
-    // if(onClick) onClick();
-    // if (buttonOnClick) {
-    //   console.log('onClick 실행함!'); // 디버깅용
-    //   buttonOnClick(); // <-- 이게 안 불리는 이유는 onClick이 undefined일 가능성이 큼
-    // } else {
-    //   console.log('onClick 없음!');
-    // }
     navigate('/payment/confirm');
   };
 
