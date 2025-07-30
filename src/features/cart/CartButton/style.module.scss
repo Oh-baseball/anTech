@@ -1,0 +1,42 @@
+.cartButton{
+    width: 385px;
+    height: 48px;
+    border-radius: $radius-md;
+    padding: 16px 24px 16px 24px;
+    background-color: $color-primary;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: $font-weight-bold;
+    position: relative;
+    cursor: pointer;
+    view-transition-name: pay-btn;
+
+    &.pressed{
+        transform: scale(0.95);
+    }
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.08);
+    border-radius: inherit;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.dark_mode {
+    background-color: $color-dark-bg;
+    color: $color-dark-text;
+  
+    .cart {
+      background-color: $color-dark-box;
+    }
+  
+    .count button {
+      background-color: $color-dark-text;
+    }
+  }
