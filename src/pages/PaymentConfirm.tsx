@@ -1,4 +1,4 @@
-import PaymentConfirmContainer from '@/features/paymentConfirm/paymentConfirm';
+import PaymentConfirmContainer from '@/features/paymentConfirm';
 
 const PaymentConfirm = () => {
   return <PaymentConfirmContainer />;
