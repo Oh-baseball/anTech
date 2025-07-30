@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import styles from './style.module.scss';
 
 const STAR_COUNTS = {
-  upper: { sm: 300, md: 60, lg: 12 },
-  lower: { sm: 150, md: 30, lg: 6 },
+  upper: { sm: 100, md: 20, lg: 4 },
+  lower: { sm: 50, md: 10, lg: 2 },
 };
 
 function getRandom(leftMax: number, topMax: number) {
@@ -62,8 +62,8 @@ const StarryNight = () => {
     if (upperRef.current) upperRef.current.innerHTML = '';
     if (lowerRef.current) lowerRef.current.innerHTML = '';
 
-    appendStars(upperRef.current, STAR_COUNTS.upper.sm, 'starSm', 'starMd', 'starLg');
-    appendStars(lowerRef.current, STAR_COUNTS.lower.sm, 'starSm', 'starMd', 'starLg');
+    appendStars(upperRef.current, STAR_COUNTS.upper.sm, 'star_sm', 'star_md', 'star_lg');
+    appendStars(lowerRef.current, STAR_COUNTS.lower.sm, 'star_sm', 'star_md', 'star_lg');
 
     document.getElementById(styles.cover)?.classList.add(styles.loaded);
   }, []);
