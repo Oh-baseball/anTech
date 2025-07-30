@@ -5,7 +5,7 @@ import { Lock, FileUser } from 'lucide-react';
 import useLogin from "@/hooks/queries/useLogin";
 import useUserStore from "@/store/useUserStore";
 
-const Loading = () => {
+const LoginLayout = () => {
   const navigate = useNavigate();
   const [clickedLogin, setClickedLogin] = useState(false);
   const [email, setEmail] = useState('');
@@ -29,6 +29,10 @@ const Loading = () => {
         setClickedLogin(false);
       },
     });
+  }
+
+  const Resister = () => {
+    navigate('/resister', { viewTransition: true });
   }
 
   return (
@@ -63,13 +67,18 @@ const Loading = () => {
           />
         </div>
         <div className={styles.button_part}>
-          <button className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`} onClick={Login} disabled={clickedLogin}>
+          <button 
+            className={`${styles.login_btn} ${clickedLogin ? styles.clickedCheck : ""}`}
+            onClick={Login} disabled={clickedLogin}
+          >
             <span className={styles.lock_icon}><Lock /></span>
             <div className={styles.login_box}>
               <span className={styles.login_text}>로그인</span>
             </div>
           </button>
-          <button className={styles.signup_btn}>
+          <button className={styles.signup_btn}
+            onClick={Resister} 
+          >
             <span className={styles.doc_icon}><FileUser /></span>
             <div>
               <span className={styles.signup_text}>회원가입</span>
@@ -84,4 +93,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoginLayout;

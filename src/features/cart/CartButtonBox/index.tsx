@@ -1,10 +1,10 @@
 import CartButton from '../CartButton';
 import styles from './style.module.scss';
-import { useNavigate } from 'react-router-dom';
-import createOrder, { CreateOrderRequest } from '@/apis/orders/createOrder';
+import { CreateOrderRequest } from '@/apis/orders/createOrder';
 import useUserStore from '@/store/useUserStore';
 import { CartItem } from '@/types/store';
 import useDarkModeStore from '@/store/useDarkModeStore';
+import { useCreateOrder } from '@/hooks/queries/useOrder';
 
 interface CartButtonBoxProps {
   amount: number;
@@ -12,16 +12,16 @@ interface CartButtonBoxProps {
 }
 
 const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
-  const navigate = useNavigate();
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
   const userId = useUserStore((state) => state.userId);
+  const createOrderMutation = useCreateOrder();
 
   const handleOrder = async () => {
-    // if (!userId) {
-    //   alert('로그인이 필요합니다.');
-    //   return;
-    // }
+    if (!userId) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
 
     if (items.length === 0) {
       alert('장바구니가 비어있습니다.');
@@ -29,7 +29,7 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
     }
 
     const req: CreateOrderRequest = {
-      user_id: 1,
+      user_id: Number(userId) || 1,
       store_id: 1,
       items: items.map((item) => ({
         menu_id: item.id,
@@ -38,17 +38,7 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
       point_used: 0,
     };
 
-    try {
-      const res = await createOrder(req);
-      if (res.success) {
-        // alert('주문이 성공적으로 생성되었습니다.');
-        navigate('/payment/method');
-      } else {
-        //   alert(`주문 실패: ${res.message}`);
-      }
-    } catch (error) {
-      //    alert((error as Error).message || '주문 처리 중 오류가 발생했습니다.');
-    }
+    createOrderMutation.mutate(req);
   };
 
   return (

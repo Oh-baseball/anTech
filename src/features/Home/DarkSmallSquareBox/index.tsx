@@ -11,7 +11,6 @@ const DarkSmallSquareBox = ({SmallSquareBoxItems}: DarkSmallSquareBoxProps) => {
     {SmallSquareBoxItems.map((boxItem, idx) => (
           <button key={idx} className={styles.smallSquareBox}>
             <div>
-              <img/>
             </div>
             <p>{boxItem.title}</p>
             <p></p>
