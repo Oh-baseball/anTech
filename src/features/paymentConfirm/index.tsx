@@ -4,35 +4,40 @@ import PaymentAmount from './PaymentAmount';
 import PaymentInfoList from './PaymentInfoList';
 import CancelButton from '@/components/CancelButton';
 import ActionButton from '@/components/ActionButton';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { Order } from '@/types/order';
-import { useEffect } from 'react';
-import fetchPaymentMethod from '@/apis/payment-methods/fetchPaymentMethod';
 import useUserStore from '@/store/useUserStore';
+import { usePaymentMethod } from '@/hooks/queries/usePaymentMethod';
 
 const PaymentConfirmContainer = () => {
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
   const methodId = searchParams.get('methodId');
   const queryClient = useQueryClient();
   const orderData = queryClient.getQueryData<Order>(['order', orderId]);
   const userId = useUserStore((state) => state.userId);
+  const { paymentMethod, isPending } = usePaymentMethod({ userId, methodId });
 
-  useEffect(() => {
-    console.log('userId', userId);
-  }, [userId]);
+  // useEffect(() => {
+  //   console.log('userId', userId);
+  // }, [userId]);
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetchPaymentMethod({ userId, methodId });
-      console.log('데이터', response.data);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetchPaymentMethod({ userId, methodId });
+  //     console.log('데이터', response.data);
+  //   })();
+  // }, []);
 
-  if (!orderData) {
+  if (!orderData || isPending) {
     return <></>;
   }
+
+  const handleOnclickPayment = () => {
+    navigate(`/auth?orderId=${orderId}&methodId=${methodId}`);
+  };
 
   return (
     <>
@@ -44,7 +49,7 @@ const PaymentConfirmContainer = () => {
         </section>
         <ActionButton
           label={`${orderData.total_amount.toLocaleString()}원 결제하기`}
-          onClick={() => null}
+          onClick={handleOnclickPayment}
         />
       </div>
     </>

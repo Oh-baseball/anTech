@@ -21,7 +21,7 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
     return <></>;
   }
 
-  const getASD = () => {
+  const getAdditionalItemText = () => {
     const itemsLength = orderData.items.length;
     if (itemsLength > 1) {
       return ` 외 ${itemsLength - 1}건`;
@@ -31,7 +31,7 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
 
   const infoList = [
     { label: '결제수단', value: '토스뱅크 통장 (***1234)' },
-    { label: '상품명', value: `${orderData.items[0].menu_name}${getASD()}` },
+    { label: '상품명', value: `${orderData.items[0].menu_name}${getAdditionalItemText()}` },
     { label: '주문금액', value: orderData.total_amount.toLocaleString() },
     { label: '할인혜택', value: orderData.discount_amount.toLocaleString(), isDiscount: true },
   ];

@@ -1,14 +1,14 @@
 import { APIResponse, ErrorResponse } from '@/types/api';
 import { axiosInstance } from '@/apis/axiosInstance';
 import axios, { AxiosError } from 'axios';
-import { PaymentProvider } from '@/types/payment-method';
+import { PaymentMethod } from '@/types/payment-method';
 
-type FetchPaymentMethodRequest = {
+export type FetchPaymentMethodRequest = {
   userId: string | null;
   methodId: string | null;
 };
 
-type FetchPaymentMethodResponse = PaymentProvider;
+export type FetchPaymentMethodResponse = PaymentMethod;
 
 const fetchPaymentMethod = async ({
   userId,
