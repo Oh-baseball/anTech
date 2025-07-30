@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import PaymentRocket from '../PaymentRocket';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export interface PaymentButtonItem {
   amount: number;
@@ -18,7 +19,6 @@ const dummyData: PaymentButtonItem = {
 };
 
 const PaymentButton = ({ PaymentButtonItem }: PaymentButtonProps) => {
-
   const navigate = useNavigate();
 
   const data = PaymentButtonItem ?? dummyData;
