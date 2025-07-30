@@ -1,0 +1,10 @@
+.qr_container {
+  width: calc(100% - 40px);
+}
+
+.video_section {
+  position: absolute;
+  display: flex;
+  height: 100dvh;
+  z-index: 100;
+}

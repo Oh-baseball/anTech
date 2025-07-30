@@ -51,11 +51,6 @@ const ResisterLayout = () => {
 
   return (
     <div className={styles.login_container}>
-      <div className={styles.video_section}>
-      <video autoPlay muted playsInline >
-        <source src="src/assets/qr_test_video.mp4" type="video/mp4"></source>
-      </video>
-      </div>
       <div className={styles.logo_section}>
         <span>ANTECH</span>
       </div>
