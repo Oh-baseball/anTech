@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 import PaymentRocket from '../PaymentRocket';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export interface PaymentButtonItem {
   amount: number;
@@ -11,14 +12,20 @@ export interface PaymentButtonItem {
 interface PaymentButtonProps {
   PaymentButtonItem?: PaymentButtonItem;
   buttonOnClick?: () => void;
+  orderId?: string;
+  selectedMethod?: string;
 }
 
 const dummyData: PaymentButtonItem = {
   amount: 14000,
 };
 
-const PaymentButton = ({ PaymentButtonItem }: PaymentButtonProps) => {
-
+const PaymentButton = ({
+  PaymentButtonItem,
+  buttonOnClick,
+  orderId,
+  selectedMethod,
+}: PaymentButtonProps) => {
   const navigate = useNavigate();
 
   const data = PaymentButtonItem ?? dummyData;
@@ -27,11 +34,16 @@ const PaymentButton = ({ PaymentButtonItem }: PaymentButtonProps) => {
   const [showRocket, setShowRocket] = useState(false);
 
   const handleClick = () => {
-    setShowRocket(true);
+    if (buttonOnClick) {
+      setShowRocket(true);
+      buttonOnClick();
+    }
   };
 
   const handleRocketEnd = () => {
-    navigate('/payment/confirm');
+    if (buttonOnClick) {
+      buttonOnClick();
+    }
   };
 
   return (

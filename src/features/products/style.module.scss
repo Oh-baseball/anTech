@@ -24,7 +24,6 @@
 
 .productsContainer {
   width: 100%;
-  max-width: 430px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 0 10px;
@@ -37,18 +36,6 @@
 .dark_mode {
   background-color: $color-dark-bg;
   color: $color-dark-text;
-
-  :global(header) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: 430px;
-    margin: 0 auto;
-    padding: 0 10px;
-    box-sizing: border-box;
-    z-index: 100;
-  }
 
   header {
     background-color: $color-dark-bg;

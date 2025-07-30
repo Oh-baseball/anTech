@@ -26,7 +26,7 @@ async function bootstrap() {
         .addTag('stores', '매장 관리')
         .addTag('categories', '카테고리 관리')
         .addTag('pay-history', '포인트 관리')
-        .addServer('http://localhost:3000', '개발 서버')
+        .addServer('http://localhost:5000', '개발 서버')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api-docs', app, document, {
@@ -35,7 +35,7 @@ async function bootstrap() {
             displayRequestDuration: true,
         },
     });
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 8000;
     await app.listen(port);
     console.log(`🚀 Application is running on: http://localhost:${port}`);
     console.log(`📚 Swagger API Docs: http://localhost:${port}/api-docs`);
