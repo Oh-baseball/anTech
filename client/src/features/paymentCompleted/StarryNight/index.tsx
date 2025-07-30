@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react';
 import styles from './style.module.scss';
 
+type StarryNightProps = {
+  scrollY?: number;
+};
+
 const STAR_COUNTS = {
   upper: { sm: 100, md: 20, lg: 4 },
   lower: { sm: 50, md: 10, lg: 2 },
@@ -9,19 +13,20 @@ const STAR_COUNTS = {
 function getRandom(leftMax: number, topMax: number) {
   return {
     left: Math.round(Math.random() * leftMax),
-    top: Math.round(Math.random() * topMax),
+    top: Math.round((Math.random() - 0.3) * topMax),
   };
 }
 
-const StarryNight = () => {
+const StarryNight = ({ scrollY = 0 }: StarryNightProps) => {
   const upperRef = useRef<HTMLDivElement>(null);
   const lowerRef = useRef<HTMLDivElement>(null);
+  const coverRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const winW = window.innerWidth;
     const winH = window.innerHeight;
-    const upperH = Math.round(winH / 2);
-    const lowerH = Math.round(winH / 2);
+    const upperH = Math.round(winH);
+    const lowerH = Math.round(winH);
 
     function appendStars(
       container: HTMLDivElement | null,
@@ -68,8 +73,14 @@ const StarryNight = () => {
     document.getElementById(styles.cover)?.classList.add(styles.loaded);
   }, []);
 
+  useEffect(() => {
+    if (coverRef.current) {
+      coverRef.current.style.transform = `translateY(${-scrollY / 3}px)`; // 속도 조절 가능
+    }
+  }, [scrollY]);
+
   return (
-    <div className={styles.cover} id={styles.cover}>
+    <div className={styles.cover} id={styles.cover} ref={coverRef}>
       <div className={styles.upper} ref={upperRef}></div>
       <div className={styles.lower} ref={lowerRef}></div>
     </div>

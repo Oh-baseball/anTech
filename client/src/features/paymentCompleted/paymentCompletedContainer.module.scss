@@ -1,11 +1,6 @@
 .container {
   width: 100%;
   overflow: hidden;
-  background-image: url('/assets/star-bg.jpg');
-}
-
-.star_bg {
-  background-image: url('/assets/star.png');
 }
 
 .section_container {
@@ -32,7 +27,7 @@
 }
 
 .section_container.bottom {
-  background: url('/assets/island.png') center bottom/300% no-repeat;
+  // background: url('/assets/island.png') center bottom/300% no-repeat;
   min-height: 100dvh;
 }
 
