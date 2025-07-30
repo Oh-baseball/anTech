@@ -25,17 +25,17 @@
   transition: all 0.3s ease;
 
   &.pressed {
-    transform: none;          
-    height: auto;          
+    transform: none;
+    height: auto;
 
     .left_items {
       height: auto;
 
       p:nth-of-type(1),
       p:nth-of-type(2) {
-        white-space: normal;   
-        overflow: visible;    
-        text-overflow: unset;   
+        white-space: normal;
+        overflow: visible;
+        text-overflow: unset;
       }
     }
   }
@@ -73,7 +73,7 @@
   p:nth-of-type(1) {
     font-size: 20px;
     font-weight: $font-weight-bold;
-    color: #1A1A1A;
+    color: #1a1a1a;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -108,28 +108,28 @@
   }
 }
 
-.dark_mode{
+.dark_mode {
   background-color: $color-dark-bg;
 
   .storeMenu {
-      background-color: $color-dark-box;
+    background-color: $color-dark-box;
+  }
+
+  .left_items {
+    p:nth-of-type(1) {
+      color: $color-dark-text;
     }
-  
-    .left_items {
-      p:nth-of-type(1) {
-        color: $color-dark-text;
-      }
-  
-      p:nth-of-type(2) {
-        color: $color-dark-text; 
-      }
-  
-      p:nth-of-type(3) {
-        color: $color-primary; 
-      }
+
+    p:nth-of-type(2) {
+      color: $color-dark-text;
     }
-  
-    .selected {
-      border: 2px solid $color-primary;
+
+    p:nth-of-type(3) {
+      color: $color-primary;
     }
+  }
+
+  .selected {
+    border: 2px solid $color-primary;
+  }
 }
