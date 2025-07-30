@@ -1,7 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './style.module.scss';
-import useDarkModeStore from '@/store/useDarkModeStore';
 import useUserStore from '@/store/useUserStore';
 import { sendAuthPattern } from '@/utils/patterApi';
 import { PaymentMethodType } from '@/types/payment';
@@ -31,6 +30,9 @@ interface PatternLine {
 
 const PatternLockDemo: React.FC = () => {
   const { userId } = useUserStore();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const methodId = searchParams.get('methodId');
 
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -282,7 +284,7 @@ const PatternLockDemo: React.FC = () => {
           setTimeout(() => {
             setPatternLines([]);
             setCurrentPos(null);
-            navigate('/payment/completed');
+            navigate(`/payment/completed?orderId=${orderId}&methodId=${methodId}`);
           }, 1000);
         } else {
           // 서버에서 실패 응답이 온 경우
@@ -357,7 +359,7 @@ const PatternLockDemo: React.FC = () => {
   };
 
   const goToPinAuth = () => {
-    navigate('/auth/pin', { viewTransition: true });
+    navigate(`/auth/pin?orderId=${orderId}&methodId=${methodId}`, { viewTransition: true });
   };
 
   const createSVGPath = (points: Point[]) => {

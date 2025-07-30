@@ -6,8 +6,8 @@ interface AuthPattern {
   auth_type: 'PIN' | 'PATTERN';
   auth_value: string;
   device_info: string;
-  order_id: string;
-  method_id: number;
+  order_id: string | null;
+  method_id: string | null;
   payment_method: PaymentMethodType;
   payment_amount: number;
   point_used: number;
