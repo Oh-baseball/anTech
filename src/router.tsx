@@ -6,6 +6,7 @@ import Authentication from './features/Authentication';
 import PatternLockDemo from './features/pattern';
 import Remittance from './pages/Remittance';
 import Resister from './pages/Resister';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
 const Products = lazy(() => import('./pages/Products'));
@@ -21,26 +22,26 @@ const router = createBrowserRouter([
     path: '/',
     element: <MainLayout />,
     children: [
-      { index: true, element: <Home /> },
+      { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
       { path: 'login', element: <Login /> },
       { path: 'resister', element: <Resister /> },
-      { path: 'remittance', element: <Remittance /> },
-      { path: 'products', element: <Products /> },
-      { path: 'cart', element: <Cart /> },
-      { path: 'verify', element: <Verify /> },
+      { path: 'remittance', element: <ProtectedRoute><Remittance /></ProtectedRoute> },
+      { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
+      { path: 'cart', element: <ProtectedRoute><Cart /></ProtectedRoute> },
+      { path: 'verify', element: <ProtectedRoute><Verify /></ProtectedRoute> },
       {
         path: 'payment',
         children: [
-          { path: 'method', element: <PaymentMethod /> },
-          { path: 'confirm', element: <PaymentConfirm /> },
-          { path: 'completed', element: <PaymentCompleted /> },
+          { path: 'method', element: <ProtectedRoute><PaymentMethod /></ProtectedRoute> },
+          { path: 'confirm', element: <ProtectedRoute><PaymentConfirm /></ProtectedRoute> },
+          { path: 'completed', element: <ProtectedRoute><PaymentCompleted /></ProtectedRoute> },
         ],
       },
       {
         path: 'auth',
         children: [
-          { path: 'pattern', element: <PatternLockDemo /> },
-          { path: 'pin', element: <Authentication /> },
+          { path: 'pattern', element: <ProtectedRoute><PatternLockDemo /></ProtectedRoute> },
+          { path: 'pin', element: <ProtectedRoute><Authentication /></ProtectedRoute> },
         ],
       },
       { path: '*', element: <NotFound /> },
