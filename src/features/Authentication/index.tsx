@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './style.module.scss';
 import '../../styles/global.scss';
 import { sendAuthPattern } from '@/utils/patterApi';
@@ -57,6 +57,9 @@ const Authentication = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const methodId = searchParams.get('methodId');
 
   const handleButtonClick = (buttonId: number, actualValue: number) => {
     if (enteredPin.length >= 6 || isCompleted) return;
@@ -97,8 +100,8 @@ const Authentication = () => {
       auth_type: 'PIN' as const,
       auth_value: pin.join(''),
       device_info: navigator.userAgent,
-      order_id: 'ORD20250729001',
-      method_id: 1,
+      order_id: orderId,
+      method_id: methodId,
       payment_method: 'MOBILE_PAY' as PaymentMethodType,
       payment_amount: 8000, // final_amount와 일치
       point_used: 1000, // 주문 조회 응답과 일치
@@ -110,7 +113,7 @@ const Authentication = () => {
 
       if (result.success) {
         setTimeout(() => {
-          navigate('/payment/completed');
+          navigate(`/payment/completed?orderId=${orderId}&methodId=${methodId}`);
         }, 1000);
       } else {
         // 서버에서 실패 응답이 온 경우
