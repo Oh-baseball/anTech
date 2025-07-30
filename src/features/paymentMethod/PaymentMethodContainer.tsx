@@ -4,30 +4,27 @@ import PaymentTitle from './PaymentTitle';
 import PaymentMethodBox from './PaymentMethodBox';
 import PaymentButton from '@/features/paymentMethod/PaymentButton';
 import styles from './style.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import CancelButton from '@/components/CancelButton';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
-const PaymentMethodContainer = ({
-  selectedMethod,
-  setSelectedMethod,
-  handleNext,
-}: {
-  selectedMethod: string | null;
-  setSelectedMethod: React.Dispatch<React.SetStateAction<string | null>>;
-  handleNext: () => void;
-}) => {
+const PaymentMethodContainer = () => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    setSelectedMethod(selectedId ? selectedId.toString() : null);
-  }, [selectedId, setSelectedMethod]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
 
   const sections = [
     { title: '간편결제', categories: ['easy_payment'] },
     { title: '카드 · 계좌', categories: ['card_payment', 'account_payment'] },
   ];
+
+  const handleRocketEnd = () => {
+    navigate(`/payment/confirm?orderId=${orderId}&methodId=${selectedId}`);
+  };
 
   return (
     <div className={`${styles.wrapper} ${darkMode ? styles.dark_mode : ''}`}>
@@ -45,23 +42,19 @@ const PaymentMethodContainer = ({
                   category={section.categories[0]}
                   selectedId={selectedId}
                   setSelectedId={setSelectedId}
-                  selectedMethod={selectedMethod}
-                  setSelectedMethod={setSelectedMethod}
                 />
               ) : (
                 <PaymentMethodBox
                   category="card_or_account"
                   selectedId={selectedId}
                   setSelectedId={setSelectedId}
-                  selectedMethod={selectedMethod}
-                  setSelectedMethod={setSelectedMethod}
                 />
               )}
             </div>
           ))}
         </div>
 
-        <PaymentButton buttonOnClick={handleNext} />
+        <PaymentButton handleRocketEnd={handleRocketEnd} />
       </div>
     </div>
   );

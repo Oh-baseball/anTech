@@ -16,7 +16,6 @@ const Header = ({ prevBtn, title, right }: HeaderProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
   const handleClickPrevBtn = () => {
-    console.log('뒤로가기');
     navigate(-1);
   };
   return (

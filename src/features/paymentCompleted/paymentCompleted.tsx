@@ -21,6 +21,7 @@ const initialPositions = [
 
 const PaymentCompletedContainer = () => {
   const navigate = useNavigate();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bottomRef = useRef<HTMLElement>(null);
