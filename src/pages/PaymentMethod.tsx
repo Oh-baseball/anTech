@@ -1,5 +1,12 @@
+import PaymentMethodContainer from "@/features/paymentMethod/PaymentMethodContainer";
+
 const PaymentMethod = () => {
-  return <div>PaymentMethod</div>;
+  return (
+    <>
+      <PaymentMethodContainer />
+    </>
+    
+  )
 };
 
 export default PaymentMethod;

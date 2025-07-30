@@ -5,9 +5,22 @@
   align-items: center;
 }
 
+// 세로 가운데 정렬
+@mixin align-items-center {
+  display: flex;
+  align-items: center;
+}
+
 // 텍스트 한 줄 말줄임
 @mixin ellipsis {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@mixin disableUserSelect {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }

@@ -1,0 +1,102 @@
+.visual_tag {
+  background: linear-gradient(
+    120deg,
+    #f3f3f4 5%,
+    #dadada 20%,
+    #bfc1c7 40%,
+    #eeeeee 60%,
+    #cacacb 83%,
+    #ffffff 100%
+  );
+  color: #444;
+  box-shadow:
+    0 3px 15px 2px rgba(80, 80, 100, 0.1),
+    0 1px 1.5px 0 rgba(165, 165, 180, 0.1),
+    0 0.5px 8px 0 #f8faff inset;
+  border: 1.5px solid #b3b3b7;
+  scale: 0.001;
+  transition: box-shadow 0.2s;
+  position: absolute;
+  z-index: 300;
+  border-radius: $radius-sm;
+  padding: 6px 12px;
+  font-size: 32px;
+  font-weight: $font-weight-semibold;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  @include disableUserSelect;
+}
+
+.visual_tag::before {
+  content: '';
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: #e6e6e6;
+  border-radius: inherit;
+  transform: translateZ(-8px);
+  z-index: -1;
+}
+
+.highlight {
+  position: absolute;
+  left: 15%;
+  top: 8%;
+  width: 60%;
+  height: 35%;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.1) 70%);
+  border-radius: 40% 40% 50% 40% / 30% 60% 40% 60%;
+  opacity: 0.95;
+  pointer-events: none;
+  filter: blur(1.1px);
+  box-shadow: 0 0 12px 3px rgba(180, 180, 205, 0.08);
+  z-index: 1;
+}
+
+.visual_tag::after {
+  content: '';
+  position: absolute;
+  left: 15%;
+  top: 8%;
+  width: 60%;
+  height: 35%;
+  background: linear-gradient(105deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.1) 70%);
+  border-radius: 40% 40% 50% 40% / 30% 60% 40% 60%;
+  opacity: 0.95;
+  pointer-events: none;
+  filter: blur(1.1px);
+  box-shadow: 0 0 12px 3px rgba(180, 180, 205, 0.08);
+}
+
+.toss_pay {
+  top: calc(50% - 120px);
+  left: calc(50% - 80px);
+  max-width: 300px;
+  transform-origin: 23% calc(100% + 12px);
+}
+
+.toss_pay::after {
+  content: '';
+  position: absolute;
+  left: 23%;
+  bottom: -16px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border: 10px solid transparent;
+  border-top: 12px solid #ffffff;
+  border-left: 6px solid #ffffff;
+}
+
+.here {
+  padding: 2px 16px;
+  top: calc(50%);
+  left: calc(50% + 60px);
+  transform: rotateX(28deg) rotateY(-10deg) rotateZ(12deg);
+}
+
+.thx {
+  top: calc(50% + 60px);
+  left: calc(50% - 130px);
+  transform: rotateX(15deg) rotateY(35deg) rotateZ(-23deg);
+}

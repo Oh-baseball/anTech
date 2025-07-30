@@ -1,4 +1,4 @@
-.mobileWrapper {
+.mobile_wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -15,6 +15,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 
+  view-transition-name: "transition_layout";
   &::-webkit-scrollbar {
     display: none;
   }

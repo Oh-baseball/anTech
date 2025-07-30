@@ -1,5 +1,11 @@
+import ProductsContainer from '@/features/products/productsContainer';
+
 const Products = () => {
-  return <div>Products</div>;
+  return (
+    <>
+      <ProductsContainer />
+    </>
+  );
 };
 
 export default Products;

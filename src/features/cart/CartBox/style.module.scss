@@ -1,0 +1,102 @@
+.cartScrollArea {
+  height: auto;
+  width: 100%;
+  overflow: scroll;
+  border-radius: 12px;
+  padding: 0 0 80px 0;
+}
+
+.cartScrollArea::-webkit-scrollbar {
+  display: none;
+}
+
+.cartBox {
+  margin: 6px auto 8px auto;
+  width: 100%;
+}
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 385px;
+  height: 120px;
+  border-radius: $radius-md;
+  background-color: $color-secondary;
+  padding: 20px 16px 20px 16px;
+  margin: 0 auto 16px auto;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+ .left_items{
+     width: 190px;
+     height: 88px;
+     padding-top: 5px;
+     padding-bottom: 5px;
+     margin-right: 35px;
+ 
+     p:nth-of-type(1){
+         font-size: 20px;
+         font-weight: $font-weight-bold;
+         color: #1A1A1A;
+         margin-bottom: 10px;
+     }
+ 
+     p:nth-of-type(2){
+         font-size: 18px;
+         font-weight: $font-weight-bold;
+         color: $color-primary;
+         margin-bottom: 10px;
+     }
+
+ }
+
+ .count{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:20px;
+    
+    button{
+      font-size: 16px;
+      font-weight: $font-weight-semibold;
+    }
+
+    p{
+      font-size: 16px;
+      font-weight: $font-weight-semibold;
+    }
+
+ }
+ 
+ .right_items{
+ 
+     img{
+         width: 70px;
+         height: 70px;
+         border-radius: 10px;
+         object-fit: cover;
+     }
+ }
+
+ .dark_mode {
+  background-color: $color-dark-bg;
+  color: $color-dark-text;
+
+  .cart {
+    background-color: $color-dark-box;
+    
+  }
+
+  .count button {
+    background-color: $color-dark-box;
+    color: $color-dark-text;
+  }
+
+  .left_items {
+    p:nth-of-type(1) {
+      color: $color-dark-text;  // 또는 $color-dark-text (흰색 계열)로 지정
+    }
+  }
+}

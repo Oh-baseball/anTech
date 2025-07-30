@@ -1,0 +1,54 @@
+{
+  // Place your the-movie workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "Axios Request Function": {
+    "prefix": "api-req",
+    "body": [
+      "import { APIResponse, ErrorResponse } from '@/types/api';",
+      "import { axiosInstance } from '@/apis/axiosInstance';",
+      "import axios, { AxiosError } from 'axios';",
+      "",
+      "type ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Request = {",
+      "  ${2}",
+      "}",
+      "",
+      "type ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Response = {",
+      "  ${3}",
+      "}",
+      "",
+      "const ${4:${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}} = async (req: ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Request): Promise<APIResponse<${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Response>> => {",
+      "  try {",
+      "    const response = await axiosInstance.${5|get,post,put,patch,delete|}<APIResponse<${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}Response>>(",
+      "      `/${6:endpoint}`,",
+      "       req",
+      "    );",
+      "    return response.data;",
+      "  } catch (error) {",
+      "    if (axios.isAxiosError(error)) {",
+      "      const errorResponse = (error as AxiosError<ErrorResponse>).response?.data;",
+      "      console.error(errorResponse);",
+      "      throw new Error(errorResponse?.message || '네트워크 요청을 확인해주세요');",
+      "    }",
+      "    throw new Error('다시 시도해주세요');",
+      "  }",
+      "};",
+      "",
+      "export default ${4:${TM_FILENAME_BASE/(.*)/${1:/camelcase}/}}"
+    ],
+    "description": "Axios request function template with error handling"
+  }
+}
