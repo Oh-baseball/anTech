@@ -2,24 +2,20 @@ import styles from "./style.module.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FileUser } from 'lucide-react';
-import useLogin from "@/hooks/queries/useLogin";
-import useUserStore from "@/store/useUserStore";
 import { useCreateUser } from "@/hooks/queries/useUser";
 
 const ResisterLayout = () => {
   const navigate = useNavigate();
-  const [clickedLogin, setClickedLogin] = useState(false);
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const loginMutation = useLogin()
   const ResisiterMutation = useCreateUser()
 
   const Resister = () => {
-    ResisiterMutation.mutate({ name, phone, email, password}, {
+    ResisiterMutation.mutate({ name, phone, email, password }, {
       onSuccess: () => {
         setTimeout(() => {
           navigate('/login', {viewTransition: true});
@@ -55,6 +51,11 @@ const ResisterLayout = () => {
 
   return (
     <div className={styles.login_container}>
+      <div className={styles.video_section}>
+      <video autoPlay muted playsInline >
+        <source src="src/assets/qr_test_video.mp4" type="video/mp4"></source>
+      </video>
+      </div>
       <div className={styles.logo_section}>
         <span>ANTECH</span>
       </div>

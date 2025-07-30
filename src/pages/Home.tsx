@@ -62,12 +62,12 @@ const Home = () => {
       time: '12:34',
       pay: 4500
     },
-    {
-      img: 'https://picsum.photos/200/300',
-      title: '스타벅스 강남점',
-      time: '12:34',
-      pay: 4500
-    }
+    // {
+    //   img: 'https://picsum.photos/200/300',
+    //   title: '스타벅스 강남점',
+    //   time: '12:34',
+    //   pay: 4500
+    // }
   ]
 
   return (
