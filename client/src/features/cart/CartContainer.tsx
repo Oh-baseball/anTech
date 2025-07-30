@@ -6,9 +6,12 @@ import { useState, useEffect } from 'react';
 import styles from './style.module.scss';
 import { getCartDetails } from '@/utils/utils';
 import { CartItem } from '@/types/store';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 const CartContainer = () => {
   const [items, setItems] = useState<CartItem[]>([]);
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   useEffect(() => {
     const cartDetails = getCartDetails();
@@ -52,7 +55,7 @@ const CartContainer = () => {
   const totalPrice = items.reduce((sum, item) => sum + item.price * item.count, 0);
 
   return (
-    <>
+    <div className={`${styles.cartContainer} ${darkMode ? styles.dark_mode : ''}`}>
       <Header
         prevBtn={true}
         title="장바구니"
@@ -71,8 +74,8 @@ const CartContainer = () => {
       <StoreInfoBox />
       <CartBox items={items} onIncrease={handleIncrease} onDecrease={handleDecrease} />
       {/* <CartTotalBox items={items}/> */}
-      <CartButtonBox amount={totalPrice} />
-    </>
+      <CartButtonBox amount={totalPrice} items={items} />
+    </div>
   );
 };
 

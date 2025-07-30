@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import storeImg from "@/assets/store.svg";
 import { Store } from '@/types/store';
 import fetchStoreById from '@/apis/stores/fetchStoreById';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 interface StoreInfoBoxItem {
   img: string;
@@ -14,6 +15,8 @@ const StoreInfoBox = () => {
   const [storeData, setStoreData] = useState<StoreInfoBoxItem | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   // API에서 스토어 데이터 로드
   useEffect(() => {
@@ -47,7 +50,7 @@ const StoreInfoBox = () => {
   // 로딩 상태 처리
   if (loading) {
     return (
-      <div className={styles.storeInfoBox}>
+      <div className={`${styles.storeInfoBox} ${darkMode ? styles.dark_mode : ''}`}>
         <div className={styles.left_items}>
           <p>스토어 정보를 불러오는 중...</p>
         </div>
@@ -61,7 +64,7 @@ const StoreInfoBox = () => {
   // 에러 상태 처리
   if (error) {
     return (
-      <div className={styles.storeInfoBox}>
+      <div className={`${styles.storeInfoBox} ${darkMode ? styles.dark_mode : ''}`}>
         <div className={styles.left_items}>
           <p>스토어 정보를 불러올 수 없습니다.</p>
           <p style={{ color: 'red', fontSize: '12px' }}>{error}</p>
@@ -76,7 +79,7 @@ const StoreInfoBox = () => {
   // 데이터가 없는 경우
   if (!storeData) {
     return (
-      <div className={styles.storeInfoBox}>
+      <div className={`${styles.storeInfoBox} ${darkMode ? styles.dark_mode : ''}`}>
         <div className={styles.left_items}>
           <p>스토어 정보가 없습니다.</p>
         </div>
@@ -88,7 +91,7 @@ const StoreInfoBox = () => {
   }
 
   return (
-    <div className={styles.storeInfoBox}>
+    <div className={`${styles.storeInfoBox} ${darkMode ? styles.dark_mode : ''}`}>
       <div className={styles.left_items}>
         <p>{storeData.name}</p>
         <p>{storeData.address}</p>

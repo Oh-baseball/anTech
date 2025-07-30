@@ -6,6 +6,7 @@ import Header from '@/components/Header';
 import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
 import useMenuStore from '@/features/products/menuStore';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 const ProductsContainer = () => {
   const menuBoxRef = useRef<StoreMenuBoxRef>(null);
@@ -15,6 +16,8 @@ const ProductsContainer = () => {
   const [cartCount, setCartCount] = useState(0);
 
   const { menuItems, categories, fetchMenus } = useMenuStore();
+
+  const darkMode = useDarkModeStore((state) => state.darkMode);
 
   // 장바구니 개수
   useEffect(() => {
@@ -49,7 +52,7 @@ const ProductsContainer = () => {
   };
 
   return (
-    <>
+    <div className={`${styles.productsContainer} ${darkMode ? styles.dark_mode : ''}`}>
       <Header
         prevBtn={true}
         title="스타벅스 강남점"
@@ -76,8 +79,8 @@ const ProductsContainer = () => {
         ref={menuBoxRef}
         setCartCount={setCartCount}
       />
-    </>
-  );
+    </div>
+  );  
 };
 
 export default ProductsContainer;

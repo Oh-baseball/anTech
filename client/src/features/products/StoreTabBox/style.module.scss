@@ -42,3 +42,18 @@
         margin-left: 9px;
     }
 }
+
+.dark_mode {
+    background-color: $color-dark-bg;
+  
+    button {
+      color: $color-dark-text; 
+  
+      &.activeTab {
+        color: $color-dark-text; 
+        &::after {
+          background-color: $color-dark-text; 
+        }
+      }
+    }
+  }

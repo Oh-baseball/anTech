@@ -6,7 +6,7 @@ import { Order, OrderItem } from '@/types/order';
 type CreateOrderRequest = {
   user_id: number;
   store_id: number;
-  items: Pick<OrderItem, 'menu_id' | 'menu_name'>[];
+  items: Pick<OrderItem, 'menu_id' | 'quantity'>[];
   point_used: number;
 };
 
@@ -27,3 +27,4 @@ const createOrder = async (req: CreateOrderRequest): Promise<APIResponse<CreateO
 };
 
 export default createOrder;
+export type {CreateOrderRequest};
