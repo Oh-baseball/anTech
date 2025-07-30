@@ -1,3 +1,4 @@
+import StoreInfoBox from '../products/StoreInfoBox';
 import styles from './style.module.scss';
 
 const QRScanLayout = () => {
@@ -8,6 +9,9 @@ const QRScanLayout = () => {
           <source src="src/assets/qr_test_video.mp4" type="video/mp4"></source>
         </video>
       </div>
+      {/* <div>
+        <StoreInfoBox/>
+      </div> */}
     </div>
   )
 };
