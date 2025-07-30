@@ -53,3 +53,12 @@
         margin-right: 24px;
     }
 }
+
+.dark_mode {
+    background-color: $color-dark-box;
+    color: $color-dark-text;
+  
+    .headerRow, .labelRow, .itemRow {
+      color: $color-dark-text;
+    }
+  }

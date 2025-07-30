@@ -3,7 +3,7 @@ import { axiosInstance } from '../axiosInstance';
 import axios, { AxiosError } from 'axios';
 import { User } from '@/types/user';
 
-type FetchUserByIdResponse = Omit<User, 'password'>;
+export type FetchUserByIdResponse = Omit<User, 'password'>;
 
 const fetchUserById = async (userId: number): Promise<APIResponse<FetchUserByIdResponse>> => {
   try {

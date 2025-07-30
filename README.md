@@ -1,87 +1,64 @@
-# ANTech 💳
+AN Payment Web App
 
-ANTech는 현대적인 모바일 결제 시스템을 위한 풀스택 애플리케이션입니다. React 19와 TypeScript를 기반으로 한 클라이언트와 Express.js 기반의 서버로 구성되어 있습니다.
+간편하고 안전한 결제 경험을 제공하는 프론트엔드 프로젝트
 
-## 🚀 주요 기능
+Vite + React 19 + TypeScript 기반으로 구축되었으며, 모듈화된 폴더 구조·일관된 Git/코딩 컨벤션·AI 리뷰 프로세스를 통해 협업 효율과 코드 품질을 극대화합니다.
 
-- **🎨 모던 UI/UX**: React 19 + Vite + SCSS 모듈
-- **🌙 다크모드**: 부드러운 전환 효과와 함께 제공
-- **📱 모바일 최적화**: 반응형 디자인으로 모든 기기 지원
-- **🔐 보안 인증**: 패턴 기반 사용자 인증 시스템
-- **🛒 결제 시스템**: 장바구니, 결제 확인, 송금 기능
-- **⚡ 빠른 개발**: pnpm 워크스페이스로 효율적인 의존성 관리
+⸻
 
-## 🏗️ 프로젝트 구조
+목차
+
+1. 기술 스택
+
+2. 시작하기
+
+3. 폴더 구조
+
+4. Git Convention
+
+5. Coding Convention
+
+6. React Convention
+
+7. Type Convention
+
+8. 커밋 & 코드 리뷰
+
+⸻
+
+## 1. 기술 스택
+
+영역 사용 기술
 
 ```
-anTech-develop/
-├── client/ # React 프론트엔드
-│ ├── src/
-│ │ ├── components/ # 재사용 가능한 컴포넌트
-│ │ ├── features/ # 기능별 컴포넌트
-│ │ ├── pages/ # 페이지 컴포넌트
-│ │ ├── store/ # Zustand 상태 관리
-│ │ └── styles/ # SCSS 스타일
-│ ├── package.json
-│ └── vite.config.ts
-├── server/ # Express 백엔드
-│ ├── src/
-│ │ └── index.ts # 서버 엔트리 포인트
-│ ├── package.json
-│ └── tsconfig.json
-├── package.json # 루트 워크스페이스 설정
-├── pnpm-workspace.yaml # pnpm 워크스페이스 구성
-└── README.md
+Language TypeScript 5.x
+Framework React 19, React Router v6
+Build Tool Vite 5.x
+State Mgmt Zustand | Context API
+Styling SCSS (CSS Modules)
+Testing Vitest, React Testing Library
+Linter / Formatter ESLint + Prettier
+CI/CD GitHub Actions (Deploy to Vercel)
 ```
 
-## 🛠️ 기술 스택
+⸻
 
-### Frontend
+## 2. 시작하기
 
-- **React 19** - 최신 React 기능 활용
-- **TypeScript** - 타입 안전성
-- **Vite** - 빠른 개발 서버
-- **SCSS Modules** - 스타일 격리
-- **Zustand** - 경량 상태 관리
-- **React Router** - 클라이언트 사이드 라우팅
-- **Framer Motion** - 애니메이션
-- **React Query** - 서버 상태 관리
+### 1. 저장소 클론
 
-### Backend
+git clone https://github.com/your-org/The-Movie.git
+cd The-Moive
 
-- **Express.js** - Node.js 웹 프레임워크
-- **TypeScript** - 타입 안전성
-- **CORS** - Cross-Origin Resource Sharing
-- **Helmet** - 보안 헤더
-- **Morgan** - HTTP 요청 로깅
+### 2. 패키지 설치
 
-### Development Tools
-
-- **pnpm** - 효율적인 패키지 매니저
-- **ESLint** - 코드 품질 관리
-- **Prettier** - 코드 포맷팅
-- **Concurrently** - 동시 스크립트 실행
-
-## 🚀 시작하기
-
-### 필수 조건
-
-- Node.js 18+
-- pnpm 8+
-
-### 설치 및 실행
-
-```bash
-# 저장소 클론
-git clone <repository-url>
-cd anTech-develop
-
-# 모든 의존성 설치
 pnpm install
 
 # 개발 서버 실행 (클라이언트: 3000, 서버: 5000)
+
 pnpm dev
-```
+
+````
 
 ### 개별 실행
 
@@ -91,7 +68,7 @@ pnpm dev:client
 
 # 서버만 실행
 pnpm dev:server
-```
+````
 
 ## 📝 사용 가능한 스크립트
 
@@ -142,39 +119,32 @@ pnpm dev:server
 //src/components/NewComponent/index.tsx
 import styles from './style.module.scss';
 
-const NewComponent = () => {
-  return <div className={styles.container}>{/* 컴포넌트 내용 */}</div>;
+const Home = () => {
+return <div className={styles.home_container}>Home</div>;
 };
 
-export default NewComponent;
+export default Home;
 ```
 
-### API 호출 예시
+⸻
 
-```typescript
-// 클라이언트에서 API 호출
-const response = await fetch('/api/health');
-const data = await response.json();
-```
+## 7. Type Convention
 
-### 상태 관리
-
-```typescript
-// Zustand 스토어 사용
-const darkMode = useDarkModeStore((state) => state.darkMode);
-const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
-```
+규칙 설명
 
 ```
-
-이 README는 다음과 같은 내용을 포함합니다:
-
-1. **프로젝트 소개** - ANTech가 무엇인지 명확히 설명
-2. **기술 스택** - 사용된 모든 기술들을 카테고리별로 정리
-3. **설치 및 실행 가이드** - 누구나 쉽게 따라할 수 있는 단계
-4. **스크립트 설명** - 모든 pnpm 명령어들의 용도
-5. **프로젝트 구조** - 폴더 구조와 각각의 역할
-6. **개발 가이드** - 새로운 기여자들을 위한 가이드
-7. **기여 방법** - 오픈소스 협업을 위한 가이드라인
-
+undefined 사용 null 대신 undefined 선호
+any 금지 필요한 경우 unknown 사용
+타입 선언 type 키워드 (type User = {...})
+인터페이스 선언 메서드·필수 속성 포함 시 interface
+전역 타입 src/types/ 폴더에 정의 & 재export
 ```
+
+⸻
+
+### 커밋 & 코드 리뷰
+
+• 커밋 타임 : 매일 16:50 KST 이후 dev ← feat/\* 머지 권장
+• 코드 리뷰 : GitHub Pull Request → AI 리뷰 툴(ex. GitHub Copilot CI) 검사 후 팀원 승인
+
+⸻

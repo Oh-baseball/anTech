@@ -1,4 +1,5 @@
 import styles from './style.module.scss';
+import useDarkModeStore from '@/store/useDarkModeStore';
 
 export interface StoreTabBoxItem {
   name: string;
@@ -18,9 +19,10 @@ const dummyTabItems = [
   
 const StoreTabBox = ({ StoreTabBoxItmes, activeTab, onTabClick }: StoreTabBoxProps) => {
     const items = StoreTabBoxItmes ?? dummyTabItems;
+    const darkMode = useDarkModeStore((state) => state.darkMode);
     return (
         <>
-        <div className={styles.storeTabBox}>
+        <div className={`${styles.storeTabBox} ${darkMode ? styles.dark_mode : ''}`}>
           {items.map((boxItem, idx) => (
             <button 
               key={idx}

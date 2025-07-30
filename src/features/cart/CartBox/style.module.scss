@@ -79,3 +79,24 @@
          object-fit: cover;
      }
  }
+
+ .dark_mode {
+  background-color: $color-dark-bg;
+  color: $color-dark-text;
+
+  .cart {
+    background-color: $color-dark-box;
+    
+  }
+
+  .count button {
+    background-color: $color-dark-box;
+    color: $color-dark-text;
+  }
+
+  .left_items {
+    p:nth-of-type(1) {
+      color: $color-dark-text;  // 또는 $color-dark-text (흰색 계열)로 지정
+    }
+  }
+}

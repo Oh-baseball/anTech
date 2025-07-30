@@ -1,0 +1,135 @@
+.shimmer_effect {
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+}
+
+.shimmer_effect::after {
+  content: '';
+  position: absolute;
+  top: -150%;
+  left: -150%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer_diagonal 1s infinite;
+  pointer-events: none;
+  z-index: 999;
+}
+
+@keyframes shimmer_diagonal {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  100% {
+    transform: translate(75%, 75%);
+  }
+}
+
+.line {
+  border-bottom: 2px solid #e0e0e0;
+  margin: 16px 0;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 68px;
+  background: rgba(0, 0, 0, 0.16);
+  display: flex;
+  // align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 10% 20px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  height: fit-content;
+  max-height: 100%;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
+  position: relative;
+  padding: 30px 20px;
+
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.close_btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.title {
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #212121;
+  letter-spacing: 1.2px;
+}
+
+.metaRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.infoTable,
+.amountTable {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.infoTable > div,
+.amountTable > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.98rem;
+  margin-bottom: 5px;
+}
+
+.amountTotal {
+  font-weight: 700;
+  margin-top: 8px;
+  background: #f8f8fa;
+  border-radius: 6px;
+  padding: 7px 0;
+}
+
+.shopInfo {
+  margin: 12px 0 4px 0;
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.25;
+}
+
+.notice {
+  font-size: 0.86rem;
+  color: #999;
+  margin-top: 10px;
+  border-top: 1px solid #eaeaea;
+  padding-top: 6px;
+  line-height: 1.4;
+}
