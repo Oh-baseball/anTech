@@ -35,6 +35,10 @@ const PaymentButton = ({
 
   const handleClick = () => {
     if (buttonOnClick) {
+      if (!selectedMethod) {
+        buttonOnClick();
+        return;
+      }
       setShowRocket(true);
       buttonOnClick();
     }
@@ -48,7 +52,10 @@ const PaymentButton = ({
 
   return (
     <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
-      <button className={styles.button} onClick={handleClick}>
+      <button 
+        className={`${styles.button} ${!selectedMethod ? styles.disabled : ''}`} 
+        onClick={handleClick}
+      >
         <span>토스페이로 {data.amount.toLocaleString()}원 결제</span>
       </button>
       {showRocket && <PaymentRocket onAnimationEnd={handleRocketEnd} />}

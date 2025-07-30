@@ -61,7 +61,7 @@ const PaymentMethodContainer = ({
           ))}
         </div>
 
-        <PaymentButton buttonOnClick={handleNext} />
+        <PaymentButton buttonOnClick={handleNext} selectedMethod={selectedMethod} />
       </div>
     </div>
   );

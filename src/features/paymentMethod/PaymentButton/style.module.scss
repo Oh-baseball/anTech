@@ -23,6 +23,15 @@
             font-size: 17px;
             font-weight: $font-weight-semibold;
         }
+
+        &.disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            
+            span {
+                color: #666;
+            }
+        }
     }
 }
 

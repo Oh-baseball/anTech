@@ -12,6 +12,11 @@ const PaymentMethod = () => {
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
 
   const handleNext = () => {
+    if (!selectedMethod) {
+      alert('결제 수단을 선택해주세요.');
+      return;
+    }
+
     const orderData = queryClient.getQueryData(['order', orderId]);
 
     if (!orderData) {
