@@ -9,7 +9,7 @@ import { useCreateOrder } from '@/hooks/queries/useOrder';
 interface StoreButtonBoxProps {
   selectedId: number | null;
   setCartCount: (count: number) => void;
-  selectedItems: { menu_id: number; quantity: number }[]; // 새로 추가
+  selectedItems: { menu_id: number; quantity: number; price: number; }[];
 }
 
 const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButtonBoxProps) => {
@@ -40,7 +40,7 @@ const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButton
       store_id: 1,
       items: selectedItems.map((item) => ({
         menu_id: item.menu_id,
-        quantity: 1,
+        quantity: 1
       })),
       point_used: 0,
     };

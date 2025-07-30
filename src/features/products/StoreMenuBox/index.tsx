@@ -30,7 +30,7 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
 
     //주문 생성을 위한 아이템 목록
     const [selectedItems, setSelectedItems] = useState<
-      { menu_id: number; quantity: number }[]
+      { menu_id: number; quantity: number; price: number; }[]
     >([]);
 
     const imgRef = useRef<Record<number, HTMLImageElement | null>>({});
@@ -116,6 +116,7 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
                           {
                             menu_id: item.id,
                             quantity: 1,
+                            price: item.price
                           },
                         ]);
                       }}
@@ -145,7 +146,8 @@ const StoreMenuBox = forwardRef<StoreMenuBoxRef, StoreMenuBoxProps>(
           ))}
         </div>
         {/* StoreButtonBox에 selectedId를 prop으로 전달 */}
-        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount} selectedItems={selectedItems} />
+        <StoreButtonBox selectedId={selectedId} setCartCount={setCartCount}
+        selectedItems={selectedItems}/>
       </>
     );
   },

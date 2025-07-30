@@ -39,6 +39,9 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
     };
 
     createOrderMutation.mutate(req);
+
+    localStorage.removeItem('cartItems');
+
   };
 
   return (
