@@ -1,180 +1,218 @@
-# ANTech 💳
+AN Payment Web App
 
-ANTech는 현대적인 모바일 결제 시스템을 위한 풀스택 애플리케이션입니다. React 19와 TypeScript를 기반으로 한 클라이언트와 Express.js 기반의 서버로 구성되어 있습니다.
+간편하고 안전한 결제 경험을 제공하는 프론트엔드 프로젝트
 
-## 🚀 주요 기능
+Vite + React 19 + TypeScript 기반으로 구축되었으며, 모듈화된 폴더 구조·일관된 Git/코딩 컨벤션·AI 리뷰 프로세스를 통해 협업 효율과 코드 품질을 극대화합니다.
 
-- **🎨 모던 UI/UX**: React 19 + Vite + SCSS 모듈
-- **🌙 다크모드**: 부드러운 전환 효과와 함께 제공
-- **📱 모바일 최적화**: 반응형 디자인으로 모든 기기 지원
-- **🔐 보안 인증**: 패턴 기반 사용자 인증 시스템
-- **🛒 결제 시스템**: 장바구니, 결제 확인, 송금 기능
-- **⚡ 빠른 개발**: pnpm 워크스페이스로 효율적인 의존성 관리
+⸻
 
-## 🏗️ 프로젝트 구조
+목차
+
+1. 기술 스택
+
+2. 시작하기
+
+3. 폴더 구조
+
+4. Git Convention
+
+5. Coding Convention
+
+6. React Convention
+
+7. Type Convention
+
+8. 커밋 & 코드 리뷰
+
+⸻
+
+## 1. 기술 스택
+
+영역 사용 기술
 
 ```
-anTech-develop/
-├── client/ # React 프론트엔드
-│ ├── src/
-│ │ ├── components/ # 재사용 가능한 컴포넌트
-│ │ ├── features/ # 기능별 컴포넌트
-│ │ ├── pages/ # 페이지 컴포넌트
-│ │ ├── store/ # Zustand 상태 관리
-│ │ └── styles/ # SCSS 스타일
-│ ├── package.json
-│ └── vite.config.ts
-├── server/ # Express 백엔드
-│ ├── src/
-│ │ └── index.ts # 서버 엔트리 포인트
-│ ├── package.json
-│ └── tsconfig.json
-├── package.json # 루트 워크스페이스 설정
-├── pnpm-workspace.yaml # pnpm 워크스페이스 구성
+Language TypeScript 5.x
+Framework React 19, React Router v6
+Build Tool Vite 5.x
+State Mgmt Zustand | Context API
+Styling SCSS (CSS Modules)
+Testing Vitest, React Testing Library
+Linter / Formatter ESLint + Prettier
+CI/CD GitHub Actions (Deploy to Vercel)
+```
+
+⸻
+
+## 2. 시작하기
+
+### 1. 저장소 클론
+
+git clone https://github.com/your-org/The-Movie.git
+cd The-Moive
+
+### 2. 패키지 설치
+
+pnpm install
+
+### 3. 개발 서버 실행
+
+`pnpm run dev` # http://localhost:5173
+
+### 4. 프로덕션 빌드
+
+pnpm build
+
+Node ≥ 20 및 pnpm 가 필요합니다. pnpm 설치 가이드를 참고하세요.
+
+⸻
+
+## 3. 폴더 구조
+
+```
+AN-Payment-Web/
+├── src/
+│ ├── assets/ # 이미지 · 폰트 등 정적 리소스
+│ ├── components/ # 재사용 가능한 UI 컴포넌트
+│ │ └─ Button/
+│ │ ├─ index.tsx
+│ │ └─ style.module.scss
+│ ├── features/ # 도메인/기능별 폴더 (비즈니스 로직)
+│ │ └─ checkout/
+│ │ ├─ ProcessCheckout.tsx
+│ │ └─ Components/
+│ │ ├─ index.tsx
+│ │ └─ style.module.scss
+│ ├── hooks/ # 커스텀 훅
+│ ├── layouts/ # 레이아웃 컴포넌트 (Header, Footer 등)
+│ ├── pages/ # 페이지(라우트) 컴포넌트
+│ ├── api/ # 외부 API 연동 모듈 (Toss Payments SDK 등)
+│ ├── store/ # 전역 상태 관리 (Zustand)
+│ ├── types/ # 전역 타입 정의
+│ ├── utils/ # 유틸 함수 · 상수
+│ ├── App.tsx # 앱 엔트리 컴포넌트
+│ ├── main.tsx # 진입점 (createRoot)
+│ ├── router.tsx # 라우터 설정
+│ └── vite-env.d.ts # Vite 환경 타입
+│
+├── .github/workflows/ # CI 파이프라인 정의
+├── .eslintrc.json # ESLint 설정
+├── .gitignore
+├── package.json
+├── pnpm-workspace.yaml # PNPM Monorepo 설정(선택)
+├── tsconfig.json
+├── vite.config.ts
 └── README.md
 ```
 
-## 🛠️ 기술 스택
+폴더 이름은 소문자 카멜 케이스를 기본으로, 컴포넌트 폴더는 파스칼 케이스를 사용합니다.
 
-### Frontend
+⸻
 
-- **React 19** - 최신 React 기능 활용
-- **TypeScript** - 타입 안전성
-- **Vite** - 빠른 개발 서버
-- **SCSS Modules** - 스타일 격리
-- **Zustand** - 경량 상태 관리
-- **React Router** - 클라이언트 사이드 라우팅
-- **Framer Motion** - 애니메이션
-- **React Query** - 서버 상태 관리
+## 4. Git Convention
 
-### Backend
+태그 용도
 
-- **Express.js** - Node.js 웹 프레임워크
-- **TypeScript** - 타입 안전성
-- **CORS** - Cross-Origin Resource Sharing
-- **Helmet** - 보안 헤더
-- **Morgan** - HTTP 요청 로깅
+```
+feat 새로운 기능 추가
+fix 버그 수정
+docs 문서 수정
+style 코드 포맷 변경 (세미콜론 누락 등), 논리 변경 없음
+refactor 프로덕션 코드 리팩터링
+test 테스트 코드 추가·수정, 프로덕션 코드 변경 없음
+chore 빌드 태스크 · 패키지 매니저 설정 등, 프로덕션 코드 변경 없음
 
-### Development Tools
-
-- **pnpm** - 효율적인 패키지 매니저
-- **ESLint** - 코드 품질 관리
-- **Prettier** - 코드 포맷팅
-- **Concurrently** - 동시 스크립트 실행
-
-## 🚀 시작하기
-
-### 필수 조건
-
-- Node.js 18+
-- pnpm 8+
-
-### 설치 및 실행
-
-```bash
-# 저장소 클론
-git clone <repository-url>
-cd anTech-develop
-
-# 모든 의존성 설치
-pnpm install
-
-# 개발 서버 실행 (클라이언트: 3000, 서버: 5000)
-pnpm dev
+브랜치 전략 : main ← dev ← feat/✱, bugfix/✱
+커밋 메시지 서식 : <type>: <subject> (예: feat: 결제 내역 조회 API 연동)
 ```
 
-### 개별 실행
+⸻
 
-```bash
-# 클라이언트만 실행
-pnpm dev:client
+## 5. Coding Convention
 
-# 서버만 실행
-pnpm dev:server
+네이밍 규칙
+
 ```
+구분 규칙 예시
+상수 대문자 + 스네이크 케이스 const MAX_RETRY = 3;
+변수·함수 카멜 케이스 const paymentList = [];
+배열 복수형 const orders = [];
+정규식 r 접두어 const rPhone = /^\d{3}-\d{4}-\d{4}$/;
+이벤트 핸들러 on 접두어 const onSubmit = () => {};
+불린 반환 is 접두어 const isLoading = true;
+Fetch 함수 get·post·put·del 접두어 const getPaymentList = () => {...}
 
-## 📝 사용 가능한 스크립트
+블록 구문
 
-| 명령어            | 설명                                        |
-| ----------------- | ------------------------------------------- |
-| `pnpm dev`        | 클라이언트와 서버를 동시에 개발 모드로 실행 |
-| `pnpm build`      | 프로덕션 빌드 생성                          |
-| `pnpm start`      | 프로덕션 모드로 실행                        |
-| `pnpm lint`       | ESLint로 코드 품질 검사                     |
-| `pnpm type-check` | TypeScript 타입 검사                        |
-| `pnpm clean`      | 빌드 파일과 node_modules 정리               |
-| `pnpm setup`      | 전체 초기화 후 빌드                         |
-| `pnpm dev:fresh`  | 전체 초기화 후 개발 서버 실행               |
+한 줄이어도 중괄호 {} 를 생략하지 않고 줄바꿈합니다.
 
-## 🌐 포트 설정
+// bad
+if (isPaid) return "success";
 
-- **클라이언트**: http://localhost:3000
-- **서버**: http://localhost:5000
-- **API 엔드포인트**: http://localhost:5000/api
+// good
+if (isPaid) {
+return "success";
+}
 
-## 📁 주요 디렉토리 설명
+함수 정의
+• 함수 표현식 + 화살표 함수를 사용합니다.
 
-### Client (`/client`)
+// bad
+function handlePay() {}
 
-- `src/components/` - Header, Login, MobileWrapper 등 공통 컴포넌트
-- `src/features/` - Authentication, Home, Cart, Products 등 기능별 컴포넌트
-- `src/pages/` - 각 라우트에 해당하는 페이지 컴포넌트
-- `src/store/` - Zustand를 사용한 전역 상태 관리
-- `src/styles/` - SCSS 변수, 믹스인, 글로벌 스타일
-
-### Server (`/server`)
-
-- `src/index.ts` - Express 서버 설정 및 라우트 정의
-- API 엔드포인트들이 `/api` 경로로 제공됨
-
-## 🎨 스타일링
-
-- **SCSS Modules** 사용으로 스타일 격리
-- **다크모드** 지원 (Zustand로 상태 관리)
-- **반응형 디자인** (모바일 우선)
-- **애니메이션** (Framer Motion 활용)
-
-## 🔧 개발 가이드
-
-### 새로운 컴포넌트 추가
-
-```typescript
-// src/components/NewComponent/index.tsx
-import styles from './style.module.scss';
-
-const NewComponent = () => {
-  return <div className={styles.container}>{/* 컴포넌트 내용 */}</div>;
+// good
+const handlePay = () => {
+// ...
 };
 
-export default NewComponent;
+바로 반환하는 경우 중괄호와 return 생략
+
+const getTotal = (a: number, b: number) => a + b;
 ```
 
-### API 호출 예시
+폴더 네이밍
+• 기본 카멜 케이스
+• 컴포넌트 폴더만 파스칼 케이스 (예: Button/)
 
-```typescript
-// 클라이언트에서 API 호출
-const response = await fetch('/api/health');
-const data = await response.json();
-```
+스타일 가이드
+• CSS 모듈(.module.scss)
+• 클래스명은 스네이크 케이스 (payment_container)
 
-### 상태 관리
+⸻
 
-```typescript
-// Zustand 스토어 사용
-const darkMode = useDarkModeStore((state) => state.darkMode);
-const toggleDarkMode = useDarkModeStore((state) => state.toggleDarkMode);
-```
+## 6. React Convention
 
 ```
+• Props 개수 3개 초과 시 ...spread 활용
+• 함수형 컴포넌트 예시
 
-이 README는 다음과 같은 내용을 포함합니다:
+import styles from "./home.module.scss";
 
-1. **프로젝트 소개** - ANTech가 무엇인지 명확히 설명
-2. **기술 스택** - 사용된 모든 기술들을 카테고리별로 정리
-3. **설치 및 실행 가이드** - 누구나 쉽게 따라할 수 있는 단계
-4. **스크립트 설명** - 모든 pnpm 명령어들의 용도
-5. **프로젝트 구조** - 폴더 구조와 각각의 역할
-6. **개발 가이드** - 새로운 기여자들을 위한 가이드
-7. **기여 방법** - 오픈소스 협업을 위한 가이드라인
+const Home = () => {
+return <div className={styles.home_container}>Home</div>;
+};
+
+export default Home;
+```
+
+⸻
+
+## 7. Type Convention
+
+규칙 설명
 
 ```
+undefined 사용 null 대신 undefined 선호
+any 금지 필요한 경우 unknown 사용
+타입 선언 type 키워드 (type User = {...})
+인터페이스 선언 메서드·필수 속성 포함 시 interface
+전역 타입 src/types/ 폴더에 정의 & 재export
+```
+
+⸻
+
+### 커밋 & 코드 리뷰
+
+• 커밋 타임 : 매일 16:50 KST 이후 dev ← feat/\* 머지 권장
+• 코드 리뷰 : GitHub Pull Request → AI 리뷰 툴(ex. GitHub Copilot CI) 검사 후 팀원 승인
+
+⸻
