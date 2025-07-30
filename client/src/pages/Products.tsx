@@ -1,9 +1,9 @@
-import ProductsContainer from "@/features/products/ProductsContainer";
+import ProductsContainer from '@/features/products/productsContainer';
 
 const Products = () => {
   return (
     <>
-    <ProductsContainer/>
+      <ProductsContainer />
     </>
   );
 };
