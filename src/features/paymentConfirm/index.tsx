@@ -7,8 +7,6 @@ import ActionButton from '@/components/ActionButton';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { Order } from '@/types/order';
-import useUserStore from '@/store/useUserStore';
-import { usePaymentMethod } from '@/hooks/queries/usePaymentMethod';
 
 const PaymentConfirmContainer = () => {
   const navigate = useNavigate();
@@ -17,8 +15,6 @@ const PaymentConfirmContainer = () => {
   const methodId = searchParams.get('methodId');
   const queryClient = useQueryClient();
   const orderData = queryClient.getQueryData<Order>(['order', orderId]);
-  const userId = useUserStore((state) => state.userId);
-  const { paymentMethod, isPending } = usePaymentMethod({ userId, methodId });
 
   // useEffect(() => {
   //   console.log('userId', userId);
@@ -31,12 +27,12 @@ const PaymentConfirmContainer = () => {
   //   })();
   // }, []);
 
-  if (!orderData || isPending) {
+  if (!orderData) {
     return <></>;
   }
 
   const handleOnclickPayment = () => {
-    navigate(`/auth?orderId=${orderId}&methodId=${methodId}`);
+    navigate(`/auth/pattern?orderId=${orderId}&methodId=${methodId}`);
   };
 
   return (

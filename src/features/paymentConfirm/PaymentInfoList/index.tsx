@@ -3,6 +3,8 @@ import PaymentInfoItem from '../PaymentInfoItem';
 import styles from './style.module.scss';
 import { Order } from '@/types/order';
 import { useEffect } from 'react';
+import useUserStore from '@/store/useUserStore';
+import { usePaymentMethod } from '@/hooks/queries/usePaymentMethod';
 
 interface PaymentInfoListProps {
   orderId: string | null;
@@ -12,12 +14,14 @@ interface PaymentInfoListProps {
 const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
   const queryClient = useQueryClient();
   const orderData = queryClient.getQueryData<Order>(['order', orderId]);
+  const userId = useUserStore((state) => state.userId);
+  const { paymentMethod, isPending } = usePaymentMethod({ userId, methodId });
 
   useEffect(() => {
     console.log('methodId', methodId);
   }, [methodId]);
 
-  if (!orderData) {
+  if (!orderData || isPending) {
     return <></>;
   }
 
@@ -30,7 +34,7 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
   };
 
   const infoList = [
-    { label: '결제수단', value: '토스뱅크 통장 (***1234)' },
+    { label: '결제수단', value: `${paymentMethod?.alias_name} (${paymentMethod?.masked_number})` },
     { label: '상품명', value: `${orderData.items[0].menu_name}${getAdditionalItemText()}` },
     { label: '주문금액', value: orderData.total_amount.toLocaleString() },
     { label: '할인혜택', value: orderData.discount_amount.toLocaleString(), isDiscount: true },
