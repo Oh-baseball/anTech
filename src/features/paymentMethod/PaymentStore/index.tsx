@@ -22,15 +22,15 @@ const PaymentStore = () => {
   const [error, setError] = useState<string | null>(null);
 
   const queryClient = useQueryClient();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
   const orderData = queryClient.getQueryData(['order', orderId]);
 
-  const updateParam = () => {
-    setSearchParams({orderId: 'newValue'});
-  }
+  // const updateParam = () => {
+  //   setSearchParams({orderId: 'newValue'});
+  // }
 
-
+  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -38,13 +38,14 @@ const PaymentStore = () => {
       
       try {
         const res = await axios.get<PaymentProvider[]>(
-            `${import.meta.env.VITE_BASE_URL}orders/:orderId`
+            `${import.meta.env.VITE_BASE_URL}orders/${orderId}`
         );
         const resData= await res.data
 
         console.log(res.status)
         setData(resData);
         console.log('API 응답:', resData);
+        console.log('orderData:',orderData);
 
       } catch (error) {
         const errorMessage = axios.isAxiosError(error) 
