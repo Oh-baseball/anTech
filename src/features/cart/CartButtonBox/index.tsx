@@ -1,10 +1,11 @@
 import CartButton from '../CartButton';
 import styles from './style.module.scss';
 import { useNavigate } from 'react-router-dom';
-import createOrder, { CreateOrderRequest } from '@/apis/orders/createOrder';
+import { CreateOrderRequest } from '@/apis/orders/createOrder';
 import useUserStore from '@/store/useUserStore';
 import { CartItem } from '@/types/store';
 import useDarkModeStore from '@/store/useDarkModeStore';
+import { useCreateOrder } from '@/hooks/queries/useOrder';
 
 interface CartButtonBoxProps {
   amount: number;
@@ -16,6 +17,7 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
   const userId = useUserStore((state) => state.userId);
+  const createOrderMutation = useCreateOrder();
 
   const handleOrder = async () => {
     // if (!userId) {
@@ -38,17 +40,18 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
       point_used: 0,
     };
 
-    try {
-      const res = await createOrder(req);
-      if (res.success) {
-        // alert('주문이 성공적으로 생성되었습니다.');
-        navigate('/payment/method');
-      } else {
-        //   alert(`주문 실패: ${res.message}`);
-      }
-    } catch (error) {
-      //    alert((error as Error).message || '주문 처리 중 오류가 발생했습니다.');
-    }
+    createOrderMutation.mutate(req, {
+      onSuccess: (data) => {
+        const orderId = data?.data.order_id;
+        console.log(orderId);
+        if (orderId) {
+          navigate(`/payment/method?orderId=${orderId}`);
+          return;
+        }
+        alert('주문 생성 실패');
+      },
+      onError: (error) => console.log('error', error),
+    });
   };
 
   return (
