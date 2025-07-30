@@ -11,7 +11,7 @@ const DarkRecordBox = ({recordBoxDarkItems}: DarkRecordBoxProps) => {
       {recordBoxDarkItems.map((boxItem, idx) => (
         <div key={idx} className={styles.recordBox}>
           <div className={styles.left_items}>
-            <div><img/></div>
+            <div></div>
             <div className={styles.middle_items}>
               <p>{boxItem.title}</p>
               <p></p>

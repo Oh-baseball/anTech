@@ -5,10 +5,10 @@
   padding: 0 20px;
 
   &.dark_mode {
-    background-color: #333333;
+    background-color: #17171C;
 
     >header {
-      background-color: #333333;
+      background-color: #17171C;
 
       >div {
         color: #ffffff;
@@ -73,6 +73,7 @@
     input {
       // outline: 1px solid #2C2C35;
       background: none;
+      color: #ebebeb;
     }
 
     .detailsList {

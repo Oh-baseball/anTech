@@ -5,7 +5,7 @@ import { Lock, FileUser } from 'lucide-react';
 import useLogin from "@/hooks/queries/useLogin";
 import useUserStore from "@/store/useUserStore";
 
-const Loading = () => {
+const LoginLayout = () => {
   const navigate = useNavigate();
   const [clickedLogin, setClickedLogin] = useState(false);
   const [email, setEmail] = useState('');
@@ -84,4 +84,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LoginLayout;

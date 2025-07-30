@@ -1,0 +1,69 @@
+.login_container {
+  position: relative;
+  padding: 0 20px;
+  
+  .logo_section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+  
+  .text_area {
+    font-size: 40px;
+    font-weight: bold;
+    display: inline-block;
+    view-transition-name: logo-box;
+    
+    &.moveUp {
+      animation: moveUp 1.0s 3.7s forwards;
+    }
+    
+    span {
+      color: #528eff;
+      opacity: 0;
+      transform: translate(-300px, 0) scale(0);
+      animation: animate 3s forwards;
+      display: inline-block;
+    }
+    
+    span:nth-of-type(2) { animation-delay: .1s; }
+    span:nth-of-type(3) { animation-delay: .2s; }
+    span:nth-of-type(4) { animation-delay: .3s; }
+    span:nth-of-type(5) { animation-delay: .4s; }
+    span:nth-of-type(6) { animation-delay: .5s; }
+    
+    @keyframes animate {
+      60% {
+        transform: translate(20px, 0) scale(1);
+        color: #e5f1fe;
+        opacity: 1;
+      }
+      80% {
+        transform: translate(20px, 0) scale(1);
+        color: #e5f1fe;
+      }
+      98% {
+        transform: translate(0) scale(1.2);
+        color: #528eff;
+      }
+      99% {
+        transform: translate(0) scale(1.1);
+        color: #528eff;
+      }
+      100% {
+        transform: translate(0) scale(1);
+        opacity: 1;
+        color: #528eff;
+      }
+    }
+    
+    @keyframes moveUp {
+      to {
+        transform: translateY(-150px);
+      }
+    }
+  }
+}
