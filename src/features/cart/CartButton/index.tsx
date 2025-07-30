@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styles from './style.module.scss';
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 export interface CartButtonItem {
   amount: number;
@@ -12,7 +12,7 @@ interface CartButtonProps {
 }
 
 const dummyData: CartButtonItem = {
-  amount: 14000
+  amount: 14000,
 };
 
 const CartButton = ({ CartButtonItem, onClick }: CartButtonProps) => {
@@ -20,7 +20,7 @@ const CartButton = ({ CartButtonItem, onClick }: CartButtonProps) => {
   const [pressedIdx, setPressedIdx] = useState<string | null>(null);
 
   return (
-    <motion.button 
+    <motion.button
       className={`${styles.cartButton} ${pressedIdx === 'button' ? styles.pressed : ''}`}
       onTapStart={() => setPressedIdx('button')}
       onTap={() => setPressedIdx(null)}

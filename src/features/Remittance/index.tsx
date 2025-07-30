@@ -5,16 +5,23 @@ import { useState, useRef, ChangeEvent } from 'react';
 import { CreditCard } from 'lucide-react';
 import Coin from '@/components/Coin';
 import useDarkModeStore from '@/store/useDarkModeStore';
+import { useNavigate } from 'react-router-dom';
+import useAccountBalance from '@/store/useAccountBalance';
 interface RemittanceLayoutProps {
   userAccount: AccountBoxProps;
 }
 
 const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
+  const userBalance = useAccountBalance(state => state.userBalance);
+  userAccount.balance = Number(userBalance);
+
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const [checkTransfer, setCheckTransfer] = useState(false);
   const [checkCoin, setCheckCoin] = useState(false);
   const coinsRefs = useRef<(HTMLDivElement)[]>([]);
   const coin1 = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  
 
   const [amount, setAmount] = useState('');
   const [displayAccount, setDisplayAccount] = useState(userAccount);
@@ -57,7 +64,9 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
       el.style.transition = 'transform 4s linear';
     }
 
-
+    setTimeout(() => {
+      navigate('/', { viewTransition: true });
+    }, 5000);
   };
 
   return (
@@ -85,16 +94,16 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
         ))}
       </div>
 
-      <div className={styles.accountBox}>
+      <div className={`${styles.accountBox} ${darkMode ? styles.dark_mode : ''}`}>
         <AccountBox accountInfo={displayAccount}/>
       </div>
 
-      <div className={styles.sectionTitle}>
+      <div className={`${styles.sectionTitle} ${darkMode ? styles.dark_mode : ''}`}>
         <p>입금 계좌</p>
       </div>
 
       {/* Info Card */}
-      <div className={`${styles.infoCard} ${checkTransfer ? styles.reduce : ''}`}>
+      <div className={`${styles.infoCard} ${checkTransfer ? styles.reduce : ''}  ${darkMode ? styles.dark_mode : ''}`}>
         <div className={styles.infoCardTitle}>
           <p>입금할 금액</p>
         </div>
@@ -117,7 +126,7 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
             </div>
             <div className={styles.detailItem}>
               <div className={styles.detailLabel}>
-                <p>메 모</p>
+                <p>메모</p>
               </div>
               <div className={styles.detailValue}>
                 <input type='text' placeholder=''/>
@@ -149,12 +158,12 @@ const RemittanceLayout = ({userAccount}:RemittanceLayoutProps) => {
       <div className={styles.buttonGroup}>
         <button className={styles.cancelButton} onClick={handleCancel}>
           <div className={styles.cancelButtonText}>
-            <p>취 소</p>
+            <p>취소</p>
           </div>
         </button>
         <button className={styles.confirmButton} onClick={handletransfer}>
           <div className={styles.confirmButtonText}>
-            <p>입 금</p>
+            <p>입금</p>
           </div>
         </button>
       </div>

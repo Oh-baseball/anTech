@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import imageMoon from "@/assets/moon.png"
 import imageSun from "@/assets/sun.png"
+import useDarkModeStore from "@/store/useDarkModeStore";
 
 const FlipButton: React.FC = () => {
   const [flipped, setFlipped] = useState(false);
+  const darkMode = useDarkModeStore((state) => state.darkMode);
+  
+  useEffect(() => {
+    setFlipped(darkMode);
+  }, [])
 
   const handleFlip = () => {
     setFlipped((prev) => !prev);
