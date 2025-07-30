@@ -7,6 +7,7 @@ import VisualTag from './VisualTag';
 import Coin from '@/components/Coin';
 import ButtonContainer from './ButtonContainer';
 import Receipt from './Receipt';
+import StarryNight from './StarryNight';
 
 gsap.registerPlugin(ScrollToPlugin);
 const FALLING_COIN_COUNT = 40;
@@ -19,7 +20,6 @@ const initialPositions = [
 
 const PaymentCompletedContainer = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const starBgRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bottomRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -35,6 +35,7 @@ const PaymentCompletedContainer = () => {
   const [isPaymentComplete, setIsPaymentComplete] = useState(false);
   const [showButtons, setShowButtons] = useState(false);
   const [receiptOpen, setReceiptOpen] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     if (isPaymentComplete) {
@@ -49,12 +50,11 @@ const PaymentCompletedContainer = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scroll = containerRef.current ? containerRef.current.scrollTop : 0;
-      if (starBgRef.current) {
-        starBgRef.current.style.transform = `translateY(${-scroll / 3}px)`;
-      }
+      const y = containerRef.current?.scrollTop ?? 0;
+      setScrollY(y);
+
       if (titleRef.current) {
-        titleRef.current.style.transform = `translateY(${scroll / 1.7}px)`;
+        titleRef.current.style.transform = `translateY(${y / 1.7}px)`;
       }
     };
     const containerEl = containerRef.current;
@@ -226,7 +226,7 @@ const PaymentCompletedContainer = () => {
 
   return (
     <div className={styles.container} ref={containerRef}>
-      <div className={styles.star_bg} ref={starBgRef}></div>
+      <StarryNight scrollY={scrollY} />
       <section className={`${styles.top} ${styles.section_container}`}>
         <h1 className={styles.title} ref={titleRef}>
           <div>결</div>
@@ -294,59 +294,7 @@ const PaymentCompletedContainer = () => {
           handleClickComplete={() => null}
         />
       )}
-      <Receipt
-        open={receiptOpen}
-        onClose={() => setReceiptOpen(false)}
-        // storeName="야무진상점"
-        // date="2025-07-28 13:00"
-        // items={[
-        //   { name: '스타벅스 아메리카노', qty: 3, price: 1200 },
-        //   { name: '우유', qty: 1, price: 2200 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '아메리카노', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        //   { name: '빵', qty: 2, price: 1500 },
-        // ]}
-        // total={8800}
-      />
+      <Receipt open={receiptOpen} onClose={() => setReceiptOpen(false)} />
     </div>
   );
 };
