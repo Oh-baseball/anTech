@@ -48,16 +48,6 @@ type PaymentMethodBoxProps = {
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
 };
 
-enum BankName {
-  '신한카드' = '신한 카드',
-  '국민카드' = '국민 카드',
-  '신협카드' = '신협 카드',
-  '우리카드' = '우리 카드',
-  '하나카드' = '하나 카드',
-  '카카오뱅크카드' = '카카오뱅크 카드',
-  '토스카드' = '토스 카드',
-}
-
 const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethodBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const user_id = useUserStore((state) => state.userId);
@@ -167,7 +157,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
             >
               <p>{method.name}</p>
               {/* 잔액 대신 API에서 받은 카드/계좌 정보 표시 */}
-              <p>{method.description}</p>
+              {/* <p>{method.description}</p> */}
             </div>
           </div>
           <div className={styles.check}>
