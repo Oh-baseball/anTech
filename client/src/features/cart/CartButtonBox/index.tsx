@@ -42,7 +42,12 @@ const CartButtonBox = ({ amount, items }: CartButtonBoxProps) => {
       const res = await createOrder(req);
       if (res.success) {
        // alert('주문이 성공적으로 생성되었습니다.');
-        navigate('/payment/method');
+       localStorage.removeItem('cartItems');
+       navigate('/payment/method', {
+        state: {
+          totalPrice: amount
+        }
+      });
       } else {
      //   alert(`주문 실패: ${res.message}`);
       }

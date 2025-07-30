@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import styles from './style.module.scss';
 import useDarkModeStore from '@/store/useDarkModeStore';
+import { useLocation } from 'react-router-dom';
 
 interface PaymentProvider {
   id: string;
@@ -12,6 +13,9 @@ interface PaymentProvider {
 }
 
 const PaymentStore = () => {
+
+  const location = useLocation();
+  const totalPrice = location.state?.totalPrice ?? 0;
   
   const darkMode = useDarkModeStore((state) => state.darkMode);
 
@@ -77,7 +81,7 @@ const PaymentStore = () => {
       </div>
       <div className={`${styles.payment_amount} ${darkMode ? styles.payment_amount_dark_mode : ''}`}>
         <p>총 결제금액</p>
-        <p>9,500원</p>
+        <p>{totalPrice.toLocaleString()}원</p>
       </div>
       
       {/* 데이터 사용 예시 */}

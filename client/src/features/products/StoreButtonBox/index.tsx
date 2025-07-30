@@ -9,7 +9,7 @@ import createOrder, {CreateOrderRequest} from '@/apis/orders/createOrder';
 interface StoreButtonBoxProps {
   selectedId: number | null;
   setCartCount: (count: number) => void;
-  selectedItems: { menu_id: number; quantity: number }[];  // 새로 추가
+  selectedItems: { menu_id: number; quantity: number; price: number; }[];
 }
 
 const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButtonBoxProps) => {
@@ -49,7 +49,11 @@ const StoreButtonBox = ({ selectedId, setCartCount, selectedItems }: StoreButton
       const res = await createOrder(req);
       if (res.success) {
       //  alert('주문이 성공적으로 생성되었습니다.');
-        navigate('/payment/method');  
+      navigate('/payment/method', {
+        state: {
+          totalPrice: selectedItems[0].price
+        }
+      });
       } else {
      //   alert(`주문 실패: ${res.message}`);
       }

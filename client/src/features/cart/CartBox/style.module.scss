@@ -41,6 +41,10 @@
          font-weight: $font-weight-bold;
          color: #1A1A1A;
          margin-bottom: 10px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
      }
  
      p:nth-of-type(2){
