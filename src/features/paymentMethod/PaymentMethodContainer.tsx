@@ -4,25 +4,14 @@ import PaymentTitle from './PaymentTitle';
 import PaymentMethodBox from './PaymentMethodBox';
 import PaymentButton from '@/features/paymentMethod/PaymentButton';
 import styles from './style.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useDarkModeStore from '@/store/useDarkModeStore';
 import CancelButton from '@/components/CancelButton';
 
-const PaymentMethodContainer = ({
-  selectedMethod,
-  setSelectedMethod,
-  handleNext,
-}: {
-  selectedMethod: string | null;
-  setSelectedMethod: React.Dispatch<React.SetStateAction<string | null>>;
-  handleNext: () => void;
-}) => {
+const PaymentMethodContainer = () => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  useEffect(() => {
-    setSelectedMethod(selectedId ? selectedId.toString() : null);
-  }, [selectedId, setSelectedMethod]);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const sections = [
     { title: '간편결제', categories: ['easy_payment'] },

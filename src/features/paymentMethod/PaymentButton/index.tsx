@@ -1,32 +1,37 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './style.module.scss';
 import PaymentRocket from '../PaymentRocket';
 import useDarkModeStore from '@/store/useDarkModeStore';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
 export interface PaymentButtonItem {
-  amount: number;
+  final_amount: number;
 }
 
 interface PaymentButtonProps {
   PaymentButtonItem?: PaymentButtonItem;
   buttonOnClick?: () => void;
-  orderId?: string;
-  selectedMethod?: string;
 }
 
 const dummyData: PaymentButtonItem = {
-  amount: 14000,
+  final_amount: 14000,
 };
 
-const PaymentButton = ({
-  PaymentButtonItem,
-  buttonOnClick,
-  orderId,
-  selectedMethod,
-}: PaymentButtonProps) => {
+interface OrderResponseData {
+  order_id: string;
+  store: string;
+  final_amount: number;
+}
+
+const PaymentButton = ({ PaymentButtonItem, buttonOnClick }: PaymentButtonProps) => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const selectedMethod = searchParams.get('methodId');
+  // const orderData = queryClient.getQueryData(['order', orderId]);
+  const orderData = queryClient.getQueryData<OrderResponseData>(['order', orderId]);
 
   const data = PaymentButtonItem ?? dummyData;
 
@@ -42,21 +47,20 @@ const PaymentButton = ({
       setShowRocket(true);
       buttonOnClick();
     }
+    setShowRocket(true);
   };
 
   const handleRocketEnd = () => {
-    if (buttonOnClick) {
-      buttonOnClick();
-    }
+    navigate('/payment/confirm');
   };
 
   return (
     <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
-      <button 
-        className={`${styles.button} ${!selectedMethod ? styles.disabled : ''}`} 
-        onClick={handleClick}
-      >
-        <span>토스페이로 {data.amount.toLocaleString()}원 결제</span>
+      <button className={styles.button} onClick={handleClick}>
+        <span>
+          토스페이로{' '}
+          {orderData ? `${orderData.final_amount.toLocaleString()}원 결제` : '결제 금액 정보 없음'}
+        </span>
       </button>
       {showRocket && <PaymentRocket onAnimationEnd={handleRocketEnd} />}
     </div>

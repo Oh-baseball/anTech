@@ -29,11 +29,7 @@ const PaymentMethod = () => {
 
   return (
     <>
-      <PaymentMethodContainer
-        selectedMethod={selectedMethod}
-        setSelectedMethod={setSelectedMethod}
-        handleNext={handleNext}
-      />
+      <PaymentMethodContainer />
     </>
   );
 };
