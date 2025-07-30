@@ -24,3 +24,9 @@ dist-ssr
 .env
 
 CLAUDE.local.md
+
+
+# macOS Extended Attributes
+._*
+.AppleDouble
+.LSOverride
