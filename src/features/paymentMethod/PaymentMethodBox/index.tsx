@@ -46,15 +46,22 @@ type PaymentMethodBoxProps = {
   category: string;
   selectedId: number | null;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedMethod: string | null;
+  setSelectedMethod: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethodBoxProps) => {
+const PaymentMethodBox = ({
+  category,
+  selectedId,
+  setSelectedId,
+  selectedMethod,
+  setSelectedMethod,
+}: PaymentMethodBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const user_id = useUserStore((state) => state.userId);
   const [methods, setMethods] = useState<DisplayMethod[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedMethod, setSelectedMethod] = useState<DisplayMethod | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,6 +143,7 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
 
   const handleClick = (id: number) => {
     setSelectedId((prev) => (prev === id ? null : id));
+    setSelectedMethod(id.toString());
   };
 
   return (
