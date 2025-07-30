@@ -139,7 +139,7 @@ pnpm dev:server
 ### 새로운 컴포넌트 추가
 
 ```typescript
-// src/components/NewComponent/index.tsx
+//src/components/NewComponent/index.tsx
 import styles from './style.module.scss';
 
 const NewComponent = () => {
