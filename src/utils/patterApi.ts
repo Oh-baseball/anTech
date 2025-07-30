@@ -7,7 +7,7 @@ interface AuthPattern {
   auth_value: string;
   device_info: string;
   order_id: string | null;
-  method_id: string | null;
+  method_id: number;
   payment_method: PaymentMethodType;
   payment_amount: number;
   point_used: number;

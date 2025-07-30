@@ -4,6 +4,8 @@ import styles from './style.module.scss';
 import '../../styles/global.scss';
 import { sendAuthPattern } from '@/utils/patterApi';
 import { PaymentMethodType } from '@/types/payment';
+import { queryClient } from '@/App';
+import { Order } from '@/types/order';
 
 interface PinButton {
   id: number;
@@ -60,6 +62,7 @@ const Authentication = () => {
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
   const methodId = searchParams.get('methodId');
+  const orderData = queryClient.getQueryData<Order>(['order', orderId]);
 
   const handleButtonClick = (buttonId: number, actualValue: number) => {
     if (enteredPin.length >= 6 || isCompleted) return;
@@ -94,6 +97,10 @@ const Authentication = () => {
     setIsLoading(true);
     setErrorMessage('');
 
+    if (!methodId) {
+      return;
+    }
+
     // 주문 조회에서 받은 실제 데이터와 정확히 일치시키기
     const authData = {
       user_id: 1,
@@ -101,10 +108,10 @@ const Authentication = () => {
       auth_value: pin.join(''),
       device_info: navigator.userAgent,
       order_id: orderId,
-      method_id: methodId,
+      method_id: Number(methodId),
       payment_method: 'MOBILE_PAY' as PaymentMethodType,
-      payment_amount: 8000, // final_amount와 일치
-      point_used: 1000, // 주문 조회 응답과 일치
+      payment_amount: orderData?.final_amount ?? 0,
+      point_used: 0,
     };
 
     try {
