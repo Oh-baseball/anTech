@@ -153,7 +153,7 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
               </div>
             </div>
             <div className={styles.shopInfo}>
-              <div>이용상점 김씨네문방구 | 대표자명: 김철수 | 사업자등록번호: 129-86-12373</div>
+              <div>이용상점 스타벅스 | 대표자명: 김철수 | 사업자등록번호: 129-86-12373</div>
               <div>주소: 서울특별시 중구 필동로 123 1층</div>
             </div>
             <div className={styles.shopInfo}>
