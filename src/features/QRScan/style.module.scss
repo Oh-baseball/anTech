@@ -10,6 +10,13 @@
   top: 64px;
 }
 
+.store_container{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  top: 100px;
+}
 .storeInfoBox{
   display: flex;
   justify-content: space-between;
@@ -22,6 +29,14 @@
   // z-index: 300;
   box-sizing: border-box;
   view-transition-name: account-box;
+  opacity: 0;
+  animation: storeBoxShow 3.5s forwards;
+}
+
+@keyframes storeBoxShow {
+  0%   { opacity: 0; }
+  99%  { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .left_items{

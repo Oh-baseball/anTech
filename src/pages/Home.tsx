@@ -4,37 +4,55 @@ import HomeLayout from "@/features/Home";
 import { AccountBoxProps } from "@/features/Home/AccountBox";
 import useAccountBalance from "@/store/useAccountBalance";
 import { Barcode, QrCode, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
   const userBalance = useAccountBalance((state) => state.userBalance);
   const setUserBalance = useAccountBalance((state) => state.setUserBalance);
+  const navigate = useNavigate();
 
   const accountInfo: AccountBoxProps = {
     title: '토스페이',
     balance: 3782000,
-    menu: ['송금', '충전', 'ATM'],
+    menu: [
+      {
+        label: "송금",
+        onClick: () => navigate('/remittance', { viewTransition: true }),
+      },
+      {
+        label: "충전",
+        onClick: () => navigate('/charge', { viewTransition: true }),
+      },
+      {
+        label: "ATM",
+        onClick: () => alert("조회 기능 준비 중!"),
+      }
+    ],
   };
 
   accountInfo.balance = Number(userBalance);
   setUserBalance(accountInfo.balance.toString());
 
   const metrixCodeMenu: SmallSquareBoxItem[] = [
-    {  
-      icon: QrCode,
-      title: 'QR결제',
-      content: '스캔하고 간편결제',
-    },
-    {  
-      icon: Barcode,
-      title: '바코드결제',
-      content: '스캔하고 간편결제',
-    },
-    {  
-      icon: ShoppingCart,
-      title: '온라인결제',
-      content: '웹/앱에서 간편결제',
-    }
+  {
+    icon: QrCode,
+    title: 'QR결제',
+    content: '스캔하고 간편결제',
+    onClick: () => navigate('/qrscan', {viewTransition: true}),
+  },
+  {
+    icon: Barcode,
+    title: '바코드결제',
+    content: '매장 스캔결제',
+    onClick: () => alert('바코드결제 준비 중!'),
+  },
+  {
+    icon: ShoppingCart,
+    title: '온라인결제',
+    content: '웹/앱에서 결제',
+    onClick: () => alert('온라인결제 준비 중!'),
+  },
   ];
 
   const recordList: RecordBoxItem[] = [
@@ -57,7 +75,7 @@ const Home = () => {
       pay: 12900
     },
     {
-      img: 'https://picsum.photos/200/300',
+      img: '/src/assets/store.svg',
       title: '스타벅스 강남점',
       time: '12:34',
       pay: 4500
