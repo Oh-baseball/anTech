@@ -1,15 +1,9 @@
-import { useNavigate } from 'react-router-dom';
 import styles from './style.module.scss';
-
-export interface AccountMenuItem {
-  label: string;
-  onClick: () => void;
-}
 
 export interface AccountBoxProps {
     title: string;
     balance: number;
-    menu: AccountMenuItem[];
+    menu: string[];
 }
 
 type UserAccount = {
@@ -17,13 +11,8 @@ type UserAccount = {
 }
 
 const AccountBox = ({accountInfo}: UserAccount) => {
-  const navigate = useNavigate();
   const { title, balance, menu } = accountInfo;
   const formmetedBalance = balance.toLocaleString();
-
-  const Transfer = () => (
-    navigate('/Remittance', { viewTransition: true})
-  );
 
   return (
     <div className={styles.accountBox}>
@@ -32,7 +21,7 @@ const AccountBox = ({accountInfo}: UserAccount) => {
         <p>{formmetedBalance}원</p>
         <div>
           {menu.map((item, idx) => (
-            <button key={idx} onClick={item.onClick}>{item.label}</button>
+            <button key={idx}>{item}</button>
           ))}
         </div>
       </div>
