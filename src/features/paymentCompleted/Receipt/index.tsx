@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './style.module.scss';
 import ReceiptSkeleton from '../ReceiptSkeleton';
+import useUserStore from '@/store/useUserStore';
+import { useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
+import { Order } from '@/types/order';
+import { usePaymentMethod } from '@/hooks/queries/usePaymentMethod';
 
 interface ReceiptProps {
   open: boolean;
@@ -11,6 +16,20 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
   const [expanded, setExpanded] = useState(false);
   const [contentReady, setContentReady] = useState(false);
   const skeletonRef = useRef<HTMLDivElement>(null);
+
+  const userId = useUserStore((state) => state.userId);
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const methodId = searchParams.get('methodId');
+
+  const queryClient = useQueryClient();
+  const orderData = queryClient.getQueryData<Order>(['order', orderId]);
+  const { paymentMethod, isPending } = usePaymentMethod({ userId, methodId });
+
+  useEffect(() => {
+    console.log('paymentMethod', paymentMethod);
+    console.log('orderData', orderData);
+  }, [paymentMethod, orderData]);
 
   useEffect(() => {
     if (open) {
@@ -28,7 +47,14 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
     }
   };
 
-  if (!open) {
+  const formatTimestamp = (input: string | undefined) => {
+    if (!input) return '';
+
+    const trimmed = input.split('.')[0]; // 밀리초 제거
+    return trimmed.replace('T', ' ');
+  };
+
+  if (!open || isPending) {
     return <></>;
   }
 
@@ -55,7 +81,8 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
             <div className={styles.line}></div>
             <div className={styles.infoTable}>
               <div>
-                <span>식별번호</span>010-****-9435
+                <span>식별번호</span>
+                {paymentMethod?.masked_number || ''}
               </div>
               <div>
                 <span>용도</span>소득공제용
@@ -63,52 +90,66 @@ const Receipt = ({ open, onClose }: ReceiptProps) => {
               <div>
                 <span>국세청 승인번호</span>983267433343
               </div>
-              <div>
-                <span>사용처</span>도서문화
-              </div>
             </div>
-            <div className={styles.infoTable}>
+            <div className={styles.infoTable} style={{ marginTop: '3px' }}>
               <div>
-                <span>구매자</span>김씨네문방구
+                <span>구매자</span>진종환
               </div>
               <div>
-                <span>구매상품</span>후드티
+                <span>구매상품</span>
+                {orderData?.items[0].menu_name || ''}
               </div>
               <div>
-                <span>주문번호</span>2391008761
+                <span>주문번호</span>
+                {orderId || ''}
               </div>
               <div>
-                <span>입금/환불일시</span>2025-07-28 16:12:23
+                <span>구매/환불일시</span>
+                {formatTimestamp(orderData?.created_at)}
               </div>
             </div>
             <div className={styles.line}></div>
             <div className={styles.amountTable}>
               <div style={{ fontWeight: 600, marginBottom: '6px' }}>구매내역</div>
-              <div>
-                <span>후드티 × 2</span>
-                <span>110,000원</span>
-              </div>
-              <div>
+              {Array.isArray(orderData?.items) &&
+                orderData.items.map((item) => (
+                  <div key={item.menu_id ?? item.menu_name}>
+                    <span>
+                      {item.menu_name} × {item.quantity}
+                    </span>
+                    <span>{item.unit_price.toLocaleString()}원</span>
+                  </div>
+                ))}
+
+              {/* <div>
                 <span>볼펜세트 × 1</span>
                 <span>15,000원</span>
               </div>
               <div>
                 <span>노트북 × 1</span>
                 <span>220,000원</span>
-              </div>
+              </div> */}
             </div>
             <div className={styles.amountTable}>
               <div>
-                <span>공급가액</span>313,637원
+                <span>공급가액</span>
+                {(isNaN(Number(orderData?.final_amount) * 0.9)
+                  ? 0
+                  : Number(orderData?.final_amount) * 0.9
+                ).toLocaleString() || 0}
+                원
               </div>
               <div>
-                <span>부가세</span>31,363원
-              </div>
-              <div>
-                <span>봉사료</span>0원
+                <span>부가세</span>
+                {(isNaN(Number(orderData?.final_amount) * 0.1)
+                  ? 0
+                  : Number(orderData?.final_amount) * 0.1
+                ).toLocaleString() || 0}
+                원
               </div>
               <div className={styles.amountTotal}>
-                <span>합계</span>345,000원
+                <span>합계</span>
+                {orderData?.final_amount.toLocaleString() || 0}원
               </div>
             </div>
             <div className={styles.shopInfo}>
