@@ -6,3 +6,8 @@
   flex-direction: column;
   gap: 12px;
 }
+
+.dark_mode {
+  background-color: $color-dark-box;
+  color: $color-dark-text;
+}

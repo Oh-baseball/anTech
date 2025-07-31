@@ -2,7 +2,7 @@ import logo_toss from '@/assets/logo_toss.svg';
 // import logo_kakao from '@/assets/logo_kakao.png'; // 카카오페이 로고가 있다면 주석 해제
 import logo_naver from '@/assets/logo_naver.svg';
 import logo_shinhan from '@/assets/logo_shinhan.png';
-import logo_kb from '@/assets/logo_kb.png';
+import logo_shinhyup from '@/assets/logo_shinhyup.png';
 import after_select from '@/assets/selection.svg';
 import before_select from '@/assets/unselection.svg';
 import styles from './style.module.scss';
@@ -16,7 +16,7 @@ const providerDetails: Record<string, { category: string; img: string }> = {
   TOSS_PAY: { category: 'easy_payment', img: logo_toss },
   NAVER_PAY: { category: 'easy_payment', img: logo_naver },
   SHINHAN_CARD: { category: 'card_payment', img: logo_shinhan },
-  KOOKMIN_BANK: { category: 'account_payment', img: logo_kb },
+  KOOKMIN_BANK: { category: 'account_payment', img: logo_shinhyup },
   // 필요한 다른 결제 수단들을 여기에 추가하세요.
   DEFAULT: { category: 'others_payment', img: '' }, // 기본값
 };
@@ -46,19 +46,12 @@ type PaymentMethodBoxProps = {
   category: string;
   selectedId: number | null;
   setSelectedId: React.Dispatch<React.SetStateAction<number | null>>;
-  selectedMethod: string | null;
-  setSelectedMethod: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const PaymentMethodBox = ({
-  category,
-  selectedId,
-  setSelectedId,
-  selectedMethod,
-  setSelectedMethod,
-}: PaymentMethodBoxProps) => {
+const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethodBoxProps) => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
-  const user_id = useUserStore((state) => state.userId);
+  const userId = useUserStore((state) => state.userId);
+
   const [methods, setMethods] = useState<DisplayMethod[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -71,7 +64,7 @@ const PaymentMethodBox = ({
       try {
         // API 응답 전체 구조에 맞게 타입 지정
         const res = await axios.get<{ data: PaymentMethodProvider[] }>(
-          `${import.meta.env.VITE_BASE_URL}payment-methods/users/${user_id}`,
+          `${import.meta.env.VITE_BASE_URL}payment-methods/users/${userId}`,
         );
 
         // 실제 데이터 배열은 res.data.data에 있습니다.
@@ -80,17 +73,36 @@ const PaymentMethodBox = ({
         const processedMethods: DisplayMethod[] = apiData.map((provider) => {
           const details = providerDetails[provider.provider_id] || providerDetails.DEFAULT;
 
+          // let description = '';
+          // if (provider.card_company && provider.masked_number) {
+          //   description = `${provider.card_company} | ${provider.masked_number}`;
+          // } else if (provider.bank_name && provider.masked_number) {
+          //   description = `${provider.bank_name} | ${provider.masked_number}`;
+          // }
+
+          let name = '';
+          if(provider.card_company){
+            name = `${provider.card_company}`
+          }else if(provider.bank_name){
+            name = `${provider.bank_name}`
+          }
+           else if(provider.alias_name){
+            name = `${provider.alias_name}`
+          }
+
+
           let description = '';
           if (provider.card_company && provider.masked_number) {
-            description = `${provider.card_company} | ${provider.masked_number}`;
+            description = `${provider.masked_number}`;
           } else if (provider.bank_name && provider.masked_number) {
-            description = `${provider.bank_name} | ${provider.masked_number}`;
+            description = `${provider.masked_number}`;
           }
 
           return {
             id: provider.method_id,
             category: details.category,
-            name: provider.alias_name,
+            // name: provider.alias_name,
+            name,
             description,
             img: provider.card_image_url || details.img,
           };
@@ -143,7 +155,6 @@ const PaymentMethodBox = ({
 
   const handleClick = (id: number) => {
     setSelectedId((prev) => (prev === id ? null : id));
-    setSelectedMethod(id.toString());
   };
 
   return (
@@ -165,7 +176,7 @@ const PaymentMethodBox = ({
             >
               <p>{method.name}</p>
               {/* 잔액 대신 API에서 받은 카드/계좌 정보 표시 */}
-              {/* <p>{method.description}</p> */}
+              <p>{method.description}</p>
             </div>
           </div>
           <div className={styles.check}>

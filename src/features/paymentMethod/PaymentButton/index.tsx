@@ -1,55 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './style.module.scss';
 import PaymentRocket from '../PaymentRocket';
 import useDarkModeStore from '@/store/useDarkModeStore';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
-export interface PaymentButtonItem {
-  amount: number;
-}
+// export interface PaymentButtonItem {
+//   final_amount: number;
+// }
 
 interface PaymentButtonProps {
-  PaymentButtonItem?: PaymentButtonItem;
+  // PaymentButtonItem?: PaymentButtonItem;
   buttonOnClick?: () => void;
-  orderId?: string;
-  selectedMethod?: string;
+  handleRocketEnd: () => void;
+  disabled?: boolean;
 }
 
-const dummyData: PaymentButtonItem = {
-  amount: 14000,
-};
+// const dummyData: PaymentButtonItem = {
+//   final_amount: 14000,
+// };
 
-const PaymentButton = ({
-  PaymentButtonItem,
-  buttonOnClick,
-  orderId,
-  selectedMethod,
-}: PaymentButtonProps) => {
-  const navigate = useNavigate();
+interface OrderResponseData {
+  order_id: string;
+  store: string;
+  final_amount: number;
+}
 
-  const data = PaymentButtonItem ?? dummyData;
+// const PaymentButton = ({ PaymentButtonItem, handleRocketEnd, disabled }: PaymentButtonProps) => {
+const PaymentButton = ({ handleRocketEnd, disabled }: PaymentButtonProps) => {
+  const queryClient = useQueryClient();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  // const orderData = queryClient.getQueryData(['order', orderId]);
+  const orderData = queryClient.getQueryData<OrderResponseData>(['order', orderId]);
 
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const [showRocket, setShowRocket] = useState(false);
 
   const handleClick = () => {
-    if (buttonOnClick) {
-      setShowRocket(true);
-      buttonOnClick();
-    }
-  };
-
-  const handleRocketEnd = () => {
-    if (buttonOnClick) {
-      buttonOnClick();
-    }
+    setShowRocket(true);
   };
 
   return (
     <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
-      <button className={styles.button} onClick={handleClick}>
-        <span>토스페이로 {data.amount.toLocaleString()}원 결제</span>
+      <button className={styles.button} onClick={handleClick} disabled={disabled}>
+        <span>
+          {' '}
+          {orderData ? `💳 ${orderData.final_amount.toLocaleString()}원 결제하기` : '결제 금액 정보 없음'}
+        </span>
       </button>
       {showRocket && <PaymentRocket onAnimationEnd={handleRocketEnd} />}
     </div>

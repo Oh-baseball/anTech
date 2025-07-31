@@ -21,6 +21,7 @@ const initialPositions = [
 
 const PaymentCompletedContainer = () => {
   const navigate = useNavigate();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const bottomRef = useRef<HTMLElement>(null);
@@ -101,7 +102,7 @@ const PaymentCompletedContainer = () => {
         ease: 'power1.out',
         delay: 3.8,
         onComplete: () => {
-          if (tossPayTagRef.current) {
+          if (tossPayTagRef.current && hereTagRef.current && thxTagRef.current) {
             setShowFallingCoins(true);
             gsap.fromTo(
               tossPayTagRef.current,
@@ -121,23 +122,21 @@ const PaymentCompletedContainer = () => {
                   { rotateZ: -15, duration: 0.3 },
                   { rotateZ: 15, duration: 0.3 },
                 ],
-                onComplete: () => {
-                  if (hereTagRef.current && thxTagRef.current) {
-                    const hereTagEl = hereTagRef.current;
-                    gsap.to(hereTagEl, {
-                      duration: 0.5,
-                      scale: 1,
-                    });
-
-                    const thxTagEl = thxTagRef.current;
-                    gsap.to(thxTagEl, {
-                      duration: 0.5,
-                      scale: 1,
-                    });
-                  }
-                },
               },
             );
+            const hereTagEl = hereTagRef.current;
+            gsap.to(hereTagEl, {
+              delay: 1.3,
+              duration: 0.5,
+              scale: 1,
+            });
+
+            const thxTagEl = thxTagRef.current;
+            gsap.to(thxTagEl, {
+              delay: 1.3,
+              duration: 0.5,
+              scale: 1,
+            });
           }
         },
       });
@@ -155,7 +154,7 @@ const PaymentCompletedContainer = () => {
         gsap.set(el, { x: startPos.x, y: startPos.y });
 
         gsap
-          .timeline({ delay: 5 + idx * 0.2 })
+          .timeline({ delay: 6 + idx * 0.2 })
           .to(el, {
             duration: 0.7,
             x: midPos.x,
@@ -187,7 +186,7 @@ const PaymentCompletedContainer = () => {
         if (!coinEl) return;
         const coin = coinEl.firstElementChild;
 
-        const randomX = (Math.random() - 0.15) * dvw * 1.3;
+        const randomX = (Math.random() - 0.25) * dvw * 1.3;
         const randomScale = 0.5 + Math.random() * 0.5;
         const randomRotationX = (Math.random() - 0.5) * 180;
         const randomRotationY = (Math.random() - 0.5) * 360;
@@ -204,21 +203,23 @@ const PaymentCompletedContainer = () => {
         }
 
         gsap.set(coinEl, {
-          y: -2300,
-          x: 0,
+          y: -1500,
+          x: randomX,
           position: 'absolute',
           scale: 0.3 * randomScale,
         });
 
         gsap.to(coinEl, {
-          duration: 3.3,
+          duration: 2,
           y: 0,
           x: randomX,
           ease: 'linear',
-          delay: (i % 10) * 0.2,
+          delay: 2 + Math.random() * 10 * 0.2,
           onComplete: () => {
             if (i === coinRefs.current.length - 1) {
-              setIsPaymentComplete(true);
+              setTimeout(() => {
+                setIsPaymentComplete(true);
+              }, 300);
             }
           },
         });

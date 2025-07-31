@@ -3,7 +3,7 @@
     "target": "ES2020",
     "lib": ["DOM", "DOM.Iterable", "ES2020"],
     "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "moduleResolution": "bundler",
     "allowJs": false,
     "jsx": "react-jsx", // React 17 이상
     "strict": true,

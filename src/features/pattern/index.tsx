@@ -1,10 +1,10 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './style.module.scss';
-import useDarkModeStore from '@/store/useDarkModeStore';
-import useUserStore from '@/store/useUserStore';
 import { sendAuthPattern } from '@/utils/patterApi';
 import { PaymentMethodType } from '@/types/payment';
+import { Order } from '@/types/order';
+import { queryClient } from '@/App';
 
 interface Point {
   id: number;
@@ -30,7 +30,10 @@ interface PatternLine {
 }
 
 const PatternLockDemo: React.FC = () => {
-  const { userId } = useUserStore();
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const methodId = searchParams.get('methodId');
+  const orderData = queryClient.getQueryData<Order>(['order', orderId]);
 
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -261,11 +264,11 @@ const PatternLockDemo: React.FC = () => {
         auth_type: 'PATTERN' as const,
         auth_value: state.pattern.join(''),
         device_info: navigator.userAgent,
-        order_id: 'ORD20250730001',
-        method_id: 1,
-        payment_method: 'MOBILE_PAY' as PaymentMethodType, // TOSS_PAY의 provider_type 값
-        payment_amount: 11900, // final_amount와 일치
-        point_used: 0, // 주문 조회 응답과 일치
+        order_id: orderId,
+        method_id: Number(methodId),
+        payment_method: 'MOBILE_PAY' as PaymentMethodType,
+        payment_amount: orderData?.final_amount ?? 0,
+        point_used: 0,
       };
 
       console.log(authData);
@@ -282,7 +285,7 @@ const PatternLockDemo: React.FC = () => {
           setTimeout(() => {
             setPatternLines([]);
             setCurrentPos(null);
-            navigate('/payment/completed');
+            navigate(`/payment/completed?orderId=${orderId}&methodId=${methodId}`);
           }, 1000);
         } else {
           // 서버에서 실패 응답이 온 경우
@@ -357,7 +360,7 @@ const PatternLockDemo: React.FC = () => {
   };
 
   const goToPinAuth = () => {
-    navigate('/auth/pin', { viewTransition: true });
+    navigate(`/auth/pin?orderId=${orderId}&methodId=${methodId}`, { viewTransition: true });
   };
 
   const createSVGPath = (points: Point[]) => {

@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import styles from './style.module.scss';
 import '../../styles/global.scss';
 import { sendAuthPattern } from '@/utils/patterApi';
 import { PaymentMethodType } from '@/types/payment';
+import { queryClient } from '@/App';
+import { Order } from '@/types/order';
 
 interface PinButton {
   id: number;
@@ -57,6 +59,10 @@ const Authentication = () => {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [searchParams] = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const methodId = searchParams.get('methodId');
+  const orderData = queryClient.getQueryData<Order>(['order', orderId]);
 
   const handleButtonClick = (buttonId: number, actualValue: number) => {
     if (enteredPin.length >= 6 || isCompleted) return;
@@ -91,17 +97,21 @@ const Authentication = () => {
     setIsLoading(true);
     setErrorMessage('');
 
+    if (!methodId) {
+      return;
+    }
+
     // 주문 조회에서 받은 실제 데이터와 정확히 일치시키기
     const authData = {
       user_id: 1,
       auth_type: 'PIN' as const,
       auth_value: pin.join(''),
       device_info: navigator.userAgent,
-      order_id: 'ORD20250729001',
-      method_id: 1,
+      order_id: orderId,
+      method_id: Number(methodId),
       payment_method: 'MOBILE_PAY' as PaymentMethodType,
-      payment_amount: 8000, // final_amount와 일치
-      point_used: 1000, // 주문 조회 응답과 일치
+      payment_amount: orderData?.final_amount ?? 0,
+      point_used: 0,
     };
 
     try {
@@ -110,7 +120,7 @@ const Authentication = () => {
 
       if (result.success) {
         setTimeout(() => {
-          navigate('/payment/completed');
+          navigate(`/payment/completed?orderId=${orderId}&methodId=${methodId}`);
         }, 1000);
       } else {
         // 서버에서 실패 응답이 온 경우
