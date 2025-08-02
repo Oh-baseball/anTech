@@ -1,5 +1,5 @@
-import { AccountBoxProps } from "@/features/Home/AccountBox";
 import RemittanceLayout from "@/features/Remittance"
+import { AccountBoxProps } from "@/features/Remittance/AccountBox";
 
 const Remittance = () => {
   const accountInfo: AccountBoxProps = {

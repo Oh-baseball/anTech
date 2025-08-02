@@ -13,7 +13,9 @@ const PaymentMethodContainer = () => {
   const darkMode = useDarkModeStore((state) => state.darkMode);
   const navigate = useNavigate();
 
+  
   const [selectedId, setSelectedId] = useState<number | null>(null);
+  // const [selectedId, setSelectedId] = useState(false);
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
 
@@ -54,7 +56,7 @@ const PaymentMethodContainer = () => {
           ))}
         </div>
 
-        <PaymentButton handleRocketEnd={handleRocketEnd} />
+        <PaymentButton handleRocketEnd={handleRocketEnd} disabled={!selectedId}/>
       </div>
     </div>
   );

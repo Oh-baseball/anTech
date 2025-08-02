@@ -36,9 +36,9 @@ const PaymentInfoList = ({ orderId, methodId }: PaymentInfoListProps) => {
   };
 
   const infoList = [
-    { label: '결제수단', value: `${paymentMethod?.alias_name}` },
+    { label: '결제수단', value: `${paymentMethod?.alias_name || '토스페이'}` },
     { label: '상품명', value: `${orderData.items[0].menu_name}${getAdditionalItemText()}` },
-    { label: '주문금액', value: orderData.total_amount.toLocaleString() },
+    { label: '주문금액', value: `${orderData.total_amount.toLocaleString()}원` },
     { label: '할인혜택', value: orderData.discount_amount.toLocaleString(), isDiscount: true },
   ];
 
