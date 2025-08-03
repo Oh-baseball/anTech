@@ -5,19 +5,20 @@ import useDarkModeStore from '@/store/useDarkModeStore';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-export interface PaymentButtonItem {
-  final_amount: number;
-}
+// export interface PaymentButtonItem {
+//   final_amount: number;
+// }
 
 interface PaymentButtonProps {
-  PaymentButtonItem?: PaymentButtonItem;
+  // PaymentButtonItem?: PaymentButtonItem;
   buttonOnClick?: () => void;
   handleRocketEnd: () => void;
+  disabled?: boolean;
 }
 
-const dummyData: PaymentButtonItem = {
-  final_amount: 14000,
-};
+// const dummyData: PaymentButtonItem = {
+//   final_amount: 14000,
+// };
 
 interface OrderResponseData {
   order_id: string;
@@ -25,7 +26,8 @@ interface OrderResponseData {
   final_amount: number;
 }
 
-const PaymentButton = ({ PaymentButtonItem, handleRocketEnd }: PaymentButtonProps) => {
+// const PaymentButton = ({ PaymentButtonItem, handleRocketEnd, disabled }: PaymentButtonProps) => {
+const PaymentButton = ({ handleRocketEnd, disabled }: PaymentButtonProps) => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
   const orderId = searchParams.get('orderId');
@@ -41,10 +43,10 @@ const PaymentButton = ({ PaymentButtonItem, handleRocketEnd }: PaymentButtonProp
 
   return (
     <div className={`${styles.button_container} ${darkMode ? styles.dark_mode : ''}`}>
-      <button className={styles.button} onClick={handleClick}>
+      <button className={styles.button} onClick={handleClick} disabled={disabled}>
         <span>
-          토스페이로{' '}
-          {orderData ? `${orderData.final_amount.toLocaleString()}원 결제` : '결제 금액 정보 없음'}
+          {' '}
+          {orderData ? `💳 ${orderData.final_amount.toLocaleString()}원 결제하기` : '결제 금액 정보 없음'}
         </span>
       </button>
       {showRocket && <PaymentRocket onAnimationEnd={handleRocketEnd} />}

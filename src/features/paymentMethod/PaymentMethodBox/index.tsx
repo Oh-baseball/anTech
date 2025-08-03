@@ -73,17 +73,36 @@ const PaymentMethodBox = ({ category, selectedId, setSelectedId }: PaymentMethod
         const processedMethods: DisplayMethod[] = apiData.map((provider) => {
           const details = providerDetails[provider.provider_id] || providerDetails.DEFAULT;
 
+          // let description = '';
+          // if (provider.card_company && provider.masked_number) {
+          //   description = `${provider.card_company} | ${provider.masked_number}`;
+          // } else if (provider.bank_name && provider.masked_number) {
+          //   description = `${provider.bank_name} | ${provider.masked_number}`;
+          // }
+
+          let name = '';
+          if(provider.card_company){
+            name = `${provider.card_company}`
+          }else if(provider.bank_name){
+            name = `${provider.bank_name}`
+          }
+           else if(provider.alias_name){
+            name = `${provider.alias_name}`
+          }
+
+
           let description = '';
           if (provider.card_company && provider.masked_number) {
-            description = `${provider.card_company} | ${provider.masked_number}`;
+            description = `${provider.masked_number}`;
           } else if (provider.bank_name && provider.masked_number) {
-            description = `${provider.bank_name} | ${provider.masked_number}`;
+            description = `${provider.masked_number}`;
           }
 
           return {
             id: provider.method_id,
             category: details.category,
-            name: provider.alias_name,
+            // name: provider.alias_name,
+            name,
             description,
             img: provider.card_image_url || details.img,
           };

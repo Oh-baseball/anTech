@@ -1,7 +1,12 @@
-import LoginLayout from "@/components/Login";
+import LoginLayout from '@/components/Login';
 
 const Login = () => {
-  return <div><LoginLayout/></div>;
+  console.log(import.meta.env.VITE_BASE_URL);
+  return (
+    <div>
+      <LoginLayout />
+    </div>
+  );
 };
 
 export default Login;

@@ -91,9 +91,10 @@
             }
         }   
 
-        .payment_method_info_dark_mode{
+        .payment_method_info.payment_method_info_dark_mode{
             p:nth-of-type(1){
-                color: $color-bg;
+                // color: $color-bg;
+                color: $color-dark-text;
             }
             p:nth-of-type(2){
                 color: #BABABD;

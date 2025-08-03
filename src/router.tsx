@@ -6,6 +6,8 @@ import Authentication from './features/Authentication';
 import PatternLockDemo from './features/pattern';
 import Remittance from './pages/Remittance';
 import Resister from './pages/Resister';
+import QRScan from './pages/QRScan';
+import Charge from './pages/Charge';
 import ProtectedRoute from './components/ProtectedRoute';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -25,6 +27,8 @@ const router = createBrowserRouter([
       { index: true, element: <ProtectedRoute><Home /></ProtectedRoute> },
       { path: 'login', element: <Login /> },
       { path: 'resister', element: <Resister /> },
+      { path: 'charge', element: <ProtectedRoute><Charge /></ProtectedRoute> },
+      { path: 'qrscan', element: <ProtectedRoute><QRScan /></ProtectedRoute> },
       { path: 'remittance', element: <ProtectedRoute><Remittance /></ProtectedRoute> },
       { path: 'products', element: <ProtectedRoute><Products /></ProtectedRoute> },
       { path: 'cart', element: <ProtectedRoute><Cart /></ProtectedRoute> },

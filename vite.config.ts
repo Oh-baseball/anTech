@@ -8,11 +8,11 @@ export default defineConfig({
   plugins: [
     react(),
     visualizer({
-      filename: './dist/stats.html', // 빌드 결과 폴더에 생성
-      template: 'network', // 시각화 방식
-      gzipSize: true, // gzip 크기 표시
-      brotliSize: true, // brotli 크기 표시
-      open: true, // 빌드 완료 후 자동으로 브라우저에서 열기
+      filename: './dist/stats.html',
+      template: 'network',
+      gzipSize: true,
+      brotliSize: true,
+      open: true,
     }) as PluginOption,
   ],
   resolve: {
@@ -28,6 +28,27 @@ export default defineConfig({
           @use "@styles/variables" as *;
           @use "@styles/mixins" as *;
         `,
+      },
+    },
+  },
+  // 정적 파일 처리 개선
+  assetsInclude: ['**/*.svg', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif'],
+  build: {
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          // assetInfo.name이 undefined일 수 있으므로 안전하게 처리
+          if (!assetInfo.name) {
+            return `assets/[name]-[hash][extname]`;
+          }
+
+          const info = assetInfo.name.split('.');
+          const ext = info[info.length - 1];
+          if (/svg|png|jpe?g|gif|tiff|bmp|ico/i.test(ext)) {
+            return `assets/images/[name]-[hash][extname]`;
+          }
+          return `assets/[name]-[hash][extname]`;
+        },
       },
     },
   },
